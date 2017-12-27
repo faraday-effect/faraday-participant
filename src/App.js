@@ -1,21 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Quiz from './components/Quiz';
 import './App.css';
 
+const mockQuiz = {
+    title: 'The Bridge',
+    questions: [
+        {
+            id: 1,
+            text: 'What is your quest?',
+            answers: [
+                {
+                    id: 1,
+                    text: 'I seek the Holy Grail',
+                    correct: true
+                },
+                {
+                    id: 2,
+                    text: 'I desire a shrubbery',
+                    correct: false
+                },
+                {
+                    id: 3,
+                    text: 'I seek the grocery store',
+                    correct: false
+                }
+            ]
+        }
+    ]
+};
+
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="main-content">
+                <Quiz content={mockQuiz}/>
+            </div>
+        );
+    }
 }
 
 export default App;
