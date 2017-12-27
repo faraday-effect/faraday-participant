@@ -33,7 +33,7 @@ class App extends Component {
     render() {
         return (
             <div className="main-content">
-                <Quiz content={mockQuiz}/>
+                <Quiz quiz={mockQuiz}/>
             </div>
         );
     }
