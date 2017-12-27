@@ -60,6 +60,7 @@ https://www.npmjs.com/package/ava
 https://www.npmjs.com/package/nock
 https://www.npmjs.com/package/tape
 ** User Interface
+[[https://react-bootstrap.github.io/][React Bootstrap]]
 https://github.com/bvaughn/react-virtualized
 https://material-ui-next.com/
 https://react-styleguidist.js.org/
@@ -69,6 +70,7 @@ https://storybook.js.org/basics/guide-react/
 *** Tool Chain
 [[https://babeljs.io/][Babel JavaScript compiler]]
 [[https://flow.org/][Flow JavaScript type checker]]
+- [[https://medium.freecodecamp.org/why-use-static-types-in-javascript-part-1-8382da1e0adb][Static Types in JavaScript (4-part tutorial)]]
 [[https://github.com/facebookincubator/create-react-app][Create React App]]
 [[https://webpack.github.io/][Webpack module bundler]]
 [[https://yarnpkg.com/en/][Yarn dependency manager]]
