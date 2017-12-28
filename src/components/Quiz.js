@@ -1,11 +1,14 @@
 import React from 'react';
-import { List, Header } from 'semantic-ui-react'
+import { Form, Header, Radio } from 'semantic-ui-react'
 
 const QuizAnswer = ({answer}) => {
     return (
-        <List.Item>
-            {answer.text}
-        </List.Item>
+        <Form.Field>
+            <Radio
+                label={answer.text}
+                value={answer.id}
+            />
+        </Form.Field>
     );
 };
 
@@ -13,9 +16,9 @@ const QuizQuestion = ({question}) => {
     return (
         <div className="quiz-question">
             <p>{question.text}</p>
-            <List bulleted>
+            <Form>
                 {question.answers.map(answer => <QuizAnswer key={answer.id} answer={answer}/>)}
-            </List>
+            </Form>
         </div>
     );
 };
