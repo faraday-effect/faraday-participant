@@ -1,35 +1,48 @@
-import React from 'react';
-import { Form, Header, Radio } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Button, Form, Header, Radio } from 'semantic-ui-react';
 
-const QuizAnswer = ({answer}) => {
-    return (
-        <Form.Field>
-            <Radio
-                label={answer.text}
-                value={answer.id}
-            />
-        </Form.Field>
-    );
-};
+export default class Quiz extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            answer: null
+        };
+    }
 
-const QuizQuestion = ({question}) => {
-    return (
-        <div className="quiz-question">
-            <p>{question.text}</p>
-            <Form>
-                {question.answers.map(answer => <QuizAnswer key={answer.id} answer={answer}/>)}
-            </Form>
-        </div>
-    );
-};
+    onAnswerChange = (event, data) => {
+        this.setState({answer: data.value});
+    };
 
-const Quiz = ({quiz}) => {
-    return (
-        <div className="quiz">
-            <Header as="h1">{quiz.title}</Header>
-            {quiz.questions.map(question => <QuizQuestion key={question.id} question={question}/>)}
-        </div>
-    );
-};
+    onSubmit = () => {
+        console.log(`Submit: ${JSON.stringify(this.state)}`);
+    };
 
-export default Quiz;
+    render() {
+        return (
+            <div className="quiz">
+                <Header as="h1">{this.props.quiz.title}</Header>
+                {this.props.quiz.questions.map(question => (
+                    <div className="quiz-question" key={question.id}>
+                        <p>{question.text}</p>
+                        <Form>
+                            {question.answers.map(answer => (
+                                <Form.Field key={answer.id}>
+                                    <Radio
+                                        label={answer.text}
+                                        value={answer.id}
+                                        checked={this.state.answer === answer.id}
+                                        onChange={this.onAnswerChange}
+                                    />
+                                </Form.Field>
+                            ))}
+                        </Form>
+                    </div>
+                ))}
+                <Button
+                    primary
+                    onClick={this.onSubmit}
+                >Submit</Button>
+            </div>
+        );
+    }
+}
