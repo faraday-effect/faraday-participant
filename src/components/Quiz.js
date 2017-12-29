@@ -7,40 +7,49 @@ export const quizConstants = {
     MULTIPLE_CHOICE: 'MULTIPLE_CHOICE'
 };
 
+const QuestionPrompt = props => {
+    return (
+        <p>
+            {props.prompt}
+            {props.required && <span> (Required)</span>}
+        </p>
+    );
+}
+
 export class Quiz extends Component {
     constructor(props) {
         super(props);
 
-        // this.state = {
-        //     "your-name": '',
-        //     "your-quest": '',
-        //     "your-favorite-color": ''
-        // };
-
-        this.state = fromPairs(props.quiz.questions.map(question => [question.key, '']));
+        this.state = {
+            question: fromPairs(props.quiz.questions.map(question => [question.key, ''])),
+            haveAllRequired: false
+        };
     }
 
-    handleShortAnswerChange = (event, data) => {
-        this.setState({[data.name]: data.value});
-    };
-
-    handleMultipleChoiceChange = (event, data) => {
-        this.setState({[data.name]: data.value});
+    handleAnswerChange = (event, data) => {
+        this.setState({ question: { ...this.state.question, [data.name]: data.value}});
     };
 
     handleSubmit = () => {
+        this.props.quiz.questions.forEach(question => {
+            console.log(question.required, this.state[question.key]);
+        });
         console.log(this.state);
+    };
+
+    haveRequiredAnswers = () => {
+        console.log('Foo');
     };
 
     renderShortAnswerQuestion = question => {
         return (
             <div className="quiz-question-short-answer" key={question.key}>
-                <p>{question.prompt}</p>
+                <QuestionPrompt prompt={question.prompt} required={question.required}/>
                 <Form>
                     <Form.Input
                         name={question.key}
-                        value={this.state[question.key]}
-                        onChange={this.handleShortAnswerChange}
+                        value={this.state.question[question.key]}
+                        onChange={this.handleAnswerChange}
                     />
                 </Form>
             </div>
@@ -50,7 +59,7 @@ export class Quiz extends Component {
     renderMultipleChoiceQuestion = question => {
         return (
             <div className="quiz-question-multiple-choice" key={question.key}>
-                <p>{question.prompt}</p>
+                <QuestionPrompt prompt={question.prompt} required={question.required}/>
                 <Form>
                     {question.answers.map(answer => (
                         <Form.Field key={answer.value}>
@@ -58,8 +67,8 @@ export class Quiz extends Component {
                                 label={answer.text}
                                 name={question.key}
                                 value={answer.value}
-                                checked={this.state[question.key] === answer.value}
-                                onChange={this.handleMultipleChoiceChange}
+                                checked={this.state.question[question.key] === answer.value}
+                                onChange={this.handleAnswerChange}
                             />
                         </Form.Field>
                     ))}
