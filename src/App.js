@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {quizConstants, Quiz} from './components/Quiz';
+import { Container, Header, Segment } from 'semantic-ui-react';
+import { quizConstants, Quiz } from './components/Quiz';
 import './App.css';
 
 const mockQuiz = {
@@ -43,13 +44,28 @@ const mockQuiz = {
     ]
 };
 
+const style = {
+    h1: { marginTop: '1em' }
+};
+
+
 class App extends Component {
     handleQuizResponse(response) {
         console.log('QUIZ RESPONSE', response);
     }
 
     render() {
-        return <Quiz quiz={mockQuiz} onResponse={this.handleQuizResponse}/>;
+        return (
+            <div>
+                <Header as="h1" style={style.h1} content="Faraday" textAlign="center"/>
+                <Container text>
+                    <Segment.Group>
+                        <Quiz quiz={mockQuiz} onResponse={this.handleQuizResponse}/>
+                    </Segment.Group>
+                </Container>
+            </div>
+
+        );
     }
 }
 

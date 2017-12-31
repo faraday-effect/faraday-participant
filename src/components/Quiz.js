@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Header, Radio } from 'semantic-ui-react';
+import { Button, Form, Header, Input, Label, Radio, Segment } from 'semantic-ui-react';
 import { every, filter, fromPairs } from 'lodash';
 import PropTypes from 'prop-types';
 
@@ -8,19 +8,23 @@ export const quizConstants = {
     MULTIPLE_CHOICE: 'MULTIPLE_CHOICE'
 };
 
-const QuestionPrompt = props => {
+const QuestionPrompt = ({question, qNo}) => {
     return (
-        <p>
-            {props.prompt}
-            {props.required && <span> (Required)</span>}
-        </p>
+        <Label color="teal">
+            {`${qNo}. ${question.prompt}`}
+            {question.required && <Label.Detail>Required</Label.Detail>}
+        </Label>
     );
 };
 
 export class Quiz extends Component {
+    static propTypes = {
+        quiz: PropTypes.object.isRequired,
+        onResponse: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
-
         this.state = {
             question: fromPairs(props.quiz.questions.map(question => [question.key, '']))
         };
@@ -35,48 +39,42 @@ export class Quiz extends Component {
             question => this.state.question[question.key]);
     }
 
-    renderShortAnswerQuestion(question) {
+    renderShortAnswerQuestion(question, qNo) {
         return (
-            <div className="quiz-question-short-answer" key={question.key}>
-                <QuestionPrompt prompt={question.prompt} required={question.required}/>
-                <Form>
-                    <Form.Input
-                        name={question.key}
-                        value={this.state.question[question.key]}
-                        onChange={this.handleAnswerChange}
-                    />
-                </Form>
-            </div>
+            <Form.Field key={question.key}>
+                <QuestionPrompt question={question} qNo={qNo}/>
+                <Input
+                    name={question.key}
+                    value={this.state.question[question.key]}
+                    onChange={this.handleAnswerChange}/>
+            </Form.Field>
         );
     };
 
-    renderMultipleChoiceQuestion(question) {
+    renderMultipleChoiceQuestion(question, qNo) {
         return (
-            <div className="quiz-question-multiple-choice" key={question.key}>
-                <QuestionPrompt prompt={question.prompt} required={question.required}/>
-                <Form>
-                    {question.answers.map(answer => (
-                        <Form.Field key={answer.value}>
-                            <Radio
-                                label={answer.text}
-                                name={question.key}
-                                value={answer.value}
-                                checked={this.state.question[question.key] === answer.value}
-                                onChange={this.handleAnswerChange}
-                            />
-                        </Form.Field>
-                    ))}
-                </Form>
-            </div>
+            <Form.Group grouped key={question.key}>
+                <QuestionPrompt question={question} qNo={qNo}/>
+                {question.answers.map(answer => (
+                    <Form.Field key={answer.value}>
+                        <Radio
+                            label={answer.text}
+                            name={question.key}
+                            value={answer.value}
+                            checked={this.state.question[question.key] === answer.value}
+                            onChange={this.handleAnswerChange}/>
+                    </Form.Field>
+                ))}
+            </Form.Group>
         );
     };
 
-    renderQuestion(question) {
+    renderQuestion(question, qNo) {
         switch (question.type) {
             case quizConstants.MULTIPLE_CHOICE:
-                return this.renderMultipleChoiceQuestion(question);
+                return this.renderMultipleChoiceQuestion(question, qNo);
             case quizConstants.SHORT_ANSWER:
-                return this.renderShortAnswerQuestion(question);
+                return this.renderShortAnswerQuestion(question, qNo);
             default:
                 return <p>INVALID QUESTION TYPE</p>;
         }
@@ -84,19 +82,18 @@ export class Quiz extends Component {
 
     render() {
         return (
-            <div className="quiz">
-                <Header as="h1">{this.props.quiz.title}</Header>
-                {this.props.quiz.questions.map(question => this.renderQuestion(question))}
-                <Button
-                    disabled={!this.haveRequiredAnswers()}
-                    primary
-                    onClick={() => this.props.onResponse(this.state.question)}>Submit</Button>
-            </div>
+            <Segment>
+                <div className="quiz">
+                    <Header as="h1">{this.props.quiz.title}</Header>
+                    <Form>
+                        {this.props.quiz.questions.map((question, idx) => this.renderQuestion(question, idx + 1))}
+                        <Button
+                            disabled={!this.haveRequiredAnswers()}
+                            primary
+                            onClick={() => this.props.onResponse(this.state.question)}>Submit</Button>
+                    </Form>
+                </div>
+            </Segment>
         );
     }
 }
-
-Quiz.propTypes = {
-    quiz: PropTypes.object.isRequired,
-    onResponse: PropTypes.func.isRequired
-};
