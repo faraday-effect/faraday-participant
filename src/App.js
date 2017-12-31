@@ -44,8 +44,12 @@ const mockQuiz = {
 };
 
 class App extends Component {
+    handleQuizResponse(response) {
+        console.log('QUIZ RESPONSE', response);
+    }
+
     render() {
-        return <Quiz quiz={mockQuiz}/>;
+        return <Quiz quiz={mockQuiz} onResponse={this.handleQuizResponse}/>;
     }
 }
 
