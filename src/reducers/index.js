@@ -2,6 +2,7 @@ import { quizConstants } from '../components/Quiz';
 
 const mockQuiz = {
     title: 'The Python Bridge',
+    key: 'python-bridge-quiz',
     questions: [
         {
             key: 'your-name',
@@ -14,7 +15,7 @@ const mockQuiz = {
             type: quizConstants.MULTIPLE_CHOICE,
             required: true,
             prompt: 'What is your quest?',
-            answers: [
+            options: [
                 {
                     value: 'grail',
                     text: 'I seek the Holy Grail',
@@ -38,9 +39,18 @@ const mockQuiz = {
             required: false,
             prompt: 'What is your favorite color?'
         },
-    ]
+    ],
+    responses: {}
 };
 
-export default function quiz(state = {quiz: mockQuiz}, action) {
-    return state;
+export default function quiz(state = { quiz: mockQuiz }, action) {
+    switch (action.type) {
+        case 'RESPOND_TO_QUIZ':
+            return {
+                ...state,
+                response: action.payload
+            };
+        default:
+            return state;
+    }
 }

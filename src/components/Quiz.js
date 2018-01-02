@@ -26,17 +26,21 @@ export class Quiz extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            question: fromPairs(props.quiz.questions.map(question => [question.key, '']))
+            response: fromPairs(props.quiz.questions.map(question => [question.key, '']))
         };
     }
 
     handleAnswerChange = (event, data) => {
-        this.setState({question: {...this.state.question, [data.name]: data.value}});
+        this.setState({response: {...this.state.response, [data.name]: data.value}});
+    };
+
+    handleResponse = (event, data) => {
+        this.props.onResponse(this.state.response);
     };
 
     haveRequiredAnswers() {
         return every(filter(this.props.quiz.questions, question => question.required),
-            question => this.state.question[question.key]);
+            question => this.state.response[question.key]);
     }
 
     renderShortAnswerQuestion(question, qNo) {
@@ -45,7 +49,7 @@ export class Quiz extends Component {
                 <QuestionPrompt question={question} qNo={qNo}/>
                 <Input
                     name={question.key}
-                    value={this.state.question[question.key]}
+                    value={this.state.response[question.key]}
                     onChange={this.handleAnswerChange}/>
             </Form.Field>
         );
@@ -55,13 +59,13 @@ export class Quiz extends Component {
         return (
             <Form.Group grouped key={question.key}>
                 <QuestionPrompt question={question} qNo={qNo}/>
-                {question.answers.map(answer => (
-                    <Form.Field key={answer.value}>
+                {question.options.map(option => (
+                    <Form.Field key={option.value}>
                         <Radio
-                            label={answer.text}
+                            label={option.text}
                             name={question.key}
-                            value={answer.value}
-                            checked={this.state.question[question.key] === answer.value}
+                            value={option.value}
+                            checked={this.state.response[question.key] === option.value}
                             onChange={this.handleAnswerChange}/>
                     </Form.Field>
                 ))}
@@ -90,7 +94,7 @@ export class Quiz extends Component {
                         <Button
                             disabled={!this.haveRequiredAnswers()}
                             primary
-                            onClick={() => this.props.onResponse(this.state.question)}>Submit</Button>
+                            onClick={this.handleResponse}>Submit</Button>
                     </Form>
                 </div>
             </Segment>

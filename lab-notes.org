@@ -2,83 +2,97 @@
 
 * Links
 ** Articles
-[[https://www.reindex.io/blog/redux-and-relay/][Comparing Redux and Relay]]
-[[https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/][Using Create React App with a Server]]
+- [[https://www.reindex.io/blog/redux-and-relay/][Comparing Redux and Relay]]
+- [[https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/][Using Create React App with a Server]]
 ** Authentication and Authorization
-[[http://www.passportjs.org/][Passport authentication for Node.JS (Express)]]
-** Firebase
-http://docs.react-redux-firebase.com/history/v2.0.0/docs/roadmap.html
-https://console.firebase.google.com/project/faraday-lms/hosting
-https://firebase.google.com/
+- [[http://www.passportjs.org/][Passport authentication for Node.JS (Express)]]
+** Data
+- https://github.com/paularmstrong/normalizr/tree/master/examples/github
+*** Firebase
+- http://docs.react-redux-firebase.com/history/v2.0.0/docs/roadmap.html
+- https://console.firebase.google.com/project/faraday-lms/hosting
+- https://firebase.google.com/
+*** MongoDB
+- http://mongoosejs.com/docs/browser.html
+- https://www.compose.com/articles/using-graphql-with-mongodb/
 ** Graphics
-[[https://d3js.org/][Data Driven Documents home page]]
-[[https://www.safaribooksonline.com/library/view/d3js-in-action/9781617294488/][D3.JS in Action]]
+- [[https://d3js.org/][Data Driven Documents home page]]
+- [[https://www.safaribooksonline.com/library/view/d3js-in-action/9781617294488/][D3.JS in Action]]
 ** GraphQL
-[[http://graphql.org/][GraphQL: Query Language for your API]]
-[[https://www.graph.cool/][GraphQL Backend Development Framework]]
-[[https://www.graphql.com/][Explore GraphQL]]
-[[https://www.safaribooksonline.com/library/view/learning-graphql-and/9781786465757/][Learning GraphQL and Relay (Safari/Pakt)]]
-https://graphcms.com/
-https://www.apollographql.com/
+- [[http://graphql.org/][GraphQL: Query Language for your API]]
+- [[https://www.graph.cool/][GraphQL Backend Development Framework]]
+- [[https://www.graphql.com/][Explore GraphQL]]
+- [[https://www.safaribooksonline.com/library/view/learning-graphql-and/9781786465757/][Learning GraphQL and Relay (Safari/Pakt)]]
+- https://graphcms.com/
+- https://www.apollographql.com/
 ** IDE
-https://www.jetbrains.com/help/webstorm/react.html
+- https://www.jetbrains.com/help/webstorm/react.html
 ** Observables
-[[file:~/Dropbox/apps/Manning%20Books/RxJS%20in%20Action/RxJS_in_Action_v8_MEAP.pdf][RxJS in Action (Local/Manning)]]
-http://reactivex.io/rxjs/
-[[https://redux-observable.js.org/][Redux + RxJS (Epics)]]
+- [[file:~/Dropbox/apps/Manning%20Books/RxJS%20in%20Action/RxJS_in_Action_v8_MEAP.pdf][RxJS in Action (Local/Manning)]]
+- http://reactivex.io/rxjs/
+- [[https://redux-observable.js.org/][Redux + RxJS (Epics)]]
 ** React
-[[file:~/Dropbox/apps/Manning%20Books/React%20in%20Action/React_in_Action_v11_MEAP.pdf][React in Action (Local/Manning)]]
-[[https://reactjs.org/][A JavaScript Library for Building User Interfaces]]
-[[https://www.safaribooksonline.com/library/view/5-practical-react/9781492065326/][Five Practical React Projects (Safari/Sitepoint)]]
-[[https://www.safaribooksonline.com/library/view/learning-react-1st/9781491954614/][Learning React (Safari/O'Reilly)]]
-[[https://www.safaribooksonline.com/library/view/react-design-patterns/9781786464538/][React Design Patterns and Best Practices (Safari/Pakt)]]
-[[https://www.safaribooksonline.com/library/view/react-for-real/9781680502817/][React for Real (Safari/PragProg)]]
-[[https://www.safaribooksonline.com/library/view/react-quickly-painless/9781617293344/][React Quickly (Safari/Manning)]]
-https://www.nearform.com/blog/react-living-style-guides/
+- [[file:~/Dropbox/apps/Manning%20Books/React%20in%20Action/React_in_Action_v11_MEAP.pdf][React in Action (Local/Manning)]]
+- [[https://reactjs.org/][A JavaScript Library for Building User Interfaces]]
+- [[https://www.safaribooksonline.com/library/view/5-practical-react/9781492065326/][Five Practical React Projects (Safari/Sitepoint)]]
+- [[https://www.safaribooksonline.com/library/view/learning-react-1st/9781491954614/][Learning React (Safari/O'Reilly)]]
+- [[https://www.safaribooksonline.com/library/view/react-design-patterns/9781786464538/][React Design Patterns and Best Practices (Safari/Pakt)]]
+- [[https://www.safaribooksonline.com/library/view/react-for-real/9781680502817/][React for Real (Safari/PragProg)]]
+- [[https://www.safaribooksonline.com/library/view/react-quickly-painless/9781617293344/][React Quickly (Safari/Manning)]]
+- https://www.nearform.com/blog/react-living-style-guides/
 ** Redux
-[[file:~/Dropbox/apps/Manning%20Books/Redux%20in%20Action/Redux_in_Action_v6_MEAP.pdf][Redux in Action (Local/Manning)]]
-https://github.com/gaearon/redux-thunk
-https://redux-saga.js.org/
-https://redux.js.org/
-https://www.npmjs.com/package/reselect
+- [[file:~/Dropbox/apps/Manning%20Books/Redux%20in%20Action/Redux_in_Action_v6_MEAP.pdf][Redux in Action (Local/Manning)]]
+- https://github.com/gaearon/redux-thunk
+- https://github.com/reactjs/react-redux
+- https://redux-form.com/7.2.0/docs/gettingstarted.md/
+- https://redux-saga.js.org/
+- https://redux.js.org/
+- https://www.npmjs.com/package/redux-logger
+- https://www.npmjs.com/package/reselect
 ** Relay
-https://facebook.github.io/relay/
+- https://facebook.github.io/relay/
 ** Router
-https://github.com/ReactTraining/react-router
-https://reacttraining.com/react-router/web/guides/philosophy
+- https://github.com/ReactTraining/react-router
+- https://reacttraining.com/react-router/web/guides/philosophy
 ** Hapi
-[[file:~/Dropbox/apps/Manning%20Books/hapi.js%20in%20Action/hapi.js_in_Action.pdf][file:~/Dropbox/apps/Manning Books/hapi.js in Action/hapi.js_in_Action.pdf]]
-https://futurestud.io/tutorials/hapi-v17-upgrade-guide-your-move-to-async-await
-https://github.com/hapijs/nes
-https://hapijs.com/api
-https://www.npmjs.com/package/hapi-dev-errors
+- [[file:~/Dropbox/apps/Manning%20Books/hapi.js%20in%20Action/hapi.js_in_Action.pdf][file:~/Dropbox/apps/Manning Books/hapi.js in Action/hapi.js_in_Action.pdf]]
+- https://futurestud.io/tutorials/hapi-v17-upgrade-guide-your-move-to-async-await
+- https://github.com/hapijs/nes
+- https://hapijs.com/api
+- https://www.npmjs.com/package/hapi-dev-errors
 ** Testing
-http://airbnb.io/enzyme/
-https://facebook.github.io/jest/
-https://github.com/typicode/json-server
-https://www.npmjs.com/package/ava
-https://www.npmjs.com/package/nock
-https://www.npmjs.com/package/tape
+- http://airbnb.io/enzyme/
+- https://facebook.github.io/jest/
+- https://github.com/typicode/json-server
+- https://www.npmjs.com/package/ava
+- https://www.npmjs.com/package/nock
+- https://www.npmjs.com/package/tape
 ** User Interface
-[[https://react-bootstrap.github.io/][React Bootstrap]]
-https://github.com/bvaughn/react-virtualized
-https://material-ui-next.com/
-https://react-styleguidist.js.org/
-https://react.semantic-ui.com/
-https://storybook.js.org/basics/guide-react/
+- [[https://react-bootstrap.github.io/][React Bootstrap]]
+- https://github.com/bvaughn/react-virtualized
+- https://material-ui-next.com/
+- https://react-styleguidist.js.org/
+- https://react.semantic-ui.com/
+- https://storybook.js.org/basics/guide-react/
 ** Utilities
+*** Immutability
+- [[https://facebook.github.io/immutable-js/][Immutable.JS]]
+- https://github.com/rtfeldman/seamless-immutable/
+- https://github.com/debitoor/dot-prop-immutable
+- https://github.com/mariocasciaro/object-path-immutable
+- https://github.com/substantial/updeep
+- https://github.com/kolodny/immutability-helper
 *** Tool Chain
-[[https://babeljs.io/][Babel JavaScript compiler]]
-[[https://flow.org/][Flow JavaScript type checker]]
+- [[https://babeljs.io/][Babel JavaScript compiler]]
+- [[https://flow.org/][Flow JavaScript type checker]]
 - [[https://medium.freecodecamp.org/why-use-static-types-in-javascript-part-1-8382da1e0adb][Static Types in JavaScript (4-part tutorial)]]
-[[https://github.com/facebookincubator/create-react-app][Create React App]]
-[[https://webpack.github.io/][Webpack module bundler]]
-[[https://yarnpkg.com/en/][Yarn dependency manager]]
-https://github.com/reactjs/react-docgen
-https://www.npmjs.com/package/dataloader
+- [[https://github.com/facebookincubator/create-react-app][Create React App]]
+- [[https://webpack.github.io/][Webpack module bundler]]
+- [[https://yarnpkg.com/en/][Yarn dependency manager]]
+- https://github.com/reactjs/react-docgen
+- https://www.npmjs.com/package/dataloader
 *** Programming
-[[http://zeptojs.com/][Zepto (jQuery Light)]]
-[[https://facebook.github.io/immutable-js/][Immutable.JS]]
-https://github.com/maicki/why-did-you-update
-https://www.npmjs.com/package/invariant
-https://www.npmjs.com/package/request
+- [[http://zeptojs.com/][Zepto (jQuery Light)]]
+- https://github.com/maicki/why-did-you-update
+- https://www.npmjs.com/package/invariant
+- https://www.npmjs.com/package/request

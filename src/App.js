@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Container, Header, Segment } from 'semantic-ui-react';
 
 import { Quiz } from './components/Quiz';
+import { respondToQuiz } from "./actions";
 
 import './App.css';
 const style = {
@@ -11,9 +12,9 @@ const style = {
 };
 
 class App extends Component {
-    handleQuizResponse(response) {
-        console.log('QUIZ RESPONSE', response);
-    }
+    handleQuizResponse = (response) => {
+        this.props.dispatch(respondToQuiz(response));
+    };
 
     render() {
         return (
