@@ -4,3 +4,14 @@ export function respondToQuiz(response) {
         payload: response
     }
 }
+
+export function answerQuestion(quizKey, name, value) {
+    return {
+        type: 'ANSWER_QUESTION',
+        payload: {
+            quizKey,
+            name,
+            value
+        }
+    };
+}

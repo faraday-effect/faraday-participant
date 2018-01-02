@@ -9,11 +9,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import 'semantic-ui-css/semantic.min.css';
 
-import quiz from './reducers';
+import rootReducer from './reducers';
 import App from './App';
 
 const store = createStore(
-    quiz,
+    rootReducer,
     composeWithDevTools(applyMiddleware(thunk))
 );
 

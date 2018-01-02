@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 
 import { Container, Header, Segment } from 'semantic-ui-react';
 
-import { Quiz } from './components/Quiz';
-import { respondToQuiz } from "./actions";
+import Quiz from './components/Quiz';
 
 import './App.css';
 const style = {
@@ -12,20 +11,16 @@ const style = {
 };
 
 class App extends Component {
-    handleQuizResponse = (response) => {
-        this.props.dispatch(respondToQuiz(response));
-    };
-
     render() {
         return (
             <div>
                 <Header as="h1" style={style.h1} content="Faraday" textAlign="center"/>
                 <Container text>
-                    <Segment.Group>
-                        <Quiz
-                            quiz={this.props.quiz}
-                            onResponse={this.handleQuizResponse}/>
-                    </Segment.Group>
+                    {this.props.quizzes.map(quiz => (
+                        <Segment.Group key={quiz.key}>
+                            <Quiz quiz={quiz}/>
+                        </Segment.Group>
+                    ))}
                 </Container>
             </div>
 
@@ -35,8 +30,9 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        quiz: state.quiz
-    }
+        quizzes: state.cells.map(cellKey => state.quizzes[cellKey])
+    };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)
+
