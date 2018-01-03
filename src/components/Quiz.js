@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 import { Button, Form, Header, Input, Label, Radio, Segment } from 'semantic-ui-react';
 import { every, filter, fromPairs } from 'lodash';
@@ -14,8 +15,7 @@ export const quizConstants = {
 const QuestionPrompt = props => {
     return (
         <Label color="teal">
-            {props.qNo}
-            {props.question.prompt}
+            {props.qNo + ". " + props.question.prompt}
             {props.question.required && <Label.Detail>Required</Label.Detail>}
         </Label>
     );
@@ -75,7 +75,7 @@ class Quiz extends Component {
 
     handleAnswerChange = (event, data) => {
         console.log(this, data.name, data.value);
-        this.props.dispatch(answerQuestion(this.props.quiz.key, data.name, data.value));
+        this.props.answerQuestion(this.props.quiz.key, data.name, data.value);
     };
 
     handleSubmit = (event, data) => {
@@ -132,4 +132,12 @@ class Quiz extends Component {
     }
 }
 
-export default connect()(Quiz)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            answerQuestion
+        },
+        dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Quiz)
