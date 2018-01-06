@@ -1,6 +1,4 @@
-import update from 'immutability-helper';
-
-export default function quizzes(state = {}, action) {
+export default function quizzes(state = [], action) {
     switch (action.type) {
         case 'FETCH_QUIZZES_SUCCEEDED':
             return action.payload.quizzes;
@@ -8,11 +6,17 @@ export default function quizzes(state = {}, action) {
             console.log('WRITE ME');
             return state;
         case 'ANSWER_QUESTION':
-            return update(state, {
-                [action.payload.quizKey] : {
-                    response: {
-                        [action.payload.name]: {$set: action.payload.value}
+            return state.map(quiz => {
+                if (quiz.key === action.payload.quizKey) {
+                    return {
+                        ...quiz,
+                        response: {
+                            ...quiz.response,
+                            [action.payload.name]: action.payload.value
+                        }
                     }
+                } else {
+                    return quiz;
                 }
             });
         default:

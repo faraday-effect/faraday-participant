@@ -79,7 +79,7 @@ class Quiz extends Component {
     };
 
     handleSubmit = (event, data) => {
-        console.log("SUBMIT");
+        console.log("SUBMIT", this.props.quiz.response);
     };
 
     haveRequiredAnswers() {

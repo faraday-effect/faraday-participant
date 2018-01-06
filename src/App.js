@@ -18,6 +18,12 @@ class App extends Component {
         this.props.fetchQuizzes();
         this.props.fetchCells();
     }
+    
+    findQuiz(quizKey) {
+        const quiz = this.props.quizzes.find(quiz => quiz.key === quizKey);
+        console.log(quizKey, this.props.quizzes, quiz);
+        return quiz;
+    }
 
     render() {
         console.log(this);
@@ -26,8 +32,8 @@ class App extends Component {
                 <Header as="h1" style={style.h1} content="Faraday" textAlign="center"/>
                 <Container text>
                     {this.props.cells.map(cell => (
-                        <Segment.Group key={cell}>
-                            <Quiz quiz={this.props.quizzes[cell]}/>
+                        <Segment.Group key={cell.key}>
+                            <Quiz quiz={this.findQuiz(cell.key)}/>
                         </Segment.Group>
                     ))}
                 </Container>
