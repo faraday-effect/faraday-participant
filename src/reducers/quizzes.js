@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 
-export default function quizzes(state = [], action) {
+export default function quizzes(state = {}, action) {
     switch (action.type) {
         case 'FETCH_QUIZZES_SUCCEEDED':
             return action.payload.quizzes;

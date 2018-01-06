@@ -1,8 +1,8 @@
-
-const initialState = [
-    'python-bridge-quiz'
-];
-
-export default function quiz(state = initialState, action) {
-    return state;
+export default function quiz(state = [], action) {
+    switch (action.type) {
+        case 'FETCH_CELLS_SUCCEEDED':
+            return action.payload.cells;
+        default:
+            return state;
+    }
 }

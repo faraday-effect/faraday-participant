@@ -10,15 +10,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import 'semantic-ui-css/semantic.min.css';
 
 import rootReducer from './reducers';
-import { fetchQuizzes } from './actions';
 import App from './App';
 
 const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(thunk))
 );
-
-store.dispatch(fetchQuizzes());
 
 ReactDOM.render(
     <Provider store={store}>
