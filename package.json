@@ -14,7 +14,8 @@
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.77.1"
+    "semantic-ui-react": "^0.77.1",
+    "yargs": "^10.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
