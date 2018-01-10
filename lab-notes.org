@@ -71,8 +71,9 @@
 - [[https://react-bootstrap.github.io/][React Bootstrap]]
 - https://github.com/bvaughn/react-virtualized
 - https://material-ui-next.com/
-- https://react-styleguidist.js.org/
 - https://react.semantic-ui.com/
+*** Documenting (and Testing) Components
+- https://react-styleguidist.js.org/
 - https://storybook.js.org/basics/guide-react/
 ** Utilities
 *** Immutability

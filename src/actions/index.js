@@ -51,3 +51,20 @@ export function fetchCells() {
             .catch(err => console.error(err));
     };
 }
+
+export function fetchNotesSucceeded(notes) {
+    return {
+        type: 'FETCH_NOTES_SUCCEEDED',
+        payload: {
+            notes
+        }
+    }
+}
+
+export function fetchNotes() {
+    return dispatch => {
+        request('http://localhost:8000/api/notes')
+            .then(response => dispatch(fetchNotesSucceeded(JSON.parse(response))))
+            .catch(err => console.error(err));
+    };
+}

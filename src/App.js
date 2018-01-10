@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Container, Header, Segment } from 'semantic-ui-react';
 
 import Quiz from './components/Quiz';
-import { fetchCells, fetchQuizzes } from './actions';
+import Note from './components/Note';
+import { fetchCells, fetchQuizzes, fetchNotes } from './actions';
 
 import './App.css';
 const style = {
@@ -17,6 +18,7 @@ class App extends Component {
         // TODO: Use a Saga?
         this.props.fetchQuizzes();
         this.props.fetchCells();
+        this.props.fetchNotes();
     }
     
     findQuiz(quizKey) {
@@ -36,6 +38,12 @@ class App extends Component {
                             <Quiz quiz={this.findQuiz(cell.key)}/>
                         </Segment.Group>
                     ))}
+                    {this.props.notes.map(note => (
+                        <Segment.Group key={note.key}>
+                            <Note key={this.note.key} content={this.note.content}/>
+                        </Segment.Group>
+                    ))}
+
                 </Container>
             </div>
 
@@ -48,4 +56,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(mapStateToProps, {fetchCells, fetchQuizzes})(App);
+export default connect(mapStateToProps, {fetchCells, fetchQuizzes, fetchNotes})(App);
