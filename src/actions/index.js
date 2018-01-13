@@ -63,7 +63,7 @@ export function fetchNotesSucceeded(notes) {
 
 export function fetchNotes() {
     return dispatch => {
-        request('http://localhost:8000/api/notes')
+        request('http://localhost:8000/api/notes/participant')
             .then(response => dispatch(fetchNotesSucceeded(JSON.parse(response))))
             .catch(err => console.error(err));
     };

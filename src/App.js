@@ -16,8 +16,9 @@ class App extends Component {
     componentDidMount() {
         // TODO: This can't be right; should fetch entire content.
         // TODO: Use a Saga?
-        this.props.fetchQuizzes();
-        this.props.fetchCells();
+
+        //this.props.fetchQuizzes();
+        //this.props.fetchCells();
         this.props.fetchNotes();
     }
     
@@ -38,12 +39,14 @@ class App extends Component {
                             <Quiz quiz={this.findQuiz(cell.key)}/>
                         </Segment.Group>
                     ))}
-                    {this.props.notes.map(note => (
-                        <Segment.Group key={note.key}>
-                            <Note key={this.note.key} content={this.note.content}/>
-                        </Segment.Group>
-                    ))}
-
+                    {this.props.notes.map(note => {
+                        console.log(note);
+                        return (
+                            <Segment.Group key={note.key}>
+                                <Note note={note}/>
+                            </Segment.Group>
+                        )
+                    })}
                 </Container>
             </div>
 

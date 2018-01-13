@@ -6,16 +6,16 @@ const md = require('markdown-it')()
     .use(require('markdown-it-highlightjs'));
 
 const Notes = props => {
+    console.log(props);
     return (
-        <div>
-            <h2>{props.key}</h2>
-            <div dangerouslySetInnerHTML={{__html: md.render(props.content)}}/>
+        <div id={props.note.key}>
+            <h2>{props.note.key}</h2>
+            <div dangerouslySetInnerHTML={{__html: md.render(props.note.content.join("\n"))}}/>
         </div>
     );
 };
 Notes.propTypes = {
-    key: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired
+    note: PropTypes.object.isRequired
 };
 
 export default Notes;
