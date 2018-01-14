@@ -35,23 +35,6 @@ export function fetchQuizzes() {
     };
 }
 
-export function fetchCellsSucceeded(cells) {
-    return {
-        type: 'FETCH_CELLS_SUCCEEDED',
-        payload: {
-            cells
-        }
-    }
-}
-
-export function fetchCells() {
-    return dispatch => {
-        request('http://localhost:8000/api/cells')
-            .then(response => dispatch(fetchCellsSucceeded(JSON.parse(response))))
-            .catch(err => console.error(err));
-    };
-}
-
 export function fetchTalksSucceeded(talks) {
     return {
         type: 'FETCH_TALKS_SUCCEEDED',
