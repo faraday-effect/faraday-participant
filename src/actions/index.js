@@ -52,19 +52,19 @@ export function fetchCells() {
     };
 }
 
-export function fetchNotesSucceeded(notes) {
+export function fetchTalksSucceeded(talks) {
     return {
-        type: 'FETCH_NOTES_SUCCEEDED',
+        type: 'FETCH_TALKS_SUCCEEDED',
         payload: {
-            notes
+            talks
         }
     }
 }
 
-export function fetchNotes() {
+export function fetchTalks() {
     return dispatch => {
-        request('http://localhost:8000/api/notes/podium')
-            .then(response => dispatch(fetchNotesSucceeded(JSON.parse(response))))
+        request('http://localhost:8000/api/talks/podium')
+            .then(response => dispatch(fetchTalksSucceeded(JSON.parse(response))))
             .catch(err => console.error(err));
     };
 }

@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { Container, Header, Segment } from 'semantic-ui-react';
 
 import Quiz from './components/Quiz';
-import Note from './components/Note';
-import { fetchCells, fetchQuizzes, fetchNotes } from './actions';
+import Talk from './components/Talk';
+import { fetchCells, fetchQuizzes, fetchTalks } from './actions';
 
 import './App.css';
 const style = {
@@ -18,10 +18,10 @@ type Cell = {
 };
 
 type AppProps = {
-    fetchNotes: void => void,
+    fetchTalks: void => void,
     quizzes: Array<Quiz>,
     cells: Array<Cell>,
-    notes: Array<Note>
+    talks: Array<Talk>
 };
 
 class App extends Component<AppProps> {
@@ -31,7 +31,7 @@ class App extends Component<AppProps> {
 
         //this.props.fetchQuizzes();
         //this.props.fetchCells();
-        this.props.fetchNotes();
+        this.props.fetchTalks();
     }
     
     findQuiz(quizKey) {
@@ -50,10 +50,10 @@ class App extends Component<AppProps> {
                             <Quiz quiz={this.findQuiz(cell.key)}/>
                         </Segment.Group>
                     ))}
-                    {this.props.notes.map(note => {
+                    {this.props.talks.map(talk => {
                         return (
-                            <Segment key={note.key}>
-                                <Note note={note}/>
+                            <Segment key={talk.key}>
+                                <Talk talk={talk}/>
                             </Segment>
                         )
                     })}
@@ -69,4 +69,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(mapStateToProps, {fetchCells, fetchQuizzes, fetchNotes})(App);
+export default connect(mapStateToProps, {fetchCells, fetchQuizzes, fetchTalks})(App);

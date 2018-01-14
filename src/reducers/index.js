@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import quizzes from './quizzes';
 import cells from './cells';
-import notes from './notes';
+import talks from './talks';
 
 export default combineReducers({
     cells,
-    notes,
+    talks,
     quizzes
 });
