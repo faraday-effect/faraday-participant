@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { Container, Header, Segment } from 'semantic-ui-react';
 
 import Quiz from './components/Quiz';
-import Talk from './components/Talk';
+import type { TalkType } from './components/Talk';
+import { Talk } from './components/Talk';
 import { fetchCells, fetchQuizzes, fetchTalks } from './actions';
 
 import './App.css';
@@ -21,7 +22,7 @@ type AppProps = {
     fetchTalks: void => void,
     quizzes: Array<Quiz>,
     cells: Array<Cell>,
-    talks: Array<Talk>
+    talks: Array<TalkType>
 };
 
 class App extends Component<AppProps> {
@@ -50,13 +51,11 @@ class App extends Component<AppProps> {
                             <Quiz quiz={this.findQuiz(cell.key)}/>
                         </Segment.Group>
                     ))}
-                    {this.props.talks.map(talk => {
-                        return (
-                            <Segment key={talk.key}>
-                                <Talk talk={talk}/>
-                            </Segment>
-                        )
-                    })}
+                    {this.props.talks.map(talk => (
+                        <Segment.Group key={talk.topic}>
+                            <Talk talk={talk}/>
+                        </Segment.Group>
+                    ))}
                 </Container>
             </div>
 

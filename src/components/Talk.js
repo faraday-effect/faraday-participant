@@ -1,17 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import * as React from 'react';
+import { Segment } from 'semantic-ui-react';
 import './zenburn.css';
 
-const Talk = props => {
-    return (
-        <div id={props.talk.key}>
-            <h2>{props.talk.key}</h2>
-            <div dangerouslySetInnerHTML={{__html: props.talk.content}}/>
-        </div>
-    );
-};
-Talk.propTypes = {
-    talk: PropTypes.object.isRequired
+type TalkSegmentType = {
+    key: string,
+    type: Array<string>,
+    content: string;
 };
 
-export default Talk;
+export type TalkType = {
+    title: string,
+    topic: string,
+    segments: Array<TalkSegmentType>;
+};
+
+type TalkProps = {
+    talk: TalkType
+};
+
+export const Talk = (props: TalkProps) => {
+    return (
+        <Segment>
+            <h1>{props.talk.title}</h1>
+            <h2>{props.talk.topic}</h2>
+            {props.talk.segments.map(segment =>
+                <div key={segment.key} id={segment.key}>
+                <h2>{segment.key}</h2>
+                <div dangerouslySetInnerHTML={{__html: segment.content}} />
+                </div>
+            )}
+        </Segment>
+    );
+};
