@@ -29,7 +29,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this);
         return (
             <div>
                 <Header as="h1" style={style.h1} content="Faraday" textAlign="center"/>
@@ -40,11 +39,10 @@ class App extends Component {
                         </Segment.Group>
                     ))}
                     {this.props.notes.map(note => {
-                        console.log(note);
                         return (
-                            <Segment.Group key={note.key}>
+                            <Segment key={note.key}>
                                 <Note note={note}/>
-                            </Segment.Group>
+                            </Segment>
                         )
                     })}
                 </Container>
