@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 import { Button, Form, Header, Input, Label, Radio, Segment } from 'semantic-ui-react';
 import { every, filter, fromPairs } from 'lodash';
-import PropTypes from 'prop-types';
 
 import { answerQuestion } from "../actions";
 
@@ -12,7 +12,42 @@ export const quizConstants = {
     MULTIPLE_CHOICE: 'MULTIPLE_CHOICE'
 };
 
-const QuestionPrompt = props => {
+type ShortAnswerQuestionType = {
+    key: string,
+    type: string,
+    required: boolean,
+    prompt: string,
+};
+
+
+type MultipleChoiceAnswerType = {
+    value: string,
+    text: string,
+    correct: boolean
+};
+
+type MultipleChoiceQuestionType = {
+    key: string,
+    type: string,
+    prompt: string,
+    options: Array<MultipleChoiceAnswerType>
+};
+
+type AnyQuestionType = ShortAnswerQuestionType | MultipleChoiceQuestionType;
+
+type SemanticUIData = {
+    name: string,
+    value: string
+};
+
+type OnChangeEventType = (SyntheticEvent<>, SemanticUIData) => void;
+
+type QuestionPromptProps = {
+    question: AnyQuestionType,
+    qNo: number
+}
+
+const QuestionPrompt = (props: QuestionPromptProps) => {
     return (
         <Label color="teal">
             {props.qNo + ". " + props.question.prompt}
@@ -20,12 +55,15 @@ const QuestionPrompt = props => {
         </Label>
     );
 };
-QuestionPrompt.propTypes = {
-    question: PropTypes.object.isRequired,
-    qNo: PropTypes.number.isRequired
+
+type ShortAnswerQuestionProps = {
+    question: ShortAnswerQuestionType,
+    qNo: number,
+    content: string,
+    onChange: OnChangeEventType
 };
 
-const ShortAnswerQuestion = props => (
+const ShortAnswerQuestion = (props: ShortAnswerQuestionProps) => (
     <Form.Field key={props.question.key}>
         <QuestionPrompt question={props.question} qNo={props.qNo}/>
         <Input
@@ -34,14 +72,15 @@ const ShortAnswerQuestion = props => (
             onChange={props.onChange}/>
     </Form.Field>
 );
-ShortAnswerQuestion.propTypes = {
-    question: PropTypes.object.isRequired,
-    qNo: PropTypes.number.isRequired,
-    content: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+
+type MultipleChoiceQuestionProps = {
+    question: MultipleChoiceQuestionType,
+    qNo: number,
+    content: string,
+    onChange: OnChangeEventType
 };
 
-const MultipleChoiceQuestion = props => (
+const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => (
     <Form.Group grouped key={props.question.key}>
         <QuestionPrompt question={props.question} qNo={props.qNo}/>
         {props.question.options.map(option => (
@@ -56,19 +95,22 @@ const MultipleChoiceQuestion = props => (
         ))}
     </Form.Group>
 );
-MultipleChoiceQuestion.propTypes = {
-    question: PropTypes.object.isRequired,
-    qNo: PropTypes.number.isRequired,
-    content: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+
+type QuizType = {
+    key: string,
+    title: string,
+    required: boolean,
+    questions: Array<AnyQuestionType>,
+    response: { string: string }
 };
 
-class Quiz extends Component {
-    static propTypes = {
-        quiz: PropTypes.object.isRequired,
-    };
+type QuizProps = {
+    answerQuestion: (string, string, string) => void,
+    quiz: QuizType
+};
 
-    constructor(props) {
+class Quiz extends React.Component<QuizProps> {
+    constructor(props: QuizProps) {
         super(props);
         props.quiz.response = fromPairs(props.quiz.questions.map(question => [question.key, '']));
     }
@@ -87,13 +129,12 @@ class Quiz extends Component {
             question => this.props.quiz.response[question.key]);
     }
 
-    renderQuestion(question, qNo) {
+    renderQuestion(question: any, qNo: number) {
         switch (question.type) {
             case quizConstants.MULTIPLE_CHOICE:
                 return (
                     <MultipleChoiceQuestion
-                        key={question.key}
-                        question={question}
+                        question={(question: MultipleChoiceQuestionType)}
                         qNo={qNo}
                         content={this.props.quiz.response[question.key]}
                         onChange={this.handleAnswerChange}
@@ -102,8 +143,7 @@ class Quiz extends Component {
             case quizConstants.SHORT_ANSWER:
                 return (
                     <ShortAnswerQuestion
-                        key={question.key}
-                        question={question}
+                        question={(question: ShortAnswerQuestionType)}
                         qNo={qNo}
                         content={this.props.quiz.response[question.key]}
                         onChange={this.handleAnswerChange}

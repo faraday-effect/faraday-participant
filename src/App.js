@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -12,7 +13,18 @@ const style = {
     h1: { marginTop: '1em' }
 };
 
-class App extends Component {
+type Cell = {
+    key: string
+};
+
+type AppProps = {
+    fetchNotes: void => void,
+    quizzes: Array<Quiz>,
+    cells: Array<Cell>,
+    notes: Array<Note>
+};
+
+class App extends Component<AppProps> {
     componentDidMount() {
         // TODO: This can't be right; should fetch entire content.
         // TODO: Use a Saga?
