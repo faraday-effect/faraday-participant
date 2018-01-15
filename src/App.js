@@ -6,7 +6,7 @@ import { Container, Header, Segment } from 'semantic-ui-react';
 
 import Quiz from './components/Quiz';
 import type { TalkType } from './components/Talk';
-import { Talk } from './components/Talk';
+import Talk from './components/Talk';
 import { fetchQuizzes, fetchTalks } from './actions';
 
 import './App.css';

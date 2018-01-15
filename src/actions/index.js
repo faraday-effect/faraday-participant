@@ -44,9 +44,12 @@ export function fetchTalksSucceeded(talks) {
     }
 }
 
-export function fetchTalks() {
+export function fetchTalks(destination = 'podium') {
     return dispatch => {
-        request('http://localhost:8000/api/talks/podium')
+        request({
+            url: `http://localhost:8000/api/talks`,
+            qs: { destination: destination}
+        })
             .then(response => dispatch(fetchTalksSucceeded(JSON.parse(response))))
             .catch(err => console.error(err));
     };
