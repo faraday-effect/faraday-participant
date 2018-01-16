@@ -7,5 +7,6 @@
 [lints]
 
 [options]
+suppress_type=$FlowTODO
 
 [strict]

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
+
 import quizzes from './quizzes';
-import { talks, talkViews } from './talks';
+import topics from './topics';
 
 export default combineReducers({
     quizzes,
-    talks,
-    talkViews
+    topics
 });

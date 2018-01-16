@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Button, Form, Header, Input, Label, Radio, Segment } from 'semantic-ui-react';
 import { every, filter, fromPairs } from 'lodash';
 
-import { answerQuestion } from "../actions";
+import { answerQuestion } from "../actions/quiz";
 
 export const quizConstants = {
     SHORT_ANSWER: 'SHORT_ANSWER',

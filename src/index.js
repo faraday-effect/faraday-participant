@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import 'semantic-ui-css/semantic.min.css';
+import './zenburn.css';
 
 import rootReducer from './reducers';
 import App from './App';

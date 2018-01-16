@@ -1,11 +1,15 @@
+import {quizActionType} from '../actions/quiz';
+
 export default function quizzes(state = [], action) {
     switch (action.type) {
-        case 'FETCH_QUIZZES_SUCCEEDED':
+        case quizActionType.FETCH_QUIZZES_SUCCEEDED:
             return action.payload.quizzes;
-        case 'RESPOND_TO_QUIZ':
+
+        case quizActionType.RESPOND_TO_QUIZ:
             console.log('WRITE ME');
             return state;
-        case 'ANSWER_QUESTION':
+
+        case quizActionType.ANSWER_QUESTION:
             return state.map(quiz => {
                 if (quiz.key === action.payload.quizKey) {
                     return {
@@ -19,6 +23,7 @@ export default function quizzes(state = [], action) {
                     return quiz;
                 }
             });
+
         default:
             return state;
     }

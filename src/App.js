@@ -1,13 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Header } from 'semantic-ui-react';
+import { Header, Container } from 'semantic-ui-react';
 
 import Quiz from './components/Quiz';
-import type { TalkType } from './components/Talk';
-// import Talk from './components/Talk';
-import TalkViews from './components/Talk';
-import { fetchQuizzes, fetchTalks, fetchTalkViews } from './actions';
+import {fetchQuizzes} from './actions/quiz';
+
+import Topic from './components/Topic';
+import {fetchTopic} from './actions/topic';
+import type {TopicType} from './actions/topic';
 
 import './App.css';
 const style = {
@@ -15,10 +16,9 @@ const style = {
 };
 
 type AppProps = {
-    fetchTalks: any => void,
-    fetchTalkViews: (string, {[string]: string}) => any;
     quizzes: Array<Quiz>,
-    talks: Array<TalkType>
+    topics: Array<TopicType>,
+    fetchTopic: (uid: string) => TopicType
 };
 
 class App extends Component<AppProps> {
@@ -28,7 +28,8 @@ class App extends Component<AppProps> {
 
         //this.props.fetchQuizzes();
         //this.props.fetchTalks();
-        this.props.fetchTalkViews('5a5bbd13ba590a9be212bc04', { left: 'podium', right: 'projector' });
+        //this.props.fetchTalkViews('5a5bbd13ba590a9be212bc04', { left: 'podium', right: 'projector' });
+        this.props.fetchTopic('flask-templates');
     }
     
     findQuiz(quizKey) {
@@ -40,29 +41,15 @@ class App extends Component<AppProps> {
     render() {
         return (
             <div>
-                <Header as="h1" style={style.h1} content="Faraday" textAlign="center"/>
-                <TalkViews/>
+                <Header as="h1" style={style.h1} content="Faraday" textAlign="center"/>\
+                <Container>
+                    {this.props.topics.map(topic =>
+                        <Topic key={topic.uid} topic={topic}/>
+                    )}
+                </Container>
             </div>
         );
     }
-
-    // renderOld() {
-    //     return (
-    //         <div>
-    //             <Header as="h1" style={style.h1} content="Faraday" textAlign="center"/>
-    //             <Container text>
-    //                 {this.props.cells.map(cell => (
-    //                     <Segment.Group key={cell.key}>
-    //                         <Quiz quiz={this.findQuiz(cell.key)}/>
-    //                     </Segment.Group>
-    //                 ))}
-    //                 {this.props.talks.map(talk => (
-    //                     <Talk talk={talk}/>
-    //                 ))}
-    //             </Container>
-    //         </div>
-    //     );
-    // }
 }
 
 // TODO: This really isn't doing much.
@@ -70,4 +57,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(mapStateToProps, {fetchQuizzes, fetchTalks, fetchTalkViews})(App);
+export default connect(mapStateToProps, {fetchQuizzes, fetchTopic})(App);
