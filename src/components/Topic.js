@@ -2,8 +2,11 @@
 
 import React from 'react';
 
-import type {CueCardType, ListingType, CodeType, NoteType,TopicType} from '../actions/topic';
-import { Header, Label, Rail, Segment } from 'semantic-ui-react';
+import { Header, Label, Segment } from 'semantic-ui-react';
+
+import type {CueCardType, ListingType, CodeType, NoteType, TopicType} from '../actions/topic';
+
+import Quiz from './Quiz';
 
 const Uid = (props: { uid: string }) => (
 //    <Label tag color="teal">{props.uid}</Label>
@@ -63,6 +66,8 @@ const Topic = (props: {topic: TopicType}) => (
             switch(cell.type) {
                 case 'listing':
                     return <Listing key={cell.uid} listing={cell}/>;
+                case 'quiz':
+                    return <Quiz key={cell.uid} quiz={cell}/>;
                 default:
                     return <p>{`Bogus cell type: ${cell.type}`}</p>;
             }

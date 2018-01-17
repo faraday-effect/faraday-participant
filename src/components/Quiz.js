@@ -1,4 +1,5 @@
 // @flow
+
 import * as React from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
@@ -8,8 +9,8 @@ import { every, filter, fromPairs } from 'lodash';
 import { answerQuestion } from "../actions/quiz";
 
 export const quizConstants = {
-    SHORT_ANSWER: 'SHORT_ANSWER',
-    MULTIPLE_CHOICE: 'MULTIPLE_CHOICE'
+    SHORT_ANSWER: 'short-answer',
+    MULTIPLE_CHOICE: 'multiple-choice'
 };
 
 type ShortAnswerQuestionType = {
@@ -18,7 +19,6 @@ type ShortAnswerQuestionType = {
     required: boolean,
     prompt: string,
 };
-
 
 type MultipleChoiceAnswerType = {
     value: string,
