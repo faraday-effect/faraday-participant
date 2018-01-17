@@ -7,7 +7,7 @@ export const topicActionType = {
     FETCH_TOPIC_SUCCEEDED: 'FETCH_TOPIC_SUCCEEDED',
 };
 
-type CodeType = {
+export type CodeType = {
     type: "code",
     meta: {
         language: string,
@@ -16,18 +16,18 @@ type CodeType = {
     content: string
 };
 
-type CueCardType = {
+export type CueCardType = {
     type: "cue-card",
     title: string,
     content: string
 };
 
-type NoteType = {
+export type NoteType = {
     type: "note",
     content: string,
 };
 
-type ListingType = {
+export type ListingType = {
     type: "listing",
     _id: string,
     uid: string,

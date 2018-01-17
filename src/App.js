@@ -42,7 +42,7 @@ class App extends Component<AppProps> {
         return (
             <div>
                 <Header as="h1" style={style.h1} content="Faraday" textAlign="center"/>\
-                <Container>
+                <Container text>
                     {this.props.topics.map(topic =>
                         <Topic key={topic.uid} topic={topic}/>
                     )}
