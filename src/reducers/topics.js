@@ -2,8 +2,8 @@
 
 import request from 'request-promise';
 
-import {apiUrl} from '../common';
-import type {TopicType} from './components/Topic';
+import {apiUrl} from './common';
+import type {TopicType} from '../containers/Topic';
 
 // State
 type State = Array<TopicType>;

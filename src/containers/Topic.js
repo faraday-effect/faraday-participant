@@ -4,11 +4,11 @@ import React from 'react';
 
 import { Header } from 'semantic-ui-react';
 
-import DangerDiv from '../../../components/DangerDiv';
-import Uid from '../../../components/Uid';
-import Listing from '../../listing/components/Listing';
+import DangerDiv from '../components/DangerDiv';
+import Uid from '../components/Uid';
+import Listing from './Listing';
 
-import type {ListingType} from "../../listing/components/Listing";
+import type {ListingType} from "./Listing";
 
 export type TopicType = {
     _id: string,

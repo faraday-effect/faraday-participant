@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Label, Segment } from 'semantic-ui-react';
 
-import DangerDiv from '../../../components/DangerDiv';
+import DangerDiv from './DangerDiv';
 
 export type CodeType = {
     type: "code",

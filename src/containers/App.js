@@ -10,8 +10,8 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import 'semantic-ui-css/semantic.min.css';
 import '../css/zenburn.css';
 
-import rootReducer from './rootReducer'
-import TopMenu from './menu';
+import rootReducer from '../reducers/rootReducer'
+import TopMenu from '../components/TopMenu';
 
 const store = createStore(
     rootReducer,

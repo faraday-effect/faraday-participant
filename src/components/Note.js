@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import DangerDiv from '../../../components/DangerDiv';
+import DangerDiv from './DangerDiv';
 
 export type NoteType = {
     type: "note",

@@ -1,16 +1,16 @@
 // @flow
 
 import React from 'react';
-import Uid from '../../../components/Uid';
+import Uid from '../components/Uid';
 
-import CueCard from './CueCard';
-import type {CueCardType} from './CueCard';
+import CueCard from '../components/CueCard';
+import type {CueCardType} from '../components/CueCard';
 
-import Code from './Code';
-import type {CodeType} from './Code';
+import Code from '../components/Code';
+import type {CodeType} from '../components/Code';
 
-import Note from './Note';
-import type {NoteType} from './Note';
+import Note from '../components/Note';
+import type {NoteType} from '../components/Note';
 
 export type ListingType = {
     type: "listing",

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import DangerDiv from '../../../components/DangerDiv';
+import DangerDiv from './DangerDiv';
 
 import { Header } from 'semantic-ui-react';
 
