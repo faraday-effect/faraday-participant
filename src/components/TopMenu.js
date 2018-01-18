@@ -7,7 +7,8 @@ const TopMenu = () => (
         <Menu.Item header>Faraday</Menu.Item>
         <Menu.Item as='a'><Link to="/">Home</Link></Menu.Item>
         <Menu.Item as='a'><Link to="/users">Users</Link></Menu.Item>
-        <Menu.Item as='a'><Link to="dashboard">Dashboard</Link></Menu.Item>
+        <Menu.Item as='a'><Link to="/dashboard">Dashboard</Link></Menu.Item>
+        <Menu.Item as='a'><Link to="/topic">Topic</Link></Menu.Item>
         <Menu.Menu position="right">
             <Menu.Item as='a'>Logout</Menu.Item>
         </Menu.Menu>

@@ -1,14 +1,16 @@
 // @flow
 
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import { Header } from 'semantic-ui-react';
 
 import DangerDiv from '../components/DangerDiv';
 import Uid from '../components/Uid';
 import Listing from './Listing';
-
 import type {ListingType} from "./Listing";
+// import Quiz from './Quiz';
+import {fetchTopic} from '../reducers/topics';
 
 export type TopicType = {
     _id: string,
@@ -18,24 +20,39 @@ export type TopicType = {
     cells: Array<ListingType>
 };
 
-// import Quiz from './Quiz';
+// type TopicProps = {
+//     ...TopicType,
+//     fetchTopic: any
+// };
 
-export const Topic = (props: {topic: TopicType}) => (
-    <div>
-        <Header as="h1" textAlign="center">{props.topic.title}</Header>
-        <Uid uid={props.topic.uid}/>
-        <DangerDiv content={props.topic.intro}/>
-        {props.topic.cells.map(cell => {
-            switch (cell.type) {
-                case 'listing':
-                    return <Listing key={cell.uid} listing={cell}/>;
-                // case 'quiz':
-                //     return <Quiz key={cell.uid} quiz={cell}/>;
-                default:
-                    return <p>{`Bogus cell type: ${cell.type}`}</p>;
-            }
-        })}
-    </div>
-);
+class Topic extends Component<any> {        // TODO: FIX TYPE
+    componentDidMount() {
+        this.props.fetchTopic('flask-templates');
+    }
 
-export default Topic;
+    render() {
+        return (
+            <div>
+                <Header as="h1" textAlign="center">{this.props.topic.title}</Header>
+                <Uid uid={this.props.topic.uid}/>
+                <DangerDiv content={this.props.topic.intro}/>
+                {this.props.topic.cells.map(cell => {
+                    switch (cell.type) {
+                        case 'listing':
+                            return <Listing key={cell.uid} listing={cell}/>;
+                        // case 'quiz':
+                        //     return <Quiz key={cell.uid} quiz={cell}/>;
+                        default:
+                            return <p>{`Bogus cell type: ${cell.type}`}</p>;
+                    }
+                })}
+            </div>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    return state.topics;
+}
+
+export default connect (mapStateToProps, {fetchTopic})(Topic);

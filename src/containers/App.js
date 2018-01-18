@@ -1,22 +1,14 @@
+// @flow
+
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {Container} from 'semantic-ui-react'
 
-import {applyMiddleware, createStore} from 'redux';
-import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension';
-
 import 'semantic-ui-css/semantic.min.css';
 import '../css/zenburn.css';
 
-import rootReducer from '../reducers/rootReducer'
 import TopMenu from '../components/TopMenu';
-
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
-);
+import Topic from './Topic';
 
 const Home = () => (
     <div>
@@ -37,18 +29,17 @@ const Dashboard = () => (
 );
 
 const App = () => (
-    <Provider store={store}>
-        <Router>
-            <div>
-                <Container text>
-                    <TopMenu/>
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/users" component={Users}/>
-                    <Route path="/dashboard" component={Dashboard}/>
-                </Container>
-            </div>
-        </Router>
-    </Provider>
+    <Router>
+        <div>
+            <Container text>
+                <TopMenu/>
+                <Route exact path="/" component={Home}/>
+                <Route path="/users" component={Users}/>
+                <Route path="/dashboard" component={Dashboard}/>
+                <Route path="/topic" component={Topic}/>
+            </Container>
+        </div>
+    </Router>
 );
 
 export default App;

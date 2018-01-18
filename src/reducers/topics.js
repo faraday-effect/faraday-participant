@@ -1,24 +1,15 @@
-    // @flow
+// @flow
 
 import request from 'request-promise';
-
 import {apiUrl} from './common';
 import type {TopicType} from '../containers/Topic';
-
-// State
-type State = Array<TopicType>;
-const initialState: State = [];
 
 // Actions
 const FETCH_TOPIC_SUCCEEDED = 'topic/FETCH_SUCCEEDED';
 
-// Action creators
-function fetchTopicSucceeded(topic: TopicType) {
-    return {
-        type: FETCH_TOPIC_SUCCEEDED,
-        payload: topic
-    };
-}
+// State
+type State = Array<TopicType>;
+const initialState: State = [];
 
 // Reducer
 export default function reducer(state: State = initialState, action: any) {
@@ -28,6 +19,11 @@ export default function reducer(state: State = initialState, action: any) {
         default:
             return state;
     }
+}
+
+// Action creators
+function fetchTopicSucceeded(topic: TopicType) {
+    return { type: FETCH_TOPIC_SUCCEEDED, payload: topic };
 }
 
 // Side effects
