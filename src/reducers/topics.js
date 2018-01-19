@@ -18,11 +18,11 @@ export default function reducer(state: State = initialState, action: any) {
         case FETCH_ALL_OKAY:
             const allTopics = {};
             (action.payload: Array<TopicType>)
-                .forEach(topic => allTopics[topic.uid] = topic);
+                .forEach(topic => allTopics[topic._id] = topic);
             return allTopics;
         case FETCH_ONE_OKAY:
             const topic = (action.payload: TopicType);
-            return {...state, [topic.uid]: topic};
+            return {...state, [topic._id]: topic};
         default:
             return state;
     }

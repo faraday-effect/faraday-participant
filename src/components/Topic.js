@@ -11,7 +11,6 @@ import type {ListingType} from "../containers/Listing";
 
 export type TopicType = {
     _id: string,
-    uid: string,
     title: string,
     intro: string,
     cells: Array<ListingType>
@@ -20,14 +19,14 @@ export type TopicType = {
 const Topic = (props: { topic: TopicType}) => (
     <div>
         <Header as="h1" textAlign="center">{props.topic.title}</Header>
-        <Uid uid={props.topic.uid}/>
+        <Uid uid={props.topic._id}/>
         <DangerDiv content={props.topic.intro}/>
         {props.topic.cells.map(cell => {
             switch (cell.type) {
                 case 'listing':
-                    return <Listing key={cell.uid} listing={cell}/>;
+                    return <Listing key={cell._id} listing={cell}/>;
                 default:
-                    return <p key={cell.uid}>{`Bogus cell type: ${cell.type}`}</p>;
+                    return <p key={cell._id}>{`Bogus cell type: ${cell.type}`}</p>;
             }
         })}
     </div>

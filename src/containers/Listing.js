@@ -15,13 +15,12 @@ import type {NoteType} from '../components/Note';
 export type ListingType = {
     type: "listing",
     _id: string,
-    uid: string,
     segments: Array<CodeType | CueCardType | NoteType>
 };
 
 export const Listing = (props: {listing: ListingType}) => (
     <div>
-        <Uid uid={props.listing.uid}/>
+        <Uid uid={props.listing._id}/>
         {props.listing.segments.map((segment, idx) => {
             let segmentKey = `segment-${idx}`;
             switch(segment.type) {

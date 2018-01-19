@@ -14,7 +14,7 @@ import type {ShortAnswerQuestionType} from "./ShortAnswer";
 import type {SemanticUIData} from "../../types/events";
 
 export type QuizType = {
-    uid: string,
+    _id: string,
     title: string,
     required: boolean,
     questions: Array<ShortAnswerQuestionType | MultipleChoiceQuestionType>
@@ -43,7 +43,7 @@ class Quiz extends React.Component<Props, {[string]: string}> {
 
     haveRequiredAnswers() {
         return _.every(_.filter(this.props.quiz.questions, question => question.required),
-            question => this.state[question.uid]);
+            question => this.state[question._id]);
     }
 
     renderQuestion(question: any, seq: number) {

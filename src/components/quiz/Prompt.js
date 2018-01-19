@@ -11,7 +11,7 @@ type Props = {
 
 const Prompt = (props: Props) => (
     <Label color="teal">
-        {`{props.seq}. ${props.prompt}`}
+        {`${props.seq}. ${props.prompt}`}
         {props.required && <Label.Detail>Required</Label.Detail>}
     </Label>
 );

@@ -14,7 +14,6 @@ type MultipleChoiceAnswerType = {
 export type MultipleChoiceQuestionType = {
     type: 'multiple-choice',
     _id: string,
-    uid: string,
     required: boolean,
     prompt: string,
     options: Array<MultipleChoiceAnswerType>
@@ -28,7 +27,7 @@ type Props = {
 };
 
 const MultipleChoiceQuestion = (props: Props) => (
-    <Form.Group grouped key={props.question.uid}>
+    <Form.Group grouped key={props.question._id}>
         <Prompt seq={props.seq}
                 prompt={props.question.prompt}
                 required={props.question.required}/>
@@ -37,7 +36,7 @@ const MultipleChoiceQuestion = (props: Props) => (
             <Form.Field key={option.value}>
                 <Radio
                     label={option.text}
-                    name={props.question.uid}
+                    name={props.question._id}
                     value={option.value}
                     checked={props.response === option.value}
                     onChange={props.onChange}/>

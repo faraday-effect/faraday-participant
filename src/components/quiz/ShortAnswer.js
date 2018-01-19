@@ -8,7 +8,6 @@ import type {ChangeEventHandler} from '../../types/events';
 export type ShortAnswerQuestionType = {
     type: 'short-answer',
     _id: string,
-    uid: string,
     required: boolean,
     prompt: string
 };
@@ -21,12 +20,12 @@ type Props = {
 };
 
 const ShortAnswerQuestion = (props: Props) => (
-    <Form.Field key={props.question.uid}>
+    <Form.Field key={props.question._id}>
         <Prompt seq={props.seq}
                 prompt={props.question.prompt}
                 required={props.question.required}/>
         <Input
-            name={props.question.uid}
+            name={props.question._id}
             value={props.response}
             onChange={props.onChange}/>
     </Form.Field>

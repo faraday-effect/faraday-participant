@@ -19,7 +19,7 @@ export default function quizzes(state: State = initialState, action: any) {     
     switch (action.type) {
         case FETCH_ALL_OKAY:
             const allQuizzes = {};
-            (action.payload: Array<QuizType>).forEach(quiz => allQuizzes[quiz.uid] = quiz);
+            (action.payload: Array<QuizType>).forEach(quiz => allQuizzes[quiz._id] = quiz);
             return allQuizzes;
 
         case RESPOND_TO_ONE:
