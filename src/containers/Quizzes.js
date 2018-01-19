@@ -21,7 +21,7 @@ class Quizzes extends Component<Props> {
 
     handleSubmit = (responseMap: { [string]: string }) => {
         console.log("QUIZ RESPONSES", responseMap);
-    }
+    };
 
     render () {
         return (

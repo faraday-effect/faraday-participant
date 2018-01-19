@@ -12,20 +12,21 @@ import type {MultipleChoiceQuestionType} from "./MultipleChoice";
 import ShortAnswerQuestion from './ShortAnswer';
 import type {ShortAnswerQuestionType} from "./ShortAnswer";
 import type {SemanticUIData} from "../../types/events";
+import type {StringMapType} from "../../types/basic";
 
 export type QuizType = {
+    type: "quiz",
     _id: string,
     title: string,
-    required: boolean,
     questions: Array<ShortAnswerQuestionType | MultipleChoiceQuestionType>
 };
 
 type Props = {
     quiz: QuizType,
-    onSubmit: ({[string]: string}) => void;
+    onSubmit: (StringMapType) => void;
 };
 
-class Quiz extends React.Component<Props, {[string]: string}> {
+class Quiz extends React.Component<Props, StringMapType> {
     constructor(props: Props) {
         super(props);
         this.state = {}
