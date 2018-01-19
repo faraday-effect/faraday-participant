@@ -5,9 +5,7 @@ import {apiUrl} from './common';
 import type {TopicType} from '../components/Topic';
 
 // Actions
-//const FETCH_ALL_FAIL = 'topic/FETCH_ALL_FAIL';
 const FETCH_ALL_OKAY = 'topic/FETCH_ALL_OKAY';
-//const FETCH_ONE_FAIL = 'topic/FETCH_ONE_FAIL';
 const FETCH_ONE_OKAY = 'topic/FETCH_ONE_OKAY';
 
 // State

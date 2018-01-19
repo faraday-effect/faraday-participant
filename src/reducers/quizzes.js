@@ -1,125 +1,61 @@
+// @flow
+
 import request from 'request-promise';
-import apiUrl from './common';
+import {apiUrl} from './common';
+import type {QuizType} from '../components/quiz';
 
-export const quizActionType = {
-    ANSWER_QUESTION: 'ANSWER_QUESTION',
-    FETCH_QUIZ_SUCCEEDED: 'FETCH_QUIZ_SUCCEEDED',
-    FETCH_QUIZZES_SUCCEEDED: 'FETCH_QUIZZES_SUCCEEDED',
-    RESPOND_TO_QUIZ: 'RESPOND_TO_QUIZ'
-};
+// Actions
+const ANSWER_QUESTION = 'quiz/ANSWER_QUESTION';
+const FETCH_ALL_OKAY = 'quiz/FETCH_ALL_OKAY';
+const FETCH_ONE_OKAY = 'quiz/FETCH_ONE_OKAY';
+const RESPOND_TO_ONE = 'quiz/RESPOND_TO_ONE';
 
-type ShortAnswerQuestionType = {
-    type: "short-answer",
-    uid: string,
-    required: boolean,
-    prompt: string
-};
+// State
+type State = { [string]: QuizType };
+const initialState: State = {};
 
-type MultipleChoiceOptionType = {
-    value: string,
-    text: string,
-    correct: boolean
-};
-
-type MultipleChoiceQuestionType = {
-    type: "multiple-choice",
-    uid: string,
-    required: boolean,
-    prompt: string,
-    options: Array<MultipleChoiceOptionType>
-};
-
-export type QuizType = {
-    _id: string,
-    uid: string,
-    title: string,
-    questions: Array<MultipleChoiceQuestionType | ShortAnswerQuestionType>
-};
-
-function fetchQuizSucceeded(quiz: QuizType) {
-    return {
-        type: quizActionType.FETCH_QUIZ_SUCCEEDED,
-        payload: quiz
-    };
-}
-
-export function fetchQuiz(uid: string) {
-    return (dispatch: $FlowTODO) => {
-        request({
-            url: apiUrl('quizzes', uid),
-            json: true
-        }).then(response => dispatch(fetchQuizSucceeded(response)));
-    };
-}
-
-///////////////
-
-export function respondToQuiz(response) {
-    return {
-        type: quizActionType.RESPOND_TO_QUIZ,
-        payload: response
-    }
-}
-
-export function answerQuestion(quizKey, name, value) {
-    return {
-        type: quizActionType.ANSWER_QUESTION,
-        payload: {
-            quizKey,
-            name,
-            value
-        }
-    };
-}
-
-export function fetchQuizzesSucceeded(quizzes) {
-    return {
-        type: quizActionType.FETCH_QUIZZES_SUCCEEDED,
-        payload: {
-            quizzes
-        }
-    }
-}
-
-export function fetchQuizzes() {
-    return dispatch => {
-        request(apiUrl('quizzes'))
-            .then(response => dispatch(fetchQuizzesSucceeded(JSON.parse(response))))
-            .catch(err => console.error(err));
-    };
-}
-
-
-//////////////////////////////////--------------------------------------
-
-
-import {quizActionType} from '../actions/quiz';
-
-export default function quizzes(state = [], action) {
+// Reducer
+export default function quizzes(state: State = initialState, action: any) {     // FIXME
     switch (action.type) {
-        case quizActionType.FETCH_QUIZZES_SUCCEEDED:
-            return action.payload.quizzes;
+        case FETCH_ALL_OKAY:
+            const allQuizzes = {};
+            (action.payload: Array<QuizType>).forEach(quiz => allQuizzes[quiz.uid] = quiz);
+            return allQuizzes;
 
-        case quizActionType.RESPOND_TO_QUIZ:
-            console.log('WRITE ME');
-            return state;
+        case RESPOND_TO_ONE:
+            throw new Error('IMPLEMENT ME');
 
-        case quizActionType.ANSWER_QUESTION:
-            return state.map(quiz => {
-                if (quiz.key === action.payload.quizKey) {
-                    return {
-                        ...quiz,
-                        response: {
-                            ...quiz.response,
-                            [action.payload.name]: action.payload.value
-                        }
-                    }
-                } else {
-                    return quiz;
-                }
-            });
+        case ANSWER_QUESTION:
+            throw new Error('IMPLEMENT ME');
 
         default:
             return state;
     }
+}
+
+// Action creators
+function fetchOneOkay(quiz: QuizType) {
+    return { type: FETCH_ONE_OKAY, payload: quiz };
+}
+
+function fetchAllOkay(quizzes: Array<QuizType>) {
+    return { type: FETCH_ALL_OKAY, payload: quizzes };
+}
+
+// Side effects
+export function fetchOne(uid: string) {
+    return (dispatch: $FlowTODO) => {
+        request({
+            url: apiUrl('quizzes', uid),
+            json: true
+        }).then(response => dispatch(fetchOneOkay(response)));
+    };
+}
+
+export function fetchAll() {
+    return (dispatch: $FlowTODO) => {
+        request(apiUrl('quizzes'))
+            .then(response => dispatch(fetchAllOkay(JSON.parse(response))))
+            .catch(err => console.error(err));
+    };
 }
