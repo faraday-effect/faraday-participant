@@ -8,7 +8,7 @@ import 'semantic-ui-css/semantic.min.css';
 import '../css/zenburn.css';
 
 import TopMenu from '../components/TopMenu';
-import Topic from './Topic';
+import Topics from '../containers/Topics';
 
 const Home = () => (
     <div>
@@ -36,7 +36,7 @@ const App = () => (
                 <Route exact path="/" component={Home}/>
                 <Route path="/users" component={Users}/>
                 <Route path="/dashboard" component={Dashboard}/>
-                <Route path="/topic" component={Topic}/>
+                <Route path="/topic" component={Topics}/>
             </Container>
         </div>
     </Router>

@@ -2,36 +2,58 @@
 
 import request from 'request-promise';
 import {apiUrl} from './common';
-import type {TopicType} from '../containers/Topic';
+import type {TopicType} from '../components/Topic';
 
 // Actions
-const FETCH_TOPIC_SUCCEEDED = 'topic/FETCH_SUCCEEDED';
+//const FETCH_ALL_FAIL = 'topic/FETCH_ALL_FAIL';
+const FETCH_ALL_OKAY = 'topic/FETCH_ALL_OKAY';
+//const FETCH_ONE_FAIL = 'topic/FETCH_ONE_FAIL';
+const FETCH_ONE_OKAY = 'topic/FETCH_ONE_OKAY';
 
 // State
-type State = Array<TopicType>;
-const initialState: State = [];
+type State = { [string]: TopicType };
+const initialState: State = {};
 
 // Reducer
 export default function reducer(state: State = initialState, action: any) {
     switch (action.type) {
-        case FETCH_TOPIC_SUCCEEDED:
-            return [ action.payload ];
+        case FETCH_ALL_OKAY:
+            const allTopics = {};
+            (action.payload: Array<TopicType>)
+                .forEach(topic => allTopics[topic.uid] = topic);
+            return allTopics;
+        case FETCH_ONE_OKAY:
+            const topic = (action.payload: TopicType);
+            return {...state, [topic.uid]: topic};
         default:
             return state;
     }
 }
 
 // Action creators
-function fetchTopicSucceeded(topic: TopicType) {
-    return { type: FETCH_TOPIC_SUCCEEDED, payload: topic };
+function fetchOneOkay(topic: TopicType) {
+    return { type: FETCH_ONE_OKAY, payload: topic };
+}
+
+function fetchAllOkay(topics: Array<TopicType>) {
+    return { type: FETCH_ALL_OKAY, payload: topics }
 }
 
 // Side effects
-export function fetchTopic(uid: string) {
+export function fetchOne(uid: string) {
     return (dispatch: $FlowTODO) => {
         request({
             url: apiUrl('topics', uid),
             json: true
-        }).then(response => dispatch(fetchTopicSucceeded(response)));
+        }).then(response => dispatch(fetchOneOkay(response)));
     };
+}
+
+export function fetchAll() {
+    return (dispatch: $FlowTODO) => {
+        request({
+            url: apiUrl('topics'),
+            json: true
+        }).then(response => dispatch(fetchAllOkay(response)));
+    }
 }
