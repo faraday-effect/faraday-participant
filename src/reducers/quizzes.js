@@ -2,7 +2,7 @@
 
 import request from 'request-promise';
 import {apiUrl} from './common';
-import type {QuizType} from '../components/quiz';
+import type {QuizType} from '../components/quiz/Quiz';
 
 // Actions
 const ANSWER_QUESTION = 'quiz/ANSWER_QUESTION';

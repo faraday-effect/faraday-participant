@@ -6,8 +6,8 @@ import _ from 'lodash';
 
 import {fetchAll} from "../reducers/quizzes";
 
-import Quiz from '../components/quiz';
-import type {QuizType} from "../components/quiz";
+import Quiz from '../components/quiz/Quiz';
+import type {QuizType} from "../components/quiz/Quiz";
 
 type Props = {
     quizzes: Array<QuizType>,
