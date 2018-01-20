@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import { Label, Segment } from 'semantic-ui-react';
-
 import DangerDiv from './DangerDiv';
 
 export type CodeType = {
@@ -16,11 +14,11 @@ export type CodeType = {
 };
 
 export const Code = (props: {code: CodeType}) => (
-    <Segment>
-        {props.code.meta.fileName && <Label ribbon color="teal">{props.code.meta.fileName}</Label>}
-        <Label attached="top right">{props.code.meta.language}</Label>
+    <div className="container">
+        {props.code.meta.fileName && <span className="tag">{props.code.meta.fileName}</span>}
+        <span className="tag">{props.code.meta.language}</span>
         <DangerDiv content={props.code.content}/>
-    </Segment>
+    </div>
 );
 
 export default Code;

@@ -20,7 +20,7 @@ export type ListingType = {
 
 export const Listing = (props: {listing: ListingType}) => (
     <div>
-        <Uid uid={props.listing._id}/>
+        <Uid _id={props.listing._id}/>
         {props.listing.segments.map((segment, idx) => {
             let segmentKey = `segment-${idx}`;
             switch(segment.type) {

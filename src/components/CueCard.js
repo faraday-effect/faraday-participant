@@ -3,8 +3,6 @@
 import React from 'react';
 import DangerDiv from './DangerDiv';
 
-import { Header } from 'semantic-ui-react';
-
 export type CueCardType = {
     type: "cue-card",
     title: string,
@@ -13,7 +11,7 @@ export type CueCardType = {
 
 export const CueCard = (props: {cuecard: CueCardType}) => (
     <div>
-        <Header as="h2">{props.cuecard.title}</Header>
+        <h1 className="title is-1">{props.cuecard.title}</h1>
         <DangerDiv content={props.cuecard.content}/>
     </div>
 );

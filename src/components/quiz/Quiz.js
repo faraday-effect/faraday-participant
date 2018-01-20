@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react';
-import { Button, Form, Header, Segment } from 'semantic-ui-react';
 import _ from 'lodash';
 
 import * as questionTypes from './constants';
@@ -33,12 +32,12 @@ class Quiz extends React.Component<Props, StringMapType> {
     }
 
     handleAnswerChange = (event: SyntheticEvent<>, data: SemanticUIData) => {
-        console.log(this, data.name, data.value);
-        this.setState({[data.name]: data.value});
+        this.setState((prevState, props) => {
+            return {[data.name]: data.value};
+        });
     };
 
     handleSubmit = () => {
-        console.log("SUBMIT", this.state);
         this.props.onSubmit(this.state);
     };
 
@@ -54,8 +53,8 @@ class Quiz extends React.Component<Props, StringMapType> {
                     <MultipleChoiceQuestion
                         key={`question-${seq}`}
                         seq={seq}
-                        question={(question: MultipleChoiceQuestionType)}
-                        response={this.state[question.uid]}
+                        question={question}
+                        response={this.state[question._id]}
                         onChange={this.handleAnswerChange}
                     />
                 );
@@ -64,8 +63,8 @@ class Quiz extends React.Component<Props, StringMapType> {
                     <ShortAnswerQuestion
                         key={`question-${seq}`}
                         seq={seq}
-                        question={(question: ShortAnswerQuestionType)}
-                        response={this.state[question.uid]}
+                        question={question}
+                        response={this.state[question._id]}
                         onChange={this.handleAnswerChange}
                     />
                 );
@@ -76,19 +75,20 @@ class Quiz extends React.Component<Props, StringMapType> {
 
     render() {
         return (
-            <Segment>
+            <div className="box">
                 <div className="quiz">
-                    <Header as="h1">{this.props.quiz.title}</Header>
-                    <Form>
+                    <h1 className="title is-1">{this.props.quiz.title}</h1>
+                    <form>
                         {this.props.quiz.questions.map((question, idx) =>
                             this.renderQuestion(question, idx + 1))}
-                        <Button
-                            disabled={!this.haveRequiredAnswers()}
-                            primary
-                            onClick={this.handleSubmit}>Submit</Button>
-                    </Form>
+                        <div className="field">
+                            <div className="control">
+                                <button className="button is-link">Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </Segment>
+            </div>
         );
     }
 }

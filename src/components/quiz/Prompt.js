@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react';
-import { Label } from 'semantic-ui-react';
 
 type Props = {
     seq: number,
@@ -10,10 +9,10 @@ type Props = {
 };
 
 const Prompt = (props: Props) => (
-    <Label color="teal">
+    <label className="label">
         {`${props.seq}. ${props.prompt}`}
-        {props.required && <Label.Detail>Required</Label.Detail>}
-    </Label>
+        {props.required && <span className="tag">Required</span>}
+    </label>
 );
 
 export default Prompt;

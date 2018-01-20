@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react';
-import { Form, Input } from 'semantic-ui-react';
 import Prompt from './Prompt';
 import type {ChangeEventHandler} from '../../types/events';
 
@@ -20,15 +19,19 @@ type Props = {
 };
 
 const ShortAnswerQuestion = (props: Props) => (
-    <Form.Field key={props.question._id}>
+    <div className="field" key={props.question._id}>
         <Prompt seq={props.seq}
                 prompt={props.question.prompt}
                 required={props.question.required}/>
-        <Input
-            name={props.question._id}
-            value={props.response}
-            onChange={props.onChange}/>
-    </Form.Field>
+        <div className="control">
+            <input className="input"
+                   type="text"
+                   name={props.question._id}
+                   value={props.response}
+                   onChange={props.onChange}
+            />
+        </div>
+    </div>
 );
 
 export default ShortAnswerQuestion;

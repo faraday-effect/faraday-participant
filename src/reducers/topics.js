@@ -38,10 +38,10 @@ function fetchAllOkay(topics: Array<TopicType>) {
 }
 
 // Side effects
-export function fetchOne(uid: string) {
+export function fetchOne(_id: string) {
     return (dispatch: $FlowTODO) => {
         request({
-            url: apiUrl('topics', uid),
+            url: apiUrl('topics', _id),
             json: true
         }).then(response => dispatch(fetchOneOkay(response)));
     };

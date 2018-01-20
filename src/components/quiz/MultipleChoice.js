@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react';
-import { Form, Radio } from 'semantic-ui-react';
 import Prompt from './Prompt';
 import type {ChangeEventHandler} from '../../types/events';
 
@@ -27,22 +26,23 @@ type Props = {
 };
 
 const MultipleChoiceQuestion = (props: Props) => (
-    <Form.Group grouped key={props.question._id}>
+    <div className="field" key={props.question._id}>
         <Prompt seq={props.seq}
                 prompt={props.question.prompt}
                 required={props.question.required}/>
-
-        {props.question.options.map(option => (
-            <Form.Field key={option.value}>
-                <Radio
-                    label={option.text}
-                    name={props.question._id}
-                    value={option.value}
-                    checked={props.response === option.value}
-                    onChange={props.onChange}/>
-            </Form.Field>
-        ))}
-    </Form.Group>
+        <div className="control">
+            {props.question.options.map(option => (
+                <label className="radio" key={option.value}>
+                    <input type="radio"
+                           name={props.question._id}
+                           value={option.value}
+                           checked={props.response === option.value}
+                           onChange={props.onChange}/>
+                    {option.text}
+                </label>
+            ))}
+        </div>
+    </div>
 );
 
 export default MultipleChoiceQuestion;

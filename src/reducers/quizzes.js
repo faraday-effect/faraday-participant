@@ -43,10 +43,10 @@ function fetchAllOkay(quizzes: Array<QuizType>) {
 }
 
 // Side effects
-export function fetchOne(uid: string) {
+export function fetchOne(_id: string) {
     return (dispatch: $FlowTODO) => {
         request({
-            url: apiUrl('quizzes', uid),
+            url: apiUrl('quizzes', _id),
             json: true
         }).then(response => dispatch(fetchOneOkay(response)));
     };

@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import { Header } from 'semantic-ui-react';
-
 import type {StringMapType} from "../types/basic";
 import DangerDiv from './DangerDiv';
 import Uid from './Uid';
@@ -28,8 +26,8 @@ function handleSubmission(values: StringMapType) {
 
 const Topic = (props: { topic: TopicType}) => (
     <div>
-        <Header as="h1" textAlign="center">{props.topic.title}</Header>
-        <Uid uid={props.topic._id}/>
+        <h1 className="title is-1">{props.topic.title}</h1>
+        <Uid _id={props.topic._id}/>
         <DangerDiv content={props.topic.intro}/>
         {props.topic.cells.map(cell => {
             switch (cell.type) {

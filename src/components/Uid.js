@@ -1,8 +1,7 @@
 import React from 'react';
-import { Label } from 'semantic-ui-react';
 
-const Uid = (props: { uid: string }) => (
-    <Label tag color="teal">{props.uid}</Label>
+const Uid = (props: { _id: string }) => (
+    <span className="tag">{props._id}</span>
 );
 
 export default Uid;
