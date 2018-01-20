@@ -10,7 +10,6 @@ import type {MultipleChoiceQuestionType} from "./MultipleChoice";
 
 import ShortAnswerQuestion from './ShortAnswer';
 import type {ShortAnswerQuestionType} from "./ShortAnswer";
-import type {SemanticUIData} from "../../types/events";
 import type {StringMapType} from "../../types/basic";
 
 export type QuizType = {
@@ -28,16 +27,20 @@ type Props = {
 class Quiz extends React.Component<Props, StringMapType> {
     constructor(props: Props) {
         super(props);
-        this.state = {}
+        this.state = _.fromPairs(props.quiz.questions.map(question => [question._id, '']));
     }
 
-    handleAnswerChange = (event: SyntheticEvent<>, data: SemanticUIData) => {
-        this.setState((prevState, props) => {
-            return {[data.name]: data.value};
+    handleAnswerChange = (event: any) => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
         });
     };
 
-    handleSubmit = () => {
+    handleSubmit = (event: any) => {
         this.props.onSubmit(this.state);
     };
 
@@ -83,7 +86,12 @@ class Quiz extends React.Component<Props, StringMapType> {
                             this.renderQuestion(question, idx + 1))}
                         <div className="field">
                             <div className="control">
-                                <button className="button is-link">Submit</button>
+                                <button type="button"
+                                        className="button is-link"
+                                        disabled={!this.haveRequiredAnswers()}
+                                        onClick={this.handleSubmit}>
+                                    Submit
+                                </button>
                             </div>
                         </div>
                     </form>
