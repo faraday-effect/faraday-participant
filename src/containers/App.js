@@ -3,10 +3,11 @@
 import React from 'react';
 import {Link, Route} from 'react-router-dom';
 import '../css/zenburn.css';
+import faradaySignature from '../assets/faraday-signature.png';
 
 import Topics from '../containers/Topics';
 import Quizzes from '../containers/Quizzes';
-import Signup from '../containers/Signup';
+import SignupPage from './SignupPage';
 
 const Home = () => (<div><h2>Home</h2></div>);
 const Dashboard = () => (<div><h2>Dashboard</h2></div>);
@@ -34,7 +35,7 @@ const App = () => (
         <section className="section">
             <div className="container">
                 <Route exact path="/" component={Home}/>
-                <Route path="/users/signup" component={Signup}/>
+                <Route path="/users/signup" component={SignupPage}/>
                 <Route path="/dashboard" component={Dashboard}/>
                 <Route path="/topics" component={Topics}/>
                 <Route path="/quizzes" component={Quizzes}/>
@@ -44,7 +45,7 @@ const App = () => (
         <section className="section">
             <footer className="footer">
                 <div className="content has-text-centered">
-                    This is Faraday
+                    <img src={faradaySignature} alt="Faraday's signature"/>
                 </div>
             </footer>
         </section>
