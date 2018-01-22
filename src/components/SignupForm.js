@@ -5,6 +5,8 @@ import * as React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import type { FieldProps } from 'redux-form';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+
 import Validator from 'validatorjs';
 
 function haveError(props) {
@@ -51,7 +53,7 @@ const renderEmailInput = (props: InputProps) : React.Node => {
             <div className="control has-icons-left">
                 <input {...props.input}{...common} type="email"/>
                 <span className="icon is-left">
-                    <i className="fas fa-envelope"/>
+                    <FontAwesomeIcon icon="envelope"/>
                 </span>
             </div>
             {haveError(props) && <p className="help is-danger">{props.meta.error}</p>}

@@ -3,6 +3,8 @@
 import React from 'react';
 import {Link, Route} from 'react-router-dom';
 import '../css/zenburn.css';
+import 'bulma/css/bulma.css';
+
 import faradaySignature from '../assets/faraday-signature.png';
 
 import Topics from '../containers/Topics';
