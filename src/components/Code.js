@@ -3,9 +3,11 @@
 import React from 'react';
 
 import DangerDiv from './DangerDiv';
+import Uid from "./Uid";
 
 export type CodeType = {
     type: "code",
+    _id: string,
     meta: {
         language: string,
         fileName?: string
@@ -13,10 +15,28 @@ export type CodeType = {
     content: string
 };
 
+const TypedTag = (props: {type: string, tag: string}) => (
+    <div class="tags has-addons">
+        <span className="tag is-info">{props.type}</span>
+        <span className="tag">{props.tag}</span>
+    </div>
+);
+
 export const Code = (props: {code: CodeType}) => (
     <div className="container">
-        {props.code.meta.fileName && <span className="tag">{props.code.meta.fileName}</span>}
-        <span className="tag">{props.code.meta.language}</span>
+        <div className="level">
+            <div className="level-left">
+                <div className="level-item">
+                    {props.code.meta.fileName && <TypedTag type="File" tag={props.code.meta.fileName}/>}
+                </div>
+                <div className="level-item">
+                    <TypedTag type="Lang" tag={props.code.meta.language}/>
+                </div>
+            </div>
+            <div className="level-right">
+                <Uid type="Code" _id={props.code._id}/>
+            </div>
+        </div>
         <DangerDiv content={props.code.content}/>
     </div>
 );

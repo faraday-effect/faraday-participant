@@ -26,8 +26,8 @@ function handleSubmission(values: StringMapType) {
 
 const Topic = (props: { topic: TopicType}) => (
     <div>
+        <Uid type="Topic" _id={props.topic._id}/>
         <h1 className="title is-1">{props.topic.title}</h1>
-        <Uid _id={props.topic._id}/>
         <DangerDiv content={props.topic.intro}/>
         {props.topic.cells.map(cell => {
             switch (cell.type) {
