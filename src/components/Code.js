@@ -3,7 +3,7 @@
 import React from 'react';
 
 import DangerDiv from './DangerDiv';
-import Uid from "./Uid";
+import {Uid} from "./util";
 
 export type CodeType = {
     type: "code",
@@ -16,29 +16,31 @@ export type CodeType = {
 };
 
 const TypedTag = (props: {type: string, tag: string}) => (
-    <div class="tags has-addons">
+    <div className="tags has-addons">
         <span className="tag is-info">{props.type}</span>
         <span className="tag">{props.tag}</span>
     </div>
 );
 
-export const Code = (props: {code: CodeType}) => (
-    <div className="container">
-        <div className="level">
-            <div className="level-left">
-                <div className="level-item">
-                    {props.code.meta.fileName && <TypedTag type="File" tag={props.code.meta.fileName}/>}
+export const Code = (props: {code: CodeType}) => {
+    return (
+        <div className="container">
+            <div className="level">
+                <div className="level-left">
+                    <div className="level-item">
+                        {props.code.meta.fileName && <TypedTag type="File" tag={props.code.meta.fileName}/>}
+                    </div>
+                    <div className="level-item">
+                        <TypedTag type="Lang" tag={props.code.meta.language}/>
+                    </div>
                 </div>
-                <div className="level-item">
-                    <TypedTag type="Lang" tag={props.code.meta.language}/>
+                <div className="level-right">
+                    <Uid type="Code" _id={props.code._id}/>
                 </div>
             </div>
-            <div className="level-right">
-                <Uid type="Code" _id={props.code._id}/>
-            </div>
+            <DangerDiv content={props.code.content}/>
         </div>
-        <DangerDiv content={props.code.content}/>
-    </div>
-);
+    );
+}
 
 export default Code;

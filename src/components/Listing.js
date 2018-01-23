@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Uid from './Uid';
+import Uid from './util';
 
 import CueCard from './CueCard';
 import type {CueCardType} from './CueCard';

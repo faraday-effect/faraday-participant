@@ -13,6 +13,7 @@ import SignupPage from './SignupPage';
 
 const Home = () => (<div><h2>Home</h2></div>);
 
+/*
 const Dashboard2 = () => (
     <section className="hero is-fullheight is-primary is-bold">
         <div className="hero-head">
@@ -22,8 +23,8 @@ const Dashboard2 = () => (
             <div className="tile is-ancestor">
                 <div className="tile">
                     <div className="container">
-                        <h1 class="title">Welcome to SYS 394</h1>
-                        <h2 class="subtitle">Information Systems Design</h2>
+                        <h1 className="title">Welcome to SYS 394</h1>
+                        <h2 className="subtitle">Information Systems Design</h2>
                     </div>
                 </div>
                 <div className="tile">
@@ -44,13 +45,14 @@ const Dashboard2 = () => (
         </div>
     </section>
 );
+*/
 
 const Dashboard = () => (
     <section className="hero is-fullheight is-primary is-bold">
         <div className="hero-body">
             <div className="container">
-                <h1 class="title">Welcome to SYS 394</h1>
-                <h2 class="subtitle">Information Systems Design</h2>
+                <h1 className="title">Welcome to SYS 394</h1>
+                <h2 className="subtitle">Information Systems Design</h2>
             </div>
             <div className="container">
                 <h1>Today's Class</h1>
@@ -61,7 +63,7 @@ const Dashboard = () => (
 
 const NavBar = () => (
     <section className="section">
-        <nav className="navbar is-primary has-shadow">
+        <nav className="navbar is-light">
             <div className="navbar-menu">
                 <div className="navbar-start">
                     <div className="navbar-item">Faraday</div>

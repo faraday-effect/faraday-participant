@@ -90,17 +90,35 @@ export function fetchOne(_id: string) {
     };
 }
 
+function showHierarchy(topics: Array<TopicType>) {
+    topics.forEach(topic => {
+        let topicPath = `topic === ${topic._id}`;
+        console.log(topicPath);
+        topic.cells.forEach(cell => {
+            let cellPath = `${topicPath} === ${cell.type} === ${cell._id}`;
+            console.log(cellPath);
+            if (cell.type === 'listing') {
+                cell.segments.forEach(segment => {
+                    let segmentPath = `${cellPath} === ${segment.type} === ${segment._id}`;
+                    console.log(segmentPath);
+                });
+            }
+        });
+    });
+}
+
 export function fetchAll() {
     return (dispatch: $FlowTODO) => {
         dispatch(fetchAllInit());
         request({
             url: apiUrl('topics'),
             json: true
-        })
-            .then(response => dispatch(fetchAllOkay(response)))
-            .catch((error: Error) => {
-                console.error(error);
-                dispatch(fetchAllFail('Unable to get topics from server'));
-            });
+        }).then((topics: Array<TopicType>) => {
+            showHierarchy(topics);
+            dispatch(fetchAllOkay(topics));
+        }).catch((error: Error) => {
+            console.error(error);
+            dispatch(fetchAllFail('Unable to get topics from server'));
+        });
     }
 }

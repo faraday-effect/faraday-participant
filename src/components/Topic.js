@@ -4,7 +4,7 @@ import React from 'react';
 
 import type {StringMapType} from "../types/basic";
 import DangerDiv from './DangerDiv';
-import Uid from './Uid';
+import Uid from './util';
 
 import Listing from './Listing';
 import type {ListingType} from "./Listing";
@@ -12,11 +12,13 @@ import type {ListingType} from "./Listing";
 import Quiz from '../components/quiz/Quiz';
 import type {QuizType} from "../components/quiz/Quiz";
 
+export type CellType = ListingType | QuizType;
+
 export type TopicType = {
     _id: string,
     title: string,
     intro: string,
-    cells: Array<ListingType | QuizType>
+    cells: Array<CellType>
 };
 
 // TODO: Temporary
