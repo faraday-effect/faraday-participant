@@ -18,7 +18,6 @@ import type {ContextRouter} from "react-router-dom";
 
 const Segments = (props) => (
     <div>
-        <h4>SEGMENTS</h4>
         <ul>{
             _.map(props.segments, segment =>
                 <li key={`${segment.type}-${segment._id}`}>
@@ -29,7 +28,8 @@ const Segments = (props) => (
             )
         }</ul>
 
-        <Route path={`${props.match.url}/:segmentType/:segmentId`}
+        <p>[[ SEGMENTS</p>
+        <Route path={`${props.match.path}/:segmentType/:segmentId`}
                render={routeProps => {
                    const segmentType = routeProps.match.params.segmentType || '[UNDEFINED]';
                    const segmentId = routeProps.match.params.segmentId || '[UNDEFINED]';
@@ -47,13 +47,13 @@ const Segments = (props) => (
                    }
                }}
         />
+        <p>SEGMENTS ]]</p>
     </div>
 );
 
 const Cells = (props: any) => {
     return (
         <div>
-            <h4>CELLS</h4>
             <ul>{
                 _.map(props.topic.cells, cell =>
                     <li key={cell._id}>
@@ -64,7 +64,8 @@ const Cells = (props: any) => {
                 )
             }</ul>
 
-            <Route path={`${props.match.url}/:cellType/:cellId`}
+            <p>[[ CELLS</p>
+            <Route path={`${props.match.path}/:cellType/:cellId`}
                    render={routeProps => {
                        const cellType = routeProps.match.params.cellType;
                        const cellId = routeProps.match.params.cellId;
@@ -79,6 +80,7 @@ const Cells = (props: any) => {
                        }
                    }}
             />
+            <p>CELLS ]]</p>
         </div>
     );
 };
@@ -103,18 +105,30 @@ class Topics extends Component<Props> {
                 <div>
                     {this.props.error && <FlashMessage message={this.props.error}/>}
 
-                    <h4>TOPICS</h4>
+                    <div className="columns">
+                        <div className="column">
+                            TOPICS
+                        </div>
+                        <div className="column">
+                            CELLS
+                        </div>
+                        <div className="column">
+                            SEGMENTS
+                        </div>
+                    </div>
+
                     <ul>{
                         _.map(this.props.topicsById, topic => (
                             <li key={topic._id}>
                                 <Link to={`${this.props.match.url}/${topic._id}`}>
-                                    {topic.title}
+                                    {topic._id}
                                 </Link>
                             </li>
                         ))
                     }</ul>
 
-                    <Route path={`${this.props.match.url}/:topicId`}
+                    <p>[[TOPICS</p>
+                    <Route path={`${this.props.match.path}/:topicId`}
                            render={(routeProps: ContextRouter) => {
                                console.log(routeProps);
                                const topicId = routeProps.match.params['topicId'];
@@ -126,6 +140,7 @@ class Topics extends Component<Props> {
                                }
                            }}
                     />
+                    <p>TOPICS]]</p>
                 </div>
             );
         }

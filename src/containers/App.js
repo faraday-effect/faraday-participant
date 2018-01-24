@@ -54,9 +54,6 @@ const Dashboard = () => (
                 <h1 className="title">Welcome to SYS 394</h1>
                 <h2 className="subtitle">Information Systems Design</h2>
             </div>
-            <div className="container">
-                <h1>Today's Class</h1>
-            </div>
         </div>
     </section>
 );
