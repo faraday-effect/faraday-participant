@@ -4,7 +4,7 @@ import React from 'react';
 
 import SignupForm from '../components/SignupForm';
 
-class SignupPage extends React.Component<void> {
+class SignupPage extends React.Component<{}> {
     submit = (values: any) => {                 // FIXME
         console.log("SIGNED UP WITH", values);
     };
