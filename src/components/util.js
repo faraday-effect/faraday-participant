@@ -9,7 +9,7 @@ export const Uid = (props: { type: string, _id: string }) => (
 
 export const ShowObject = (props: {message: string, obj: any}) => (
     <div>
-        <p>{props.message}</p>
+        {props.message && <p>{props.message}</p>}
         <pre>
             {JSON.stringify(props.obj, null, 4)}
         </pre>

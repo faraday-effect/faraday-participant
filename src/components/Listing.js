@@ -12,10 +12,12 @@ import type {CodeType} from './Code';
 import Note from './Note';
 import type {NoteType} from './Note';
 
+export type SegmentType = CodeType | CueCardType | NoteType;
+
 export type ListingType = {
     type: "listing",
     _id: string,
-    segments: Array<CodeType | CueCardType | NoteType>
+    segments: Array<SegmentType>
 };
 
 export const Listing = (props: {listing: ListingType}) => (

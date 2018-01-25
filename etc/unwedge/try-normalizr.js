@@ -399,8 +399,11 @@ function normalizeListings(listingData) {
     return normalize(listingData, listings);
 }
 
-const makeSegmentId = (value, parent /*, key*/) => [parent._id, value.type, value._id].join('/');
-const makeCellId = (value /*, parent, key*/) => [value.type, value._id].join('/');
+let sId = 1, cId = 1;
+const makeSegmentId = () => sId++;
+const makeCellId = () => cId++;
+// const makeSegmentId = (value, parent /*, key*/) => [parent._id, value.type, value._id].join('/');
+// const makeCellId = (value /*, parent, key*/) => [value.type, value._id].join('/');
 
 function normalizeTopics(topicData) {
     const segment = new schema.Entity('segment', {}, {idAttribute: makeSegmentId});
@@ -415,6 +418,6 @@ function normalizeTopics(topicData) {
     return normalize(topicData, topics);
 }
 
-console.log(JSON.stringify(normalizeListings(listingData), null, 4));
-console.log(JSON.stringify(normalizeQuizzes(quizData), null, 4));
+//console.log(JSON.stringify(normalizeListings(listingData), null, 4));
+//console.log(JSON.stringify(normalizeQuizzes(quizData), null, 4));
 console.log(JSON.stringify(normalizeTopics(topicData), null, 4));
