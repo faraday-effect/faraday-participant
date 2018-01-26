@@ -27,7 +27,7 @@ const history = createHistory();
 const routesMap = {
     HOME: '/',
     SIGN_UP: '/sign-up',
-    TOPICS: '/topics',
+    TOPICS: '/topics/:topicId?',
     QUIZZES: '/quizzes'
 };
 

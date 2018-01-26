@@ -4,7 +4,7 @@ import React from 'react';
 
 import type {StringMapType} from "../types/basic";
 import DangerDiv from './DangerDiv';
-import Uid from './util';
+import {Uid} from './util';
 
 import Listing from './Listing';
 import type {ListingType} from "./Listing";
@@ -35,13 +35,11 @@ const Topic = (props: { topic: TopicType}) => (
             switch (cell.type) {
                 case 'listing':
                     return <Listing key={cell._id}
-                                    listing={cell}
-                    />;
+                                    listing={cell}/>;
                 case 'quiz':
                     return <Quiz key={cell._id}
                                  quiz={cell}
-                                 onSubmit={handleSubmission}
-                    />;
+                                 onSubmit={handleSubmission}/>;
                 default:
                     return <p key={cell._id}>{`Bogus cell type: ${cell.type}`}</p>;
             }

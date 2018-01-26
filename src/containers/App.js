@@ -9,12 +9,11 @@ import Link from 'redux-first-router-link';
 import '../css/zenburn.css';
 import 'bulma/css/bulma.css';
 
-import {ShowObject} from "../components/util";
 import SignupPage from './SignupPage';
 
 import faradaySignature from '../assets/faraday-signature.png';
 
-import Topics from './Topics';
+import TopicsPage from './TopicsPage';
 import Quizzes from './Quizzes';
 
 const Home = () => (
@@ -79,11 +78,11 @@ function switcher(props: Props) {
         case 'SIGN_UP':
             return <SignupPage/>;
         case 'TOPICS':
-            return <Topics/>;
+            return <TopicsPage/>;
         case 'QUIZZES':
             return <Quizzes/>;
         default:
-            return <p>FIX ME</p>;
+            return <p>FIX ME (App.js/switcher)</p>;
     }
 }
 
