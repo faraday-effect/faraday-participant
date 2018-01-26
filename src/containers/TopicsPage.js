@@ -20,6 +20,14 @@ type Props = State & {
     selectSegment: (string) => Action
 };
 
+/*
+               | Offering        |                     |
+               |   Theme         |                     |
+   Topic       |     Topic       |                     |
+     Cell      |       Section   | Listing             | Quiz
+       Segment |         Segment |   Code/Note/CueCard |   Question
+ */
+
 const DrillButton = (props: {onClick: void => any, type?: string, children: Array<any>}) => (
     <span>
         <button className="button small" onClick={props.onClick}>
@@ -49,7 +57,7 @@ class TopicsPage extends Component<Props> {
                                 {_.map(this.props.allTopics, (topic, idx) =>
                                     <li key={idx}>
                                         <DrillButton onClick={ev => this.props.selectTopic(topic)}>
-                                            {topic._id}
+                                            {topic.title}
                                         </DrillButton>
                                     </li>
                                 )}
