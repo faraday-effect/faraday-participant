@@ -12,13 +12,13 @@ import type {ListingType} from "./Listing";
 import Quiz from '../components/quiz/Quiz';
 import type {QuizType} from "../components/quiz/Quiz";
 
-export type CellType = ListingType | QuizType;
+export type SectionType = ListingType | QuizType;
 
 export type TopicType = {
     _id: string,
     title: string,
     intro: string,
-    cells: Array<CellType>
+    sections: Array<SectionType>
 };
 
 // TODO: Temporary
@@ -31,17 +31,17 @@ const Topic = (props: { topic: TopicType}) => (
         <Uid type="Topic" _id={props.topic._id}/>
         <h1 className="title is-1">{props.topic.title}</h1>
         <DangerDiv content={props.topic.intro}/>
-        {props.topic.cells.map(cell => {
-            switch (cell.type) {
+        {props.topic.sections.map(section => {
+            switch (section.type) {
                 case 'listing':
-                    return <Listing key={cell._id}
-                                    listing={cell}/>;
+                    return <Listing key={section._id}
+                                    listing={section}/>;
                 case 'quiz':
-                    return <Quiz key={cell._id}
-                                 quiz={cell}
+                    return <Quiz key={section._id}
+                                 quiz={section}
                                  onSubmit={handleSubmission}/>;
                 default:
-                    return <p key={cell._id}>{`Bogus cell type: ${cell.type}`}</p>;
+                    return <p key={section._id}>{`Bogus section type: ${section.type}`}</p>;
             }
         })}
     </div>

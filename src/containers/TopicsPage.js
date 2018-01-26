@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
-import {fetchAll, selectTopic, selectCell, selectSegment} from "../reducers/topics";
+import {fetchAll, selectTopic, selectSection, selectSegment} from "../reducers/topics";
 
 import FlashMessage from '../components/FlashMessage';
 import type {State} from "../reducers/topics";
@@ -16,7 +16,7 @@ import {segmentFactory} from "../components/Segment";
 type Props = State & {
     fetchAll: () => Action,
     selectTopic: (string) => Action,
-    selectCell: (string) => Action,
+    selectSection: (string) => Action,
     selectSegment: (string) => Action
 };
 
@@ -64,13 +64,13 @@ class TopicsPage extends Component<Props> {
                             </ul>
                         </div>
                         <div className="column">
-                            <h4 className="title is-4">Cells</h4>
+                            <h4 className="title is-4">Sections</h4>
                             <ul>
-                                {_.map(this.props.selectedCells, (cell, idx) =>
+                                {_.map(this.props.selectedSections, (section, idx) =>
                                     <li key={idx}>
-                                        <DrillButton type={cell.type}
-                                                     onClick={ev => this.props.selectCell(cell)}>
-                                            {cell._id}
+                                        <DrillButton type={section.type}
+                                                     onClick={ev => this.props.selectSection(section)}>
+                                            {section._id}
                                         </DrillButton>
                                     </li>
                                 )}
@@ -103,4 +103,4 @@ class TopicsPage extends Component<Props> {
 
 const mapStateToProps = state => state.topics;
 
-export default connect(mapStateToProps, {fetchAll, selectTopic, selectCell, selectSegment})(TopicsPage);
+export default connect(mapStateToProps, {fetchAll, selectTopic, selectSection, selectSegment})(TopicsPage);

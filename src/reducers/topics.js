@@ -2,7 +2,7 @@
 
 import request from 'request-promise';
 import {apiUrl} from './common';
-import type {TopicType, CellType} from '../components/Topic';
+import type {TopicType, SectionType} from '../components/Topic';
 import type {Action} from '../types/redux';
 import type {SegmentType} from "../components/Segment";
 
@@ -12,13 +12,13 @@ const FETCH_ALL_OKAY = 'TOPICS/FETCH-ALL-OKAY';
 const FETCH_ALL_FAIL = 'TOPICS/FETCH-ALL-FAIL';
 
 const SELECT_TOPIC = 'TOPIC/SELECT-TOPIC';
-const SELECT_CELL = 'TOPIC/SELECT-CELL';
+const SELECT_SECTION = 'TOPIC/SELECT-SECTION';
 const SELECT_SEGMENT = 'TOPIC/SELECT-SEGMENT';
 
 // State
 export type State = {
     allTopics: Array<TopicType>,
-    selectedCells: Array<CellType>,
+    selectedSections: Array<SectionType>,
     selectedSegments: Array<SegmentType>,
     selectedSegment: any,
     isFetchActive: boolean,
@@ -27,7 +27,7 @@ export type State = {
 
 const initialState: State = {
     allTopics: [],
-    selectedCells: [],
+    selectedSections: [],
     selectedSegments: [],
     selectedSegment: null,
     isFetchActive: false,
@@ -46,7 +46,7 @@ export default function topicReducer(state: State = initialState, action: Action
         case FETCH_ALL_OKAY:
             return {
                 allTopics: action.payload,
-                selectedCells: [],
+                selectedSections: [],
                 selectedSegments: [],
                 selectedSegment: null,
                 isFetchActive: false,
@@ -62,11 +62,11 @@ export default function topicReducer(state: State = initialState, action: Action
         case SELECT_TOPIC:
             return {
                 ...state,
-                selectedCells: action.payload.cells,
+                selectedSections: action.payload.sections,
                 selectedSegments: [],
                 selectedSegment: null
             };
-        case SELECT_CELL:
+        case SELECT_SECTION:
             return {
                 ...state,
                 selectedSegments: action.payload.segments,
@@ -102,9 +102,9 @@ export const selectTopic = (topic: string) => ({
     payload: topic
 });
 
-export const selectCell = (cell: string) => ({
-    type: SELECT_CELL,
-    payload: cell
+export const selectSection = (section: string) => ({
+    type: SELECT_SECTION,
+    payload: section
 });
 
 export const selectSegment = (segment: string) => ({
