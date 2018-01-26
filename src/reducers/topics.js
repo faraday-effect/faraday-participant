@@ -2,31 +2,40 @@
 
 import request from 'request-promise';
 import {apiUrl} from './common';
-import type {TopicType} from '../components/Topic';
-import type {ActionType} from '../types/redux';
+import type {TopicType, CellType} from '../components/Topic';
+import type {Action} from '../types/redux';
+import type {SegmentType} from "../components/Segment";
 
 // Actions
-const FETCH_ALL_INIT = 'TOPIC/FETCH_ALL_INIT';
-const FETCH_ALL_OKAY = 'TOPIC/FETCH_ALL_OKAY';
-const FETCH_ALL_FAIL = 'TOPIC/FETCH_ALL_FAIL';
+const FETCH_ALL_INIT = 'TOPICS/FETCH-ALL-INIT';
+const FETCH_ALL_OKAY = 'TOPICS/FETCH-ALL-OKAY';
+const FETCH_ALL_FAIL = 'TOPICS/FETCH-ALL-FAIL';
 
-const FETCH_ONE_OKAY = 'TOPIC/FETCH_ONE_OKAY';
+const SELECT_TOPIC = 'TOPIC/SELECT-TOPIC';
+const SELECT_CELL = 'TOPIC/SELECT-CELL';
+const SELECT_SEGMENT = 'TOPIC/SELECT-SEGMENT';
 
 // State
 export type State = {
-    byId: { [string]: TopicType },
+    allTopics: Array<TopicType>,
+    selectedCells: Array<CellType>,
+    selectedSegments: Array<SegmentType>,
+    selectedSegment: any,
     isFetchActive: boolean,
     error: string
 };
 
 const initialState: State = {
-    byId: {},
+    allTopics: [],
+    selectedCells: [],
+    selectedSegments: [],
+    selectedSegment: null,
     isFetchActive: false,
     error: ''
 };
 
 // Reducer
-export default function reducer(state: State = initialState, action: ActionType) : State {
+export default function topicReducer(state: State = initialState, action: Action) : State {
     switch (action.type) {
         case FETCH_ALL_INIT:
             return {
@@ -35,10 +44,11 @@ export default function reducer(state: State = initialState, action: ActionType)
                 error: ''
             };
         case FETCH_ALL_OKAY:
-            const allTopics = {};
-            (action.payload: Array<TopicType>).forEach(topic => allTopics[topic._id] = topic);
             return {
-                byId: allTopics,
+                allTopics: action.payload,
+                selectedCells: [],
+                selectedSegments: [],
+                selectedSegment: null,
                 isFetchActive: false,
                 error: ''
             };
@@ -48,13 +58,24 @@ export default function reducer(state: State = initialState, action: ActionType)
                 isFetchActive: false,
                 error: action.payload
             };
-        case FETCH_ONE_OKAY:
-            const topic: TopicType = action.payload;
+
+        case SELECT_TOPIC:
             return {
                 ...state,
-                ...{ byId: {[topic._id]: topic}},
-                isFetchActive: false,
-                error: ''
+                selectedCells: action.payload.cells,
+                selectedSegments: [],
+                selectedSegment: null
+            };
+        case SELECT_CELL:
+            return {
+                ...state,
+                selectedSegments: action.payload.segments,
+                selectedSegment: null
+            };
+        case SELECT_SEGMENT:
+            return {
+                ...state,
+                selectedSegment: action.payload
             };
         default:
             return state;
@@ -62,10 +83,6 @@ export default function reducer(state: State = initialState, action: ActionType)
 }
 
 // Action creators
-function fetchOneOkay(topic: TopicType) {
-    return { type: FETCH_ONE_OKAY, payload: topic };
-}
-
 const fetchAllInit = () => ({
     type: FETCH_ALL_INIT
 });
@@ -80,33 +97,22 @@ const fetchAllFail = (message: string) => ({
     payload: message
 });
 
+export const selectTopic = (topic: string) => ({
+    type: SELECT_TOPIC,
+    payload: topic
+});
+
+export const selectCell = (cell: string) => ({
+    type: SELECT_CELL,
+    payload: cell
+});
+
+export const selectSegment = (segment: string) => ({
+    type: SELECT_SEGMENT,
+    payload: segment
+});
+
 // Side effects
-export function fetchOne(_id: string) {
-    return (dispatch: $FlowTODO) => {
-        request({
-            url: apiUrl('topics', _id),
-            json: true
-        }).then(response => dispatch(fetchOneOkay(response)));
-    };
-}
-
-function showHierarchy(topics: Array<TopicType>) {
-    topics.forEach(topic => {
-        let topicPath = `topic === ${topic._id}`;
-        console.log(topicPath);
-        topic.cells.forEach(cell => {
-            let cellPath = `${topicPath} === ${cell.type} === ${cell._id}`;
-            console.log(cellPath);
-            if (cell.type === 'listing') {
-                cell.segments.forEach(segment => {
-                    let segmentPath = `${cellPath} === ${segment.type} === ${segment._id}`;
-                    console.log(segmentPath);
-                });
-            }
-        });
-    });
-}
-
 export function fetchAll() {
     return (dispatch: $FlowTODO) => {
         dispatch(fetchAllInit());
@@ -114,7 +120,6 @@ export function fetchAll() {
             url: apiUrl('topics'),
             json: true
         }).then((topics: Array<TopicType>) => {
-            showHierarchy(topics);
             dispatch(fetchAllOkay(topics));
         }).catch((error: Error) => {
             console.error(error);

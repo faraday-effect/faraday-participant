@@ -59,7 +59,7 @@ const renderEmailInput = (props: InputProps) : React.Node => {
             {haveError(props) && <p className="help is-danger">{props.meta.error}</p>}
         </div>
     );
-}
+};
 
 type ButtonProps = {
     label?: string,

@@ -41,6 +41,6 @@ export const Code = (props: {code: CodeType}) => {
             <DangerDiv content={props.code.content}/>
         </div>
     );
-}
+};
 
 export default Code;
