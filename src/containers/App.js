@@ -74,6 +74,6 @@ class App extends React.Component<*> {
 }
 
 const mapStateToProps = state => ({ ...state });
+const mapDispatchToProps = ({});
 
-export default connect(mapStateToProps)(App);
-
+export default connect(mapStateToProps, mapDispatchToProps)(App);

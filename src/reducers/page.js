@@ -2,7 +2,9 @@
 
 import {HOME, SIGN_UP, TOPICS, QUIZZES} from '../routesMap';
 
-export default (state = null, action) => {
+import type {Action} from '../types/redux';
+
+export default (state: $FlowTODO = null, action: Action) => {
     switch(action.type) {
         case HOME:
             return 'HomePage';

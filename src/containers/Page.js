@@ -21,5 +21,6 @@ const Page = ({ page }) => {
 };
 
 const mapStatetoProps = ({ page }) => ({ page });
+const mapDispatchToProps = ({});
 
-export default connect(mapStatetoProps)(Page);
+export default connect(mapStatetoProps, mapDispatchToProps)(Page);
