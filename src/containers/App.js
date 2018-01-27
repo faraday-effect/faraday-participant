@@ -10,17 +10,15 @@ import '../css/zenburn.css';
 import 'bulma/css/bulma.css';
 
 import SignupPage from './SignupPage';
+import Page from './Page';
 
 import faradaySignature from '../assets/faraday-signature.png';
 
 import TopicsPage from './TopicsPage';
-import Quizzes from './Quizzes';
+import Quizzes from './QuizzesPage';
+import {selectTopic} from "../reducers/topics";
 
-const Home = () => (
-    <div>
-        <h1 className="title is-1">Welcome to Faraday</h1>
-    </div>
-);
+import {HOME, TOPICS, SIGN_UP, QUIZZES} from '../routesMap';
 
 const NavBar = () => (
     <section className="section">
@@ -29,24 +27,16 @@ const NavBar = () => (
                 <div className="navbar-start">
                     <div className="navbar-item">Faraday</div>
                     <div className="navbar-item">
-                        <Link to={{ type: 'HOME'}}>
-                            Home
-                        </Link>
+                        <Link to={{ type: HOME}}>Home</Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to={{ type: 'SIGN_UP' }}>
-                            Sign Up
-                        </Link>
+                        <Link to={{ type: SIGN_UP}}>Sign Up</Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to={{ type: 'TOPICS'}}>
-                            Topics
-                        </Link>
+                        <Link to={{ type: TOPICS}}>Topics</Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to={{type: 'QUIZZES'}}>
-                            Quizzes
-                        </Link>
+                        <Link to={{type: QUIZZES}}>Quizzes</Link>
                     </div>
                 </div>
                 <div className="navbar-end">
@@ -67,37 +57,16 @@ const Footer = () => (
     </section>
 );
 
-type Props = {
-    location: Location
-}
-
-function switcher(props: Props) {
-    switch(props.location.type) {
-        case 'HOME':
-            return <Home/>;
-        case 'SIGN_UP':
-            return <SignupPage/>;
-        case 'TOPICS':
-            return <TopicsPage/>;
-        case 'QUIZZES':
-            return <Quizzes/>;
-        default:
-            return <p>FIX ME (App.js/switcher)</p>;
-    }
-}
-
-class App extends React.Component<Props> {
+class App extends React.Component<*> {
     render () {
         return (
             <div>
                 <NavBar/>
-
                 <section className="section">
                     <div className="container">
-                        {switcher(this.props)}
+                        <Page/>
                     </div>
                 </section>
-
                 <Footer/>
             </div>
         );
@@ -105,8 +74,6 @@ class App extends React.Component<Props> {
 }
 
 const mapStateToProps = state => ({ ...state });
-const mapDispatchToProps = dispatch => ({
-    goToSignUp: () => dispatch({type: "SIGN_UP"})
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
+

@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 import topicsReducer from './reducers/topics';
 import quizzesReducer from './reducers/quizzes';
+import pageReducer from './reducers/page';
 
 import { connectRoutes } from 'redux-first-router';
 
@@ -16,6 +17,7 @@ export default history => {
 
     const rootReducer = combineReducers({
         location: reducer,
+        page: pageReducer,
         topics: topicsReducer,
         quizzes: quizzesReducer,
         form: formReducer

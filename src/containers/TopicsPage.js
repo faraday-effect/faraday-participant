@@ -4,14 +4,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
+import Link from 'redux-first-router-link';
+
 import {fetchAll, selectTopic, selectSection, selectSegment} from "../reducers/topics";
 
 import FlashMessage from '../components/FlashMessage';
 import type {State} from "../reducers/topics";
-
-// import Quiz from '../components/quiz/Quiz';
 import type {Action} from "../types/redux";
 import {segmentFactory} from "../components/Segment";
+import {TOPICS} from '../routesMap';
+
+// import Quiz from '../components/quiz/Quiz';
 
 type Props = State & {
     fetchAll: () => Action,
@@ -56,9 +59,10 @@ class TopicsPage extends Component<Props> {
                             <ul>
                                 {_.map(this.props.allTopics, (topic, idx) =>
                                     <li key={idx}>
-                                        <DrillButton onClick={ev => this.props.selectTopic(topic)}>
+                                        <Link onClick={ev => this.props.selectTopic(topic)}
+                                              to={{ type: TOPICS, payload: { topicId: topic._id }}}>
                                             {topic.title}
-                                        </DrillButton>
+                                        </Link>
                                     </li>
                                 )}
                             </ul>
