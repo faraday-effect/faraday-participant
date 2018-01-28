@@ -5,10 +5,10 @@ import {apiUrl} from './common';
 import type {QuizType} from '../components/quiz/Quiz';
 
 // Actions
-const ANSWER_QUESTION = 'quiz/ANSWER_QUESTION';
-const FETCH_ALL_OKAY = 'quiz/FETCH_ALL_OKAY';
-const FETCH_ONE_OKAY = 'quiz/FETCH_ONE_OKAY';
-const RESPOND_TO_ONE = 'quiz/RESPOND_TO_ONE';
+const ANSWER_QUESTION = 'QUIZZES/ANSWER_QUESTION';
+const FETCH_ALL_OKAY = 'QUIZZES/FETCH_ALL_OKAY';
+const FETCH_ONE_OKAY = 'QUIZZES/FETCH_ONE_OKAY';
+const RESPOND_TO_ONE = 'QUIZZES/RESPOND_TO_ONE';
 
 // State
 type State = { [string]: QuizType };

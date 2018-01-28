@@ -1,15 +1,15 @@
 // @flow
 
-export const HOME = 'ROUTE/HOME';
-export const SIGN_UP = 'ROUTE/SIGN-UP';
-export const TOPICS = 'ROUTE/TOPICS';
-export const QUIZZES = 'ROUTE/QUIZZES';
+import {HOME_PAGE, SIGN_UP_PAGE, TOPICS_PAGE, QUIZZES_PAGE} from './reducers/page';
 
 const routesMap = {
-    [HOME]: '/',
-    [SIGN_UP]: '/sign-up',
-    [TOPICS]: '/topics/:topicId?',
-    [QUIZZES]: '/quizzes'
+    [HOME_PAGE]: '/',
+
+    [QUIZZES_PAGE]: '/quizzes',
+
+    [SIGN_UP_PAGE]: '/sign-up',
+
+    [TOPICS_PAGE]: '/topics/:topicId?/:sectionId?/:segmentId?'
 };
 
 export default routesMap;

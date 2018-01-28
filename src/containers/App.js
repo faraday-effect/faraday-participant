@@ -3,22 +3,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import type {Location} from 'redux-first-router';
 import Link from 'redux-first-router-link';
 
 import '../css/zenburn.css';
 import 'bulma/css/bulma.css';
 
-import SignupPage from './SignupPage';
 import Page from './Page';
 
 import faradaySignature from '../assets/faraday-signature.png';
 
-import TopicsPage from './TopicsPage';
-import Quizzes from './QuizzesPage';
-import {selectTopic} from "../reducers/topics";
-
-import {HOME, TOPICS, SIGN_UP, QUIZZES} from '../routesMap';
+import {HOME_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/page';
 
 const NavBar = () => (
     <section className="section">
@@ -27,16 +21,16 @@ const NavBar = () => (
                 <div className="navbar-start">
                     <div className="navbar-item">Faraday</div>
                     <div className="navbar-item">
-                        <Link to={{ type: HOME}}>Home</Link>
+                        <Link to={{type: HOME_PAGE}}>Home</Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to={{ type: SIGN_UP}}>Sign Up</Link>
+                        <Link to={{type: SIGN_UP_PAGE}}>Sign Up</Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to={{ type: TOPICS}}>Topics</Link>
+                        <Link to={{type: TOPICS_PAGE}}>Topics</Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to={{type: QUIZZES}}>Quizzes</Link>
+                        <Link to={{type: QUIZZES_PAGE}}>Quizzes</Link>
                     </div>
                 </div>
                 <div className="navbar-end">

@@ -16,11 +16,11 @@ export default history => {
     const {reducer, middleware, enhancer} = connectRoutes(history, routesMap);
 
     const rootReducer = combineReducers({
-        location: reducer,
         page: pageReducer,
         topics: topicsReducer,
         quizzes: quizzesReducer,
-        form: formReducer
+        form: formReducer,
+        location: reducer
     });
 
     const middlewares = applyMiddleware(middleware, thunk);

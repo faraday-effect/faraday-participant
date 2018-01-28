@@ -6,21 +6,18 @@ import _ from 'lodash';
 
 import Link from 'redux-first-router-link';
 
-import {fetchAll, selectTopic, selectSection, selectSegment} from "../reducers/topics";
+import {fetchAll} from "../reducers/topics";
 
 import FlashMessage from '../components/FlashMessage';
 import type {State} from "../reducers/topics";
 import type {Action} from "../types/redux";
 import {segmentFactory} from "../components/Segment";
-import {TOPICS} from '../routesMap';
+import {TOPICS_PAGE} from '../reducers/page';
 
 // import Quiz from '../components/quiz/Quiz';
 
 type Props = State & {
-    fetchAll: () => Action,
-    selectTopic: (string) => Action,
-    selectSection: (string) => Action,
-    selectSegment: (string) => Action
+    fetchAll: () => Action
 };
 
 /*
@@ -30,15 +27,6 @@ type Props = State & {
      Cell      |       Section   | Listing             | Quiz
        Segment |         Segment |   Code/Note/CueCard |   Question
  */
-
-const DrillButton = (props: {onClick: void => any, type?: string, children: Array<any>}) => (
-    <span>
-        <button className="button small" onClick={props.onClick}>
-            {props.children}
-        </button>
-        {props.type && <span className="tag is-info is-pulled-right">{props.type}</span>}
-    </span>
-);
 
 class TopicsPage extends Component<Props> {
     componentDidMount() {
@@ -59,8 +47,7 @@ class TopicsPage extends Component<Props> {
                             <ul>
                                 {_.map(this.props.allTopics, (topic, idx) =>
                                     <li key={idx}>
-                                        <Link onClick={ev => this.props.selectTopic(topic)}
-                                              to={{ type: TOPICS, payload: { topicId: topic._id }}}>
+                                        <Link to={{type: TOPICS_PAGE, payload: { topicId: topic._id }}}>
                                             {topic.title}
                                         </Link>
                                     </li>
@@ -72,10 +59,12 @@ class TopicsPage extends Component<Props> {
                             <ul>
                                 {_.map(this.props.selectedSections, (section, idx) =>
                                     <li key={idx}>
-                                        <DrillButton type={section.type}
-                                                     onClick={ev => this.props.selectSection(section)}>
+                                        <Link to={{type: TOPICS_PAGE, payload: {
+                                                topicId: this.props.currentTopic._id,
+                                                sectionId: section._id
+                                            }}}>
                                             {section._id}
-                                        </DrillButton>
+                                        </Link>
                                     </li>
                                 )}
                             </ul>
@@ -85,10 +74,12 @@ class TopicsPage extends Component<Props> {
                             <ul>
                                 {_.map(this.props.selectedSegments, (segment, idx) =>
                                     <li key={idx}>
-                                        <DrillButton type={segment.type}
-                                                     onClick={ev => this.props.selectSegment(segment)}>
+                                        <Link to={{type: TOPICS_PAGE, payload: {
+                                                topicId: this.props.currentTopic._id,
+                                                sectionId: this.props.currentSection._id,
+                                                segmentId: segment._id}}}>
                                             {segment._id}
-                                        </DrillButton>
+                                        </Link>
                                     </li>
                                 )}
                             </ul>
@@ -96,7 +87,7 @@ class TopicsPage extends Component<Props> {
                     </div>
                     <div className="columns">
                         <div className="column">
-                            {this.props.selectedSegment && segmentFactory(this.props.selectedSegment)}
+                            {this.props.currentSegment && segmentFactory(this.props.currentSegment)}
                         </div>
                     </div>
                 </div>
@@ -107,4 +98,4 @@ class TopicsPage extends Component<Props> {
 
 const mapStateToProps = state => state.topics;
 
-export default connect(mapStateToProps, {fetchAll, selectTopic, selectSection, selectSegment})(TopicsPage);
+export default connect(mapStateToProps, {fetchAll})(TopicsPage);

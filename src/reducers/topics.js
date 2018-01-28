@@ -5,31 +5,35 @@ import {apiUrl} from './common';
 import type {TopicType, SectionType} from '../components/Topic';
 import type {Action} from '../types/redux';
 import type {SegmentType} from "../components/Segment";
+import {TOPICS_PAGE} from './page';
 
 // Actions
 const FETCH_ALL_INIT = 'TOPICS/FETCH-ALL-INIT';
 const FETCH_ALL_OKAY = 'TOPICS/FETCH-ALL-OKAY';
 const FETCH_ALL_FAIL = 'TOPICS/FETCH-ALL-FAIL';
 
-const SELECT_TOPIC = 'TOPIC/SELECT-TOPIC';
-const SELECT_SECTION = 'TOPIC/SELECT-SECTION';
-const SELECT_SEGMENT = 'TOPIC/SELECT-SEGMENT';
-
 // State
 export type State = {
     allTopics: Array<TopicType>,
+    currentTopic: any,
+
     selectedSections: Array<SectionType>,
+    currentSection: any,
+
     selectedSegments: Array<SegmentType>,
-    selectedSegment: any,
+    currentSegment: any,
+
     isFetchActive: boolean,
     error: string
 };
 
 const initialState: State = {
     allTopics: [],
+    currentTopic: null,
     selectedSections: [],
+    currentSection: null,
     selectedSegments: [],
-    selectedSegment: null,
+    currentSegment: null,
     isFetchActive: false,
     error: ''
 };
@@ -46,9 +50,11 @@ export default function topicReducer(state: State = initialState, action: Action
         case FETCH_ALL_OKAY:
             return {
                 allTopics: action.payload,
+                currentTopic: null,
                 selectedSections: [],
+                currentSection: null,
                 selectedSegments: [],
-                selectedSegment: null,
+                currentSegment: null,
                 isFetchActive: false,
                 error: ''
             };
@@ -59,24 +65,37 @@ export default function topicReducer(state: State = initialState, action: Action
                 error: action.payload
             };
 
-        case SELECT_TOPIC:
-            return {
+        case TOPICS_PAGE:
+            if (!state.allTopics.length) {
+                return state;
+            }
+
+            const nextState = {
                 ...state,
-                selectedSections: action.payload.sections,
-                selectedSegments: [],
-                selectedSegment: null
             };
-        case SELECT_SECTION:
-            return {
-                ...state,
-                selectedSegments: action.payload.segments,
-                selectedSegment: null
-            };
-        case SELECT_SEGMENT:
-            return {
-                ...state,
-                selectedSegment: action.payload
-            };
+
+            if (action.payload.topicId) {
+                const topic = state.allTopics.find(topic => topic._id === action.payload.topicId);
+                nextState.currentTopic = topic;
+                nextState.selectedSections = topic.sections;
+                nextState.selectedSegments = [];
+                nextState.currentSegment = null;
+            }
+
+            if (action.payload.sectionId) {
+                const section = state.selectedSections.find(section => section._id === action.payload.sectionId);
+                nextState.currentSection = section;
+                nextState.selectedSegments = section.segments;
+                nextState.currentSegment = null;
+            }
+
+            if (action.payload.segmentId) {
+                nextState.currentSegment =
+                    state.selectedSegments.find(segment => segment._id === action.payload.segmentId);
+            }
+
+            return nextState;
+
         default:
             return state;
     }
@@ -95,21 +114,6 @@ const fetchAllOkay = (topics: Array<TopicType>) => ({
 const fetchAllFail = (message: string) => ({
     type: FETCH_ALL_FAIL,
     payload: message
-});
-
-export const selectTopic = (topic: string) => ({
-    type: SELECT_TOPIC,
-    payload: topic
-});
-
-export const selectSection = (section: string) => ({
-    type: SELECT_SECTION,
-    payload: section
-});
-
-export const selectSegment = (segment: string) => ({
-    type: SELECT_SEGMENT,
-    payload: segment
 });
 
 // Side effects
