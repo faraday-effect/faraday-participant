@@ -36,7 +36,6 @@ const initialState: State = {
 export default function topicReducer(state: State = initialState, action: Action) : State {
     switch (action.type) {
         case FETCH_ALL_OKAY:
-            console.log(JSON.stringify(action, null, 4));
             const nextState = {
                 allTopics: action.payload.topics,
                 currentTopic: null,

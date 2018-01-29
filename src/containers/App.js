@@ -10,7 +10,7 @@ import 'bulma/css/bulma.css';
 
 import Page from './Page';
 
-import faradaySignature from '../assets/faraday-signature.png';
+import faradaySignature from '../assets/faraday-sig-small.png';
 
 import {HOME_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/page';
 
@@ -44,8 +44,18 @@ const NavBar = () => (
 const Footer = () => (
     <section className="section">
         <footer className="footer">
-            <div className="content has-text-centered">
-                <img src={faradaySignature} alt="Faraday's signature"/>
+            <div className="container">
+                <div className="columns">
+                    <div className="column">
+                        <h4 className="title is-4">Faraday</h4>
+                    </div>
+                    <div className="column">
+                        Actionable Educational Intelligence
+                    </div>
+                    <div className="column">
+                        <img className="is-pulled-right" src={faradaySignature} alt="Faraday's signature"/>
+                    </div>
+                </div>
             </div>
         </footer>
     </section>
@@ -53,18 +63,18 @@ const Footer = () => (
 
 class App extends React.Component<*> {
     render () {
-        return (
-            <div>
-                <NavBar/>
-                <section className="section">
-                    <div className="container">
-                        <Page/>
-                    </div>
-                </section>
-                <Footer/>
-            </div>
-        );
-    }
+    return (
+    <div>
+    <NavBar/>
+    <section className="section">
+    <div className="container">
+    <Page/>
+    </div>
+    </section>
+    <Footer/>
+    </div>
+    );
+}
 }
 
 const mapStateToProps = state => ({ ...state });
