@@ -6,19 +6,9 @@ import _ from 'lodash';
 
 import Link from 'redux-first-router-link';
 
-import {fetchAll} from "../reducers/topics";
-
 import FlashMessage from '../components/FlashMessage';
-import type {State} from "../reducers/topics";
-import type {Action} from "../types/redux";
 import {segmentFactory} from "../components/Segment";
 import {TOPICS_PAGE} from '../reducers/page';
-
-// import Quiz from '../components/quiz/Quiz';
-
-type Props = State & {
-    fetchAll: () => Action
-};
 
 /*
                | Offering        |                     |
@@ -28,24 +18,20 @@ type Props = State & {
        Segment |         Segment |   Code/Note/CueCard |   Question
  */
 
-class TopicsPage extends Component<Props> {
-    componentDidMount() {
-        this.props.fetchAll();
-    }
-
+class TopicsPage extends Component<*> {
     render () {
-        if (this.props.isFetchActive) {
+        if (this.props.loading) {
             return <p>LOADING</p>;
         } else {
             return (
                 <div>
-                    {this.props.error && <FlashMessage message={this.props.error}/>}
+                    {this.props.topics.error && <FlashMessage message={this.props.topics.error}/>}
 
                     <div className="columns">
                         <div className="column">
                             <h4 className="title is-4">Topics</h4>
                             <ul>
-                                {_.map(this.props.allTopics, (topic, idx) =>
+                                {_.map(this.props.topics.allTopics, (topic, idx) =>
                                     <li key={idx}>
                                         <Link to={{type: TOPICS_PAGE, payload: { topicId: topic._id }}}>
                                             {topic.title}
@@ -57,10 +43,10 @@ class TopicsPage extends Component<Props> {
                         <div className="column">
                             <h4 className="title is-4">Sections</h4>
                             <ul>
-                                {_.map(this.props.selectedSections, (section, idx) =>
+                                {_.map(this.props.topics.selectedSections, (section, idx) =>
                                     <li key={idx}>
                                         <Link to={{type: TOPICS_PAGE, payload: {
-                                                topicId: this.props.currentTopic._id,
+                                                topicId: this.props.topics.currentTopic._id,
                                                 sectionId: section._id
                                             }}}>
                                             {section._id}
@@ -72,11 +58,11 @@ class TopicsPage extends Component<Props> {
                         <div className="column">
                             <h4 className="title is-4">Segments</h4>
                             <ul>
-                                {_.map(this.props.selectedSegments, (segment, idx) =>
+                                {_.map(this.props.topics.selectedSegments, (segment, idx) =>
                                     <li key={idx}>
                                         <Link to={{type: TOPICS_PAGE, payload: {
-                                                topicId: this.props.currentTopic._id,
-                                                sectionId: this.props.currentSection._id,
+                                                topicId: this.props.topics.currentTopic._id,
+                                                sectionId: this.props.topics.currentSection._id,
                                                 segmentId: segment._id}}}>
                                             {segment._id}
                                         </Link>
@@ -87,7 +73,7 @@ class TopicsPage extends Component<Props> {
                     </div>
                     <div className="columns">
                         <div className="column">
-                            {this.props.currentSegment && segmentFactory(this.props.currentSegment)}
+                            {this.props.topics.currentSegment && segmentFactory(this.props.topics.currentSegment)}
                         </div>
                     </div>
                 </div>
@@ -96,6 +82,6 @@ class TopicsPage extends Component<Props> {
     }
 }
 
-const mapStateToProps = state => state.topics;
+const mapStateToProps = ({ topics, loading }) => ({ topics, loading });
 
-export default connect(mapStateToProps, {fetchAll})(TopicsPage);
+export default connect(mapStateToProps, {})(TopicsPage);

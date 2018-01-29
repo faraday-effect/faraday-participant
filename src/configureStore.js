@@ -3,24 +3,20 @@ import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import { reducer as formReducer } from 'redux-form'
-import topicsReducer from './reducers/topics';
-import quizzesReducer from './reducers/quizzes';
-import pageReducer from './reducers/page';
+import { reducer as formReducer } from 'redux-form';
+import * as reducers from './reducers';
 
 import { connectRoutes } from 'redux-first-router';
 
 import routesMap from './routesMap'
 
 export default history => {
-    const {reducer, middleware, enhancer} = connectRoutes(history, routesMap);
+    const {reducer: routeReducer, middleware, enhancer} = connectRoutes(history, routesMap);
 
     const rootReducer = combineReducers({
-        page: pageReducer,
-        topics: topicsReducer,
-        quizzes: quizzesReducer,
+        ...reducers,
         form: formReducer,
-        location: reducer
+        location: routeReducer
     });
 
     const middlewares = applyMiddleware(middleware, thunk);

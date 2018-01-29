@@ -6,8 +6,6 @@ import {Uid} from './util';
 import type {SegmentType} from "./Segment";
 import {segmentFactory} from "./Segment";
 
-export type SegmentType = CodeType | CueCardType | NoteType;
-
 export type ListingType = {
     type: "listing",
     _id: string,

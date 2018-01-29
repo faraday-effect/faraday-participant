@@ -6,11 +6,11 @@ import type {StringMapType} from "../types/basic";
 import DangerDiv from './DangerDiv';
 import {Uid} from './util';
 
-import Listing from './Listing';
 import type {ListingType} from "./Listing";
-
-import Quiz from '../components/quiz/Quiz';
 import type {QuizType} from "../components/quiz/Quiz";
+
+import Listing from './Listing';
+import Quiz from '../components/quiz/Quiz';
 
 export type SectionType = ListingType | QuizType;
 
