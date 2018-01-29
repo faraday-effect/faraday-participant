@@ -6,9 +6,8 @@ import _ from 'lodash';
 
 import Link from 'redux-first-router-link';
 
-import FlashMessage from '../components/FlashMessage';
 import {segmentFactory} from "../components/Segment";
-import {TOPICS_PAGE} from '../reducers/page';
+import {TOPICS_PAGE} from '../reducers/pages';
 
 /*
                | Offering        |                     |
@@ -25,8 +24,6 @@ class TopicsPage extends Component<*> {
         } else {
             return (
                 <div>
-                    {this.props.topics.error && <FlashMessage message={this.props.topics.error}/>}
-
                     <div className="columns">
                         <div className="column">
                             <h4 className="title is-4">Topics</h4>
@@ -65,8 +62,8 @@ class TopicsPage extends Component<*> {
                                     <li key={idx}>
                                         <Link to={{type: TOPICS_PAGE, payload: {
                                                 topicId: this.props.topics.currentTopic._id,
-                                                sectionType: this.props.topics.currentSection.type,
-                                                sectionId: this.props.topics.currentSection._id,
+                                                sectionType: this.props.topics.sectionIdx.type,
+                                                sectionId: this.props.topics.sectionIdx._id,
                                                 segmentType: segment.type,
                                                 segmentId: segment._id}}}>
                                             {segment._id} ({segment.type})
@@ -78,7 +75,7 @@ class TopicsPage extends Component<*> {
                     </div>
                     <div className="columns">
                         <div className="column">
-                            {this.props.topics.currentSegment && segmentFactory(this.props.topics.currentSegment)}
+                            {this.props.topics.segmentIdx && segmentFactory(this.props.topics.segmentIdx)}
                         </div>
                     </div>
                 </div>

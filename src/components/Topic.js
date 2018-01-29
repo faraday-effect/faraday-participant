@@ -21,6 +21,13 @@ export type TopicType = {
     sections: Array<SectionType>
 };
 
+export const NullTopic: TopicType = {
+    _id: 'zero',
+    title: 'Null Topic',
+    intro: 'This is the null topic',
+    sections: []
+};
+
 // TODO: Temporary
 function handleSubmission(values: StringMapType) {
     console.log("TOPIC SAYS", values);

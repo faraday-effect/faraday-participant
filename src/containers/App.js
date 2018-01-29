@@ -8,23 +8,31 @@ import Link from 'redux-first-router-link';
 import '../css/zenburn.css';
 import 'bulma/css/bulma.css';
 
-import Page from './Page';
-
 import faradaySignature from '../assets/faraday-sig-small.png';
 
-import {HOME_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/page';
+import FlashMessage from '../components/FlashMessage';
+
+import HomePage from './HomePage';
+import ProjectorPage from './ProjectorPage';
+import QuizzesPage from './QuizzesPage';
+import SignupPage from './SignupPage';
+import TopicsPage from './TopicsPage';
+
+import {HOME_PAGE, PROJECTOR_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/pages';
 
 const NavBar = () => (
     <section className="section">
         <nav className="navbar is-light">
             <div className="navbar-menu">
                 <div className="navbar-start">
-                    <div className="navbar-item">Faraday</div>
                     <div className="navbar-item">
-                        <Link to={{type: HOME_PAGE}}>Home</Link>
+                        <Link to={{type: HOME_PAGE}}>Faraday</Link>
                     </div>
                     <div className="navbar-item">
                         <Link to={{type: SIGN_UP_PAGE}}>Sign Up</Link>
+                    </div>
+                    <div className="navbar-item">
+                        <Link to={{type: PROJECTOR_PAGE}}>Projector</Link>
                     </div>
                     <div className="navbar-item">
                         <Link to={{type: TOPICS_PAGE}}>Topics</Link>
@@ -61,20 +69,44 @@ const Footer = () => (
     </section>
 );
 
+type PageStyle = "normal" | "empty";
+type PageInfo = {[string]: {container: any, style: PageStyle}};
+
+const pageConfig: PageInfo = {
+    HomePage: {container: HomePage, style: "normal"},
+    ProjectorPage: {container: ProjectorPage, style: "empty"},
+    QuizzesPage: {container: QuizzesPage, style: "normal"},
+    SignupPage: {container: SignupPage, style: "normal"},
+    TopicsPage: {container: TopicsPage, style: "normal"}
+};
+
 class App extends React.Component<*> {
     render () {
-    return (
-    <div>
-    <NavBar/>
-    <section className="section">
-    <div className="container">
-    <Page/>
-    </div>
-    </section>
-    <Footer/>
-    </div>
-    );
-}
+        const pageInfo = pageConfig[this.props.page];
+        const Page = pageInfo.container;
+
+        if (pageInfo.style === "empty") {
+            return (
+                <div>
+                    <FlashMessage/>
+                    <Page/>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <NavBar/>
+                    <FlashMessage/>
+                    <section className="section">
+                        <div className="container">
+                            <Page/>
+                        </div>
+                    </section>
+                    <Footer/>
+                </div>
+            );
+        }
+    }
 }
 
 const mapStateToProps = state => ({ ...state });

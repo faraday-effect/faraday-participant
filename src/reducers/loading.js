@@ -1,11 +1,11 @@
-import {TOPICS_PAGE} from './page';
-import {FETCH_ALL_OKAY} from "./topics";
+import {TOPICS_PAGE} from './pages';
+import {FETCH_TOPIC_OKAY} from "./topics";
 
 export default (state = false, action = {}) => {
     switch(action.type) {
         case TOPICS_PAGE:
             return true;
-        case FETCH_ALL_OKAY:
+        case FETCH_TOPIC_OKAY:
             return false;
         default:
             return state;

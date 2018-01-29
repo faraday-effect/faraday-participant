@@ -5,9 +5,7 @@ import type {SegmentType} from "../components/Segment";
 import type {Action} from '../types/redux';
 
 // Actions
-export const FETCH_ALL_INIT = 'TOPICS/FETCH-ALL-INIT';
-export const FETCH_ALL_OKAY = 'TOPICS/FETCH-ALL-OKAY';
-export const FETCH_ALL_FAIL = 'TOPICS/FETCH-ALL-FAIL';
+export const FETCH_TOPIC_OKAY = 'TOPICS/FETCH-ALL-OKAY';
 
 // State
 export type State = {
@@ -35,7 +33,7 @@ const initialState: State = {
 // Reducer
 export default function topicReducer(state: State = initialState, action: Action) : State {
     switch (action.type) {
-        case FETCH_ALL_OKAY:
+        case FETCH_TOPIC_OKAY:
             const nextState = {
                 allTopics: action.payload.topics,
                 currentTopic: null,
@@ -59,7 +57,7 @@ export default function topicReducer(state: State = initialState, action: Action
                     section._id === action.payload.sectionId && section.type === action.payload.sectionType);
                 if (section != null) {
                     nextState.currentSection = section;
-                    nextState.selectedSegments = section.segments;
+                    nextState.selectedSegments = section.sections;
                     nextState.currentSegment = null;
                 }
             }
@@ -73,12 +71,6 @@ export default function topicReducer(state: State = initialState, action: Action
             }
 
             return nextState;
-
-        case FETCH_ALL_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            };
 
         default:
             return state;
