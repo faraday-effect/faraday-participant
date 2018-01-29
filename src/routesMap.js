@@ -14,9 +14,9 @@ const routesMap = {
     [SIGN_UP_PAGE]: '/sign-up',
 
     [TOPICS_PAGE]: {
-        path: '/topics/:topicId?/:sectionId?/:segmentId?',
+        path: '/topics/:topicId?/:sectionType?/:sectionId?/:segmentType?/:segmentId?',
         thunk: async (dispatch: Function, getState: any) => {
-            const {topicId, sectionId, segmentId} = getState().location.payload;
+            const {topicId, sectionType, sectionId, segmentType, segmentId} = getState().location.payload;
 
             try {
                 const topics = await request({
@@ -25,7 +25,7 @@ const routesMap = {
                 });
                 dispatch({
                     type: FETCH_ALL_OKAY,
-                    payload: {topics, topicId, sectionId, segmentId}
+                    payload: {topics, topicId, sectionType, sectionId, segmentType, segmentId}
                 });
             } catch (err) {
                 dispatch({

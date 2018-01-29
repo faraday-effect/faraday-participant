@@ -36,6 +36,7 @@ const initialState: State = {
 export default function topicReducer(state: State = initialState, action: Action) : State {
     switch (action.type) {
         case FETCH_ALL_OKAY:
+            console.log(JSON.stringify(action, null, 4));
             const nextState = {
                 allTopics: action.payload.topics,
                 currentTopic: null,
@@ -55,7 +56,8 @@ export default function topicReducer(state: State = initialState, action: Action
             }
 
             if (action.payload.sectionId) {
-                const section = nextState.selectedSections.find(section => section._id === action.payload.sectionId);
+                const section = nextState.selectedSections.find(section =>
+                    section._id === action.payload.sectionId && section.type === action.payload.sectionType);
                 if (section != null) {
                     nextState.currentSection = section;
                     nextState.selectedSegments = section.segments;
@@ -64,7 +66,8 @@ export default function topicReducer(state: State = initialState, action: Action
             }
 
             if (action.payload.segmentId) {
-                const val = nextState.selectedSegments.find(segment => segment._id === action.payload.segmentId);
+                const val = nextState.selectedSegments.find(segment =>
+                    segment._id === action.payload.segmentId && segment.type === action.payload.segmentType);
                 if (val != null) {
                     nextState.currentSegment = val;
                 }

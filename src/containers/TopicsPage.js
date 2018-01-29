@@ -33,7 +33,9 @@ class TopicsPage extends Component<*> {
                             <ul>
                                 {_.map(this.props.topics.allTopics, (topic, idx) =>
                                     <li key={idx}>
-                                        <Link to={{type: TOPICS_PAGE, payload: { topicId: topic._id }}}>
+                                        <Link to={{type: TOPICS_PAGE, payload: {
+                                                topicId: topic._id
+                                            }}}>
                                             {topic.title}
                                         </Link>
                                     </li>
@@ -47,9 +49,10 @@ class TopicsPage extends Component<*> {
                                     <li key={idx}>
                                         <Link to={{type: TOPICS_PAGE, payload: {
                                                 topicId: this.props.topics.currentTopic._id,
+                                                sectionType: section.type,
                                                 sectionId: section._id
                                             }}}>
-                                            {section._id}
+                                            {section._id} ({section.type})
                                         </Link>
                                     </li>
                                 )}
@@ -62,9 +65,11 @@ class TopicsPage extends Component<*> {
                                     <li key={idx}>
                                         <Link to={{type: TOPICS_PAGE, payload: {
                                                 topicId: this.props.topics.currentTopic._id,
+                                                sectionType: this.props.topics.currentSection.type,
                                                 sectionId: this.props.topics.currentSection._id,
+                                                segmentType: segment.type,
                                                 segmentId: segment._id}}}>
-                                            {segment._id}
+                                            {segment._id} ({segment.type})
                                         </Link>
                                     </li>
                                 )}
