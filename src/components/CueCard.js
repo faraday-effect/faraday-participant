@@ -13,9 +13,10 @@ export type CueCardType = {
 
 export const CueCard = (props: {cuecard: CueCardType}) => (
     <div>
-        <Uid type="Cue Card" _id={props.cuecard._id}/>
-        <h1 className="title is-1">{props.cuecard.title}</h1>
-        <DangerDiv content={props.cuecard.content}/>
+        <h1 className="title">{props.cuecard.title}</h1>
+        <h2 className="subtitle">
+            <DangerDiv content={props.cuecard.content}/>
+        </h2>
     </div>
 );
 

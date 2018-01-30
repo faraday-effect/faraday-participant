@@ -1,15 +1,17 @@
 // @flow
 
 import type {SegmentType} from "../components/Segment";
-import type {TopicType} from "../components/Topic";
 import type {Action} from "../types/redux";
-import {NullTopic} from "../components/Topic";
 import type {ListingType} from "../components/Listing";
+import _ from 'lodash';
+import type {SectionType, TopicType} from "../components/Topic";
 
 // Actions
 export const FETCH_PROJECTOR_OKAY = 'PROJECTOR/FETCH-ALL-OKAY';
 export const PROJECTOR_NEXT = 'PROJECTOR/NEXT';
 export const PROJECTOR_PREV = 'PROJECTOR/PREV';
+export const PROJECTOR_FIRST = 'PROJECTOR/FIRST';
+export const PROJECTOR_LAST = 'PROJECTOR/LAST';
 
 // State
 export type State = {
@@ -35,9 +37,11 @@ function lastSectionIdx(state: State) {
     return state.sections.length - 1;
 }
 
-// Index of last segment of current section of state.
-function lastSegmentIdx(state: State) {
-    return state.sections[state.sectionIdx].segments.length - 1;
+// Index of last segment of given section. If no section provided,
+// use the current section of the state.
+function lastSegmentIdx(state: State, optSectionIdx : ?number) {
+    const sectionIdx = optSectionIdx || state.sectionIdx;
+    return state.sections[sectionIdx].segments.length - 1;
 }
 
 // State currently at the first segment?
@@ -57,6 +61,7 @@ function setCurrentSegment(state: State) {
     state.isFirstSegment = atFirstSegment(state);
     state.isLastSegment = atLastSegment(state);
     state.currentSegment = state.sections[state.sectionIdx].segments[state.segmentIdx];
+    return state;
 }
 
 // Advance to the next segment. If already at the last segment, do nothing.
@@ -89,9 +94,18 @@ function previousSegment(state: State) {
     return state;
 }
 
+function gotoState(state, sectionIdx, segmentIdx) {
+    state = {...state};
+    state.sectionIdx = sectionIdx;
+    state.segmentIdx = segmentIdx;
+    return setCurrentSegment(state);
+}
+
 // Action creators
 export const projectorNext = () => ({type: PROJECTOR_NEXT});
 export const projectorPrev = () => ({type: PROJECTOR_PREV});
+export const projectorFirst = () => ({type: PROJECTOR_FIRST});
+export const projectorLast = () => ({type: PROJECTOR_LAST});
 
 // Reducer
 const projectorReducer = (state: State = initialState, action: Action): State => {
@@ -99,7 +113,7 @@ const projectorReducer = (state: State = initialState, action: Action): State =>
         case FETCH_PROJECTOR_OKAY:
             const newState: State = {
                 ...initialState,
-                sections: action.payload.sections
+                sections: _.filter(action.payload.sections, section => section.type === 'listing')
             };
             setCurrentSegment(newState);
             return newState;
@@ -107,6 +121,11 @@ const projectorReducer = (state: State = initialState, action: Action): State =>
             return nextSegment(state);
         case PROJECTOR_PREV:
             return previousSegment(state);
+        case PROJECTOR_FIRST:
+            return gotoState(state, 0, 0);
+        case PROJECTOR_LAST:
+            const lastSecIdx = lastSectionIdx(state);
+            return gotoState(state, lastSecIdx, lastSegmentIdx(state, lastSecIdx));
         default:
             return state;
     }

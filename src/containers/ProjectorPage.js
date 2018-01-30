@@ -4,7 +4,24 @@ import React from 'react';
 import moment from 'moment';
 import {connect} from "react-redux";
 import {segmentFactory} from "../components/Segment";
-import {PROJECTOR_NEXT, PROJECTOR_PREV, projectorNext, projectorPrev} from "../reducers/projector";
+import {projectorFirst, projectorLast, projectorNext, projectorPrev} from "../reducers/projector";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+
+// Navigation button, including "disabled" status. Note that we have to
+// mark the button disabled so it renders properly, AND short circuit
+// the action when disabled.
+const NavButton = (props) => (
+    <div className="navbar-item">
+        <a className="button"
+           disabled={props.disabled}
+           onClick={ev => props.disabled || props.action()}>
+            <span className="icon">
+                <FontAwesomeIcon icon={props.icon}/>
+            </span>
+            <span>{props.label}</span>
+        </a>
+    </div>
+);
 
 const ProjectorNavBar = (props) => (
     <nav className="navbar">
@@ -15,23 +32,22 @@ const ProjectorNavBar = (props) => (
             </div>
             <div className="navbar-menu">
                 <div className="navbar-end">
-                    {!props.isFirstSegment &&
-                    <a className="navbar-item"
-                       onClick={ev => props.projectorPrev()}>Previous</a>}
-                    {!props.isLastSegment &&
-                    <a className="navbar-item"
-                       onClick={ev => props.projectorNext()}>Next</a>}
+                    <NavButton label="First" icon="angle-double-left"
+                               disabled={props.isFirstSegment} action={props.projectorFirst}/>
+                    <NavButton label="Previous" icon="angle-left"
+                               disabled={props.isFirstSegment} action={props.projectorPrev}/>
+                    <NavButton label="Next" icon="angle-right"
+                               disabled={props.isLastSegment} action={props.projectorNext}/>
+                    <NavButton label="Last" icon="angle-double-right"
+                               disabled={props.isLastSegment} action={props.projectorLast}/>
                 </div>
             </div>
         </div>
     </nav>
 );
 
-const ProjectorPage = (props) => (
+const SplashScreen = () => (
     <section className="hero is-info is-fullheight is-bold">
-        <div className="hero-head">
-            {ProjectorNavBar(props)}
-        </div>
         <div className="hero-body">
             <div className="container">
                 <h1 className="title">SYS 394&mdash;Information Systems Design</h1>
@@ -39,19 +55,30 @@ const ProjectorPage = (props) => (
                 <h2 className="subtitle">
                     {moment().format('dddd, MMMM Do, YYYY')}
                 </h2>
-                <div>
-                    {segmentFactory(props.currentSegment)}
-                </div>
             </div>
-        </div>
-        <div className="hero-foot">
         </div>
     </section>
 );
 
-//const mapStateToProps = ({ projector }) => ({ projector });
-const mapStateToProps = (state) => {
-    return state.projector;
+const ContentScreen = (props) => (
+    <section className="hero is-fullheight">
+        <div className="hero-body">
+            <div className="container">
+                {segmentFactory(props.currentSegment)}
+            </div>
+        </div>
+        <div className="hero-foot">
+            {ProjectorNavBar(props)}
+        </div>
+    </section>
+);
+
+const ProjectorPage = (props) => {
+    console.log(JSON.stringify(props, null, 4));
+    const showSplash: boolean = false;
+    return showSplash? SplashScreen() : ContentScreen(props);
 };
 
-export default connect(mapStateToProps, {projectorPrev, projectorNext})(ProjectorPage);
+const mapStateToProps = (state) => state.projector;
+
+export default connect(mapStateToProps, {projectorPrev, projectorNext, projectorFirst, projectorLast})(ProjectorPage);

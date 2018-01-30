@@ -30,12 +30,9 @@ export const Code = (props: {code: CodeType}) => {
                     <div className="level-item">
                         {props.code.meta.fileName && <TypedTag type="File" tag={props.code.meta.fileName}/>}
                     </div>
-                    <div className="level-item">
-                        <TypedTag type="Lang" tag={props.code.meta.language}/>
-                    </div>
                 </div>
                 <div className="level-right">
-                    <Uid type="Code" _id={props.code._id}/>
+                    <TypedTag type="Lang" tag={props.code.meta.language}/>
                 </div>
             </div>
             <DangerDiv content={props.code.content}/>
