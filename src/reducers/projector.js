@@ -4,7 +4,6 @@ import type {SegmentType} from "../components/Segment";
 import type {Action} from "../types/redux";
 import type {ListingType} from "../components/Listing";
 import _ from 'lodash';
-import type {SectionType, TopicType} from "../components/Topic";
 
 // Actions
 export const FETCH_PROJECTOR_OKAY = 'PROJECTOR/FETCH-ALL-OKAY';

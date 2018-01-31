@@ -3,7 +3,6 @@
 import React from 'react';
 
 import DangerDiv from './DangerDiv';
-import {Uid} from "./util";
 
 export type CodeType = {
     type: "code",
