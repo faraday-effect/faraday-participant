@@ -7,7 +7,7 @@ import {Provider} from 'react-redux';
 
 import createHistory from 'history/createBrowserHistory';
 import configureStore from './configureStore';
-import App from './containers/App'
+import App from './scenes/App'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';

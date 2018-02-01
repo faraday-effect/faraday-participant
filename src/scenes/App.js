@@ -12,22 +12,18 @@ import faradaySignature from '../assets/faraday-sig-small.png';
 
 import FlashMessage from '../components/FlashMessage';
 
-import HomePage from './HomePage';
 import ProjectorPage from './ProjectorPage';
 import QuizzesPage from '../modules/quiz/QuizzesPage';
 import SignupPage from './SignupPage';
 import TopicsPage from './TopicsPage';
 
-import {HOME_PAGE, PROJECTOR_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/pages';
+import {PROJECTOR_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/pages';
 
 const NavBar = () => (
     <section className="section">
         <nav className="navbar is-light">
             <div className="navbar-menu">
                 <div className="navbar-start">
-                    <div className="navbar-item">
-                        <Link to={{type: HOME_PAGE}}>Faraday</Link>
-                    </div>
                     <div className="navbar-item">
                         <Link to={{type: SIGN_UP_PAGE}}>Sign Up</Link>
                     </div>

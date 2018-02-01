@@ -10,7 +10,7 @@ specific to each module.
   - Quiz contains questions
   - Etc. 
 
-# Interfaces
+# Scenes
 
 ## Preparation
 - Syllabus
@@ -94,7 +94,8 @@ Support rendering to multiple interfaces.
 ## Quiz Module
 - Preparation
   - Create quiz
-  - Edit quiz
+  - Update quiz
+  - Delete (deactivate) quiz
 - Presentation
   - Podium
     - Start quiz
@@ -115,11 +116,26 @@ Support rendering to multiple interfaces.
     - Follow-up actions based on results
 
 # Open Issues
-  - How to store student responses?
-  - How to version assignment/quiz
-    and associated student response?
-    - Version number seems clunky.
-    - Quiz (e.g.): create document containing
-      quiz itself (duplicate)
-      and all student responses.
-    - Quiz grades itself
+- How to store student responses?
+- How to version assignment/quiz
+  and associated student response?
+  - Version number seems clunky.
+  - Quiz (e.g.): create document containing
+    quiz itself (duplicate)
+    and all student responses.
+  - Quiz grades itself
+- How to fire up each scene?
+  - Log in
+  - Choose scene based on permissions
+    - Student: get participant scene
+    - Teacher: _choose_ scene
+      (Does this mean all these 
+      are part of the same application?)
+      - Preparation
+      - Presentation
+      - Evaluation
+- How does a student log in 
+  (check records, submit homework, etc.)
+  when not in class?
+  - Allow viewing records at any time?
+  - One option to sign in to class when available

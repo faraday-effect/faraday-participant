@@ -1,16 +1,14 @@
 // @flow
 
-import {HOME_PAGE, SIGN_UP_PAGE, TOPICS_PAGE, QUIZZES_PAGE, PROJECTOR_PAGE} from './reducers/pages';
+import {SIGN_UP_PAGE, TOPICS_PAGE, QUIZZES_PAGE, PROJECTOR_PAGE} from './reducers/pages';
 import request from "request-promise";
 import {apiUrl} from "./reducers/common";
 
 import {FETCH_TOPIC_OKAY} from './reducers/topics';
 import {FLASH_SET_MESSAGE} from "./reducers/flash";
-import {FETCH_PROJECTOR_OKAY} from "./modules/code/projector";
+import {FETCH_PROJECTOR_OKAY} from "./modules/code/reducer";
 
 const routesMap = {
-    [HOME_PAGE]: '/',
-
     [PROJECTOR_PAGE]: {
         path: '/projector/:topicId',
         thunk: async (dispatch: Function, getState: any) => {
