@@ -4,10 +4,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
-import {fetchAll} from "../reducers/quizzes";
+import {fetchAll} from "./reducer";
 
-import Quiz from '../components/quiz/Quiz';
-import type {QuizType} from "../components/quiz/Quiz";
+import Quiz from './components/Quiz';
+import type {QuizType} from "./components/Quiz";
 
 type Props = {
     quizzes: Array<QuizType>,

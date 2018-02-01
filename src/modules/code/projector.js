@@ -1,8 +1,8 @@
 // @flow
 
-import type {SegmentType} from "../components/Segment";
-import type {Action} from "../types/redux";
-import type {ListingType} from "../components/Listing";
+import type {SegmentType} from "./Segment";
+import type {Action} from "../../types/redux";
+import type {ListingType} from "./Code";
 import _ from 'lodash';
 
 // Actions

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import {Uid} from './util';
+import {Uid} from '../../components/ShowObject';
 
 import type {SegmentType} from "./Segment";
 import {segmentFactory} from "./Segment";

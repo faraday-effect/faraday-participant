@@ -3,14 +3,14 @@
 import * as React from 'react';
 import _ from 'lodash';
 
-import * as questionTypes from './constants';
+import * as questionTypes from '../constants';
 
 import MultipleChoiceQuestion from './MultipleChoice';
 import type {MultipleChoiceQuestionType} from "./MultipleChoice";
 
 import ShortAnswerQuestion from './ShortAnswer';
 import type {ShortAnswerQuestionType} from "./ShortAnswer";
-import type {StringMapType} from "../../types/basic";
+import type {StringMapType} from "../../../types/basic";
 
 export type QuizType = {
     type: "quiz",

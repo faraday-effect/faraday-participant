@@ -4,13 +4,13 @@ import React from 'react';
 
 import type {StringMapType} from "../types/basic";
 import DangerDiv from './DangerDiv';
-import {Uid} from './util';
+import {Uid} from './ShowObject';
 
-import type {ListingType} from "./Listing";
-import type {QuizType} from "../components/quiz/Quiz";
+import type {ListingType} from "../modules/code/Code";
+import type {QuizType} from "../modules/quiz/components/Quiz";
 
-import Listing from './Listing';
-import Quiz from '../components/quiz/Quiz';
+import Listing from '../modules/code/Code';
+import Quiz from '../modules/quiz/components/Quiz';
 
 export type SectionType = ListingType | QuizType;
 

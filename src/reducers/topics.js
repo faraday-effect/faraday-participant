@@ -1,7 +1,7 @@
 // @flow
 
 import type {TopicType, SectionType} from '../components/Topic';
-import type {SegmentType} from "../components/Segment";
+import type {SegmentType} from "../modules/code/Segment";
 import type {Action} from '../types/redux';
 
 // Actions

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Prompt from './Prompt';
-import type {ChangeEventHandler} from '../../types/events';
+import type {ChangeEventHandler} from '../../../types/events';
 
 type MultipleChoiceAnswerType = {
     value: string,

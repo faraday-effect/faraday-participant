@@ -14,7 +14,7 @@ import FlashMessage from '../components/FlashMessage';
 
 import HomePage from './HomePage';
 import ProjectorPage from './ProjectorPage';
-import QuizzesPage from './QuizzesPage';
+import QuizzesPage from '../modules/quiz/QuizzesPage';
 import SignupPage from './SignupPage';
 import TopicsPage from './TopicsPage';
 

@@ -1,8 +1,8 @@
 // @flow
 
 import request from 'request-promise';
-import {apiUrl} from './common';
-import type {QuizType} from '../components/quiz/Quiz';
+import {apiUrl} from '../../reducers/common';
+import type {QuizType} from './components/Quiz';
 
 // Actions
 const ANSWER_QUESTION = 'QUIZZES/ANSWER_QUESTION';

@@ -2,14 +2,14 @@
 
 import React from 'react';
 
-import CueCard from './CueCard';
-import type {CueCardType} from './CueCard';
+import CueCard from '../../components/CueCard';
+import type {CueCardType} from '../../components/CueCard';
 
-import Code from './Code';
-import type {CodeType} from './Code';
+import Code from './Listing';
+import type {CodeType} from './Listing';
 
-import Note from './Note';
-import type {NoteType} from './Note';
+import Note from '../../components/Note';
+import type {NoteType} from '../../components/Note';
 
 export type SegmentType = CodeType | CueCardType | NoteType;
 
