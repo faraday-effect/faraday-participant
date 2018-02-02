@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import DangerDiv from './DangerDiv';
+import DangerDiv from '../../../components/DangerDiv';
 
 export type CueCardType = {
     type: "cue-card",
@@ -10,7 +10,7 @@ export type CueCardType = {
     content: string
 };
 
-export const CueCard = (props: {cuecard: CueCardType}) => (
+export const Intertitle = (props: {cuecard: CueCardType}) => (
     <div>
         <h1 className="title">{props.cuecard.title}</h1>
         <h2 className="subtitle">
@@ -19,4 +19,4 @@ export const CueCard = (props: {cuecard: CueCardType}) => (
     </div>
 );
 
-export default CueCard;
+export default Intertitle;

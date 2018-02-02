@@ -68,7 +68,7 @@ specific to each module.
 # Modules
 Plugins for different course elements.
 Support rendering to multiple interfaces.
-- Code
+- Lecture
 - Quiz
 - Survey
 - Q and A
@@ -79,13 +79,13 @@ Support rendering to multiple interfaces.
 # Components
 - Listing
 - Cue card
-- Prose (not for display)
+- Note (not for display)
 - Slide (for display)
 - Video
 - Image
 - Chart (e.g., D3)
 - PDF page
-- Flash
+- Flash Message
 - Calendar/Clock
 - Timer
 - Progress

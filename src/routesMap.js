@@ -6,7 +6,7 @@ import {apiUrl} from "./reducers/common";
 
 import {FETCH_TOPIC_OKAY} from './reducers/topics';
 import {FLASH_SET_MESSAGE} from "./reducers/flash";
-import {FETCH_PROJECTOR_OKAY} from "./modules/code/reducer";
+import {FETCH_PROJECTOR_OKAY} from "./modules/lecture/reducer";
 
 const routesMap = {
     [PROJECTOR_PAGE]: {

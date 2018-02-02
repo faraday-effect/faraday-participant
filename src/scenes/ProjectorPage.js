@@ -3,8 +3,8 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from "react-redux";
-import {segmentFactory} from "../modules/code/Segment";
-import {projectorFirst, projectorLast, projectorNext, projectorPrev} from "../modules/code/reducer";
+import {segmentFactory} from "../modules/lecture/Segment";
+import {projectorFirst, projectorLast, projectorNext, projectorPrev} from "../modules/lecture/reducer";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 
 // Navigation button, including "disabled" status. Note that we have to

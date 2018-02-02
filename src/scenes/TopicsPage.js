@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import Link from 'redux-first-router-link';
 
-import {segmentFactory} from "../modules/code/Segment";
+import {segmentFactory} from "../modules/lecture/Segment";
 import {TOPICS_PAGE} from '../reducers/pages';
 
 /*

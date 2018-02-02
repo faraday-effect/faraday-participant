@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import DangerDiv from '../../components/DangerDiv';
+import DangerDiv from '../../../components/DangerDiv';
 
 export type CodeType = {
     type: "code",

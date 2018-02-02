@@ -3,13 +3,13 @@
 import React from 'react';
 
 import type {StringMapType} from "../types/basic";
-import DangerDiv from './DangerDiv';
-import {Uid} from './ShowObject';
+import DangerDiv from '../components/DangerDiv';
+import {Uid} from '../components/ShowObject';
 
-import type {ListingType} from "../modules/code/Code";
+import type {ListingType} from "../modules/lecture/Code";
 import type {QuizType} from "../modules/quiz/components/Quiz";
 
-import Listing from '../modules/code/Code';
+import Listing from '../modules/lecture/Code';
 import Quiz from '../modules/quiz/components/Quiz';
 
 export type SectionType = ListingType | QuizType;
