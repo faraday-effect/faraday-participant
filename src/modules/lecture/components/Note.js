@@ -3,7 +3,7 @@
 import React from 'react';
 
 import DangerDiv from '../../../components/DangerDiv';
-import {Uid} from '../../../components/ShowObject';
+import {Uid} from '../../../components/Uid';
 
 export type NoteType = {
     type: "note",

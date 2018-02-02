@@ -11,6 +11,7 @@ import App from './scenes/App'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
+import SignIn from "./scenes/SignIn";
 
 fontawesome.library.add(solid);
 
@@ -24,7 +25,7 @@ if (!rootElement) {
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <SignIn/>
     </Provider>,
     rootElement
 );

@@ -12,9 +12,9 @@ import faradaySignature from '../assets/faraday-sig-small.png';
 
 import FlashMessage from '../components/FlashMessage';
 
-import ProjectorPage from './ProjectorPage';
+import ProjectorPage from './Projector';
 import QuizzesPage from '../modules/quiz/QuizzesPage';
-import SignupPage from './SignupPage';
+import SignupPage from './SignUp';
 import TopicsPage from './TopicsPage';
 
 import {PROJECTOR_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/pages';
@@ -69,7 +69,6 @@ type PageStyle = "normal" | "empty";
 type PageInfo = {[string]: {container: any, style: PageStyle}};
 
 const pageConfig: PageInfo = {
-    HomePage: {container: HomePage, style: "normal"},
     ProjectorPage: {container: ProjectorPage, style: "empty"},
     QuizzesPage: {container: QuizzesPage, style: "normal"},
     SignupPage: {container: SignupPage, style: "normal"},
