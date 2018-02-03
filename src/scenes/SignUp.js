@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import SignupForm from '../forms/SignupForm';
+import SignupForm from '../forms/SignUpForm';
 
 class SignupPage extends React.Component<*> {
     submit = (values: any) => {                 // FIXME

@@ -11,7 +11,7 @@ import App from './scenes/App'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
-import SignIn from "./scenes/SignIn";
+import SignIn from "./scenes/LogIn";
 
 fontawesome.library.add(solid);
 
