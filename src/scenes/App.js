@@ -5,16 +5,12 @@ import {connect} from 'react-redux';
 
 import Link from 'redux-first-router-link';
 
-import '../css/zenburn.css';
-import 'bulma/css/bulma.css';
-
-import faradaySignature from '../assets/faraday-sig-small.png';
 
 import FlashMessage from '../components/FlashMessage';
 
 import ProjectorPage from './Projector';
 import QuizzesPage from '../modules/quiz/QuizzesPage';
-import SignupPage from './SignUp';
+import SignupPage from './Signup';
 import TopicsPage from './TopicsPage';
 
 import {PROJECTOR_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/pages';

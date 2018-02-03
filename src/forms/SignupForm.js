@@ -7,9 +7,9 @@ import {Button, InputField} from "./components";
 
 import Validator from 'validatorjs';
 
-const SignUpForm = (props: any) => {
+const SignupForm = (props: any) => {
     return (
-        <form onSubmit={data => console.log("FORM", data)}>
+        <form>
             <Field name="email" type="text" component={InputField} label="Email Address" placeholder="who@example.com"/>
             <Field name="firstName" type="text" component={InputField} label="First Name" placeholder="Your given name"/>
             <Field name="lastName" type="text" component={InputField} label="Last Name" placeholder="Your surname"/>
@@ -33,4 +33,4 @@ function signupValidator(data) {
 export default reduxForm({
     form: 'signup',
     validate: signupValidator
-})(SignUpForm);
+})(SignupForm);

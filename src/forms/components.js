@@ -10,18 +10,19 @@ type InputFieldProps = FieldProps & {
 };
 
 export const InputField = (props: InputFieldProps) => {
-    const {label, placeholder, type, meta: {touched, invalid, error}} = props;
+    const {label, placeholder, type, input, meta: {touched, invalid, error}} = props;
     return (
         <div className="field">
             <label className="label">{label}</label>
             <div className="control">
-                <input className={touched && invalid ? "input is-danger" : "input"}
+                <input {...input}
+                       className={touched && invalid ? "input is-danger" : "input"}
                        type={type}
-                       placeholder={{placeholder} || 'Enter a value'}/>
+                       placeholder={placeholder || 'Enter a value'}/>
             </div>
             {touched && invalid && <p className="help is-danger">{error}</p>}
         </div>
-    )
+    );
 };
 
 type ButtonProps = {

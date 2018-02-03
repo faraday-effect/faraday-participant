@@ -5,13 +5,16 @@ import ReactDOM from 'react-dom';
 
 import {Provider} from 'react-redux';
 
+import './css/zenburn.css';
+import 'bulma/css/bulma.css';
+// import faradaySignature from './assets/faraday-sig-small.png';
+
 import createHistory from 'history/createBrowserHistory';
 import configureStore from './configureStore';
-import App from './scenes/App'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
-import SignIn from "./scenes/LogIn";
+import Login from "./scenes/Login";
 
 fontawesome.library.add(solid);
 
@@ -25,7 +28,7 @@ if (!rootElement) {
 
 ReactDOM.render(
     <Provider store={store}>
-        <SignIn/>
+        <Login/>
     </Provider>,
     rootElement
 );
