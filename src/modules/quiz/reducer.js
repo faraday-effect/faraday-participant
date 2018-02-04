@@ -1,8 +1,7 @@
 // @flow
 
-import request from 'request-promise';
-import {apiUrl} from '../../reducers/common';
 import type {QuizType} from './components/Quiz';
+import {httpGet} from "../../reducers/api";
 
 // Actions
 const ANSWER_QUESTION = 'QUIZZES/ANSWER_QUESTION';
@@ -44,18 +43,19 @@ function fetchAllOkay(quizzes: Array<QuizType>) {
 
 // Side effects
 export function fetchOne(_id: string) {
-    return (dispatch: $FlowTODO) => {
-        request({
-            url: apiUrl('quizzes', _id),
-            json: true
-        }).then(response => dispatch(fetchOneOkay(response)));
+    return async (dispatch: $FlowTODO) => {
+        const response = await httpGet('quizzes');
+        dispatch(fetchOneOkay(response.payload));
     };
 }
 
 export function fetchAll() {
-    return (dispatch: $FlowTODO) => {
-        request(apiUrl('quizzes'))
-            .then(response => dispatch(fetchAllOkay(JSON.parse(response))))
-            .catch(err => console.error(err));
+    return async (dispatch: $FlowTODO) => {
+        try {
+            const response = await httpGet('quizzes');
+            dispatch(fetchAllOkay(response.payload));
+        } catch(err) {
+            console.error(err);
+        }
     };
 }

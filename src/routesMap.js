@@ -1,8 +1,7 @@
 // @flow
 
 import {SIGN_UP_PAGE, TOPICS_PAGE, QUIZZES_PAGE, PROJECTOR_PAGE} from './reducers/pages';
-import request from "request-promise";
-import {apiUrl} from "./reducers/common";
+import {httpGet} from "./reducers/api";
 
 import {FETCH_TOPIC_OKAY} from './reducers/topics';
 import {FLASH_SET_MESSAGE} from "./reducers/flash";
@@ -15,13 +14,10 @@ const routesMap = {
             const topicId = getState().location.payload.topicId;
 
             try {
-                const topic = await request({
-                    url: apiUrl('topics', topicId),
-                    json: true
-                });
+                const topic = await httpGet(['topics', topicId]);
                 dispatch({
                     type: FETCH_PROJECTOR_OKAY,
-                    payload: topic
+                    payload: topic.payload
                 });
             } catch (err) {
                 dispatch({
@@ -49,9 +45,13 @@ const routesMap = {
             try {
                 // Only load data if we've not been on the same route; this allows the drill-down
                 // behavior to work properly without reloading after each click.
-                const topics = previousType !== currentType
-                    ? await request({url: apiUrl('topics'), json: true})
-                    : getState().topics.allTopics;
+                let topics = [];
+                if (previousType !== currentType) {
+                    const response = await httpGet('topics');
+                    topics = response.payload;
+                } else {
+                    topics = getState().topics.allTopics;
+                }
 
                 // In either case, want to trigger this action
                 // so that the view state is updated properly.

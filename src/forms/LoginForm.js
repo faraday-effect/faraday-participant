@@ -3,7 +3,7 @@
 import React from 'react';
 
 import {Field, reduxForm} from 'redux-form';
-import {Button, InputField} from "./components";
+import {InputField, SubmitButton} from "./components";
 
 import Validator from 'validatorjs';
 
@@ -15,7 +15,7 @@ const LoginForm = (props) => {
                    component={InputField}/>
             <Field name="password" type="password" label="Password" placholder="secret"
                    component={InputField}/>
-            <Button disabled={invalid} onClick={handleSubmit}/>
+            <SubmitButton disabled={invalid}/>
         </form>
     );
 }

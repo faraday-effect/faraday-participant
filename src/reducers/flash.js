@@ -19,6 +19,20 @@ const initialState = {
     message: ''
 };
 
+export const showFlash = (severity: FlashSeverity, message: string) => {
+    return {
+        type: FLASH_SET_MESSAGE,
+        payload: {
+            severity,
+            message
+        }
+    };
+};
+
+export const clearFlash = () => {
+    return { type: FLASH_CLEAR_MESSAGE };
+};
+
 const flashReducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
         case FLASH_SET_MESSAGE:

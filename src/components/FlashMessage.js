@@ -31,5 +31,5 @@ function FlashMessage(props: State) {
     );
 }
 
-const mapStateToProps = ({ flash }) => ({ flash });
+const mapStateToProps = state => state.flash;
 export default connect(mapStateToProps, {})(FlashMessage);

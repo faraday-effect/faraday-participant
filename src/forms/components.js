@@ -27,17 +27,15 @@ export const InputField = (props: InputFieldProps) => {
 
 type ButtonProps = {
     label?: string,
-    disabled: boolean,
-    onClick: any
+    disabled: boolean
 }
 
-export const Button = (props: ButtonProps) => (
+export const SubmitButton = (props: ButtonProps) => (
     <div className="field">
         <div className="control">
             <button className="button is-link"
-                    type="button"
-                    disabled={props.disabled}
-                    onClick={props.onClick}>
+                    type="submit"
+                    disabled={props.disabled}>
                 {props.label || 'Submit'}
             </button>
         </div>
