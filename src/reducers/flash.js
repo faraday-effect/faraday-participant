@@ -19,7 +19,7 @@ const initialState = {
     message: ''
 };
 
-export const showFlash = (severity: FlashSeverity, message: string) => {
+const _flashShow = (severity: FlashSeverity, message: string) => {
     return {
         type: FLASH_SET_MESSAGE,
         payload: {
@@ -29,9 +29,13 @@ export const showFlash = (severity: FlashSeverity, message: string) => {
     };
 };
 
-export const clearFlash = () => {
+export const flashClear = () => {
     return { type: FLASH_CLEAR_MESSAGE };
 };
+
+export const flashInfo = (message: string) => _flashShow('info', message);
+export const flashWarning = (message: string) => _flashShow('warning', message);
+export const flashError = (message: string) => _flashShow('error', message);
 
 const flashReducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
