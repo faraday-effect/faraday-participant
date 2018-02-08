@@ -3,6 +3,8 @@
 import {httpPost} from './api';
 import type {Action} from "../types/redux";
 import {flashInfo, flashError} from "./flash";
+import {GRAND_CENTRAL} from "../scenes/reducer";
+import {redirect} from 'redux-first-router';
 
 const USER_AUTH_INIT = 'USER/AUTH-INIT';
 const USER_AUTH_OKAY = 'USER/AUTH-OKAY';
@@ -48,6 +50,7 @@ export function authenticateUser(email: string, password: string) {
                 localStorage.setItem(JWT_LOCAL_STORAGE_KEY, response.payload.jwt);
                 dispatch({type: USER_AUTH_OKAY, payload: response.payload.user});
                 dispatch(flashInfo(`Welcome ${response.payload.user.firstName}`));
+                dispatch(redirect({ type: GRAND_CENTRAL }));
             } else {
                 localStorage.removeItem(JWT_LOCAL_STORAGE_KEY);
                 dispatch({type: USER_AUTH_FAIL, payload: response.payload});

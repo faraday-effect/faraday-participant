@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Link from 'redux-first-router-link';
+import faradaySignature from '../assets/faraday-sig-small.png';
 
 
 import FlashMessage from '../components/FlashMessage';
@@ -13,7 +14,7 @@ import QuizzesPage from '../modules/quiz/QuizzesPage';
 import SignupPage from './Signup';
 import TopicsPage from './TopicsPage';
 
-import {PROJECTOR_PAGE, TOPICS_PAGE, SIGN_UP_PAGE, QUIZZES_PAGE} from '../reducers/pages';
+import {PROJECTOR_SCENE, TOPICS_SCENE, SIGNUP_SCENE} from './reducer';
 
 const NavBar = () => (
     <section className="section">
@@ -21,16 +22,13 @@ const NavBar = () => (
             <div className="navbar-menu">
                 <div className="navbar-start">
                     <div className="navbar-item">
-                        <Link to={{type: SIGN_UP_PAGE}}>Sign Up</Link>
+                        <Link to={{type: SIGNUP_SCENE}}>Sign Up</Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to={{type: PROJECTOR_PAGE}}>Projector</Link>
+                        <Link to={{type: PROJECTOR_SCENE}}>Projector</Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to={{type: TOPICS_PAGE}}>Topics</Link>
-                    </div>
-                    <div className="navbar-item">
-                        <Link to={{type: QUIZZES_PAGE}}>Quizzes</Link>
+                        <Link to={{type: TOPICS_SCENE}}>Topics</Link>
                     </div>
                 </div>
                 <div className="navbar-end">

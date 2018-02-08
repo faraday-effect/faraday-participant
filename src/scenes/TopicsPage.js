@@ -7,7 +7,7 @@ import _ from 'lodash';
 import Link from 'redux-first-router-link';
 
 import {segmentFactory} from "../modules/lecture/Segment";
-import {TOPICS_PAGE} from '../reducers/pages';
+import {TOPICS_SCENE} from './reducer';
 
 /*
                | Offering        |                     |
@@ -30,7 +30,7 @@ class TopicsPage extends Component<*> {
                             <ul>
                                 {_.map(this.props.topics.allTopics, (topic, idx) =>
                                     <li key={idx}>
-                                        <Link to={{type: TOPICS_PAGE, payload: {
+                                        <Link to={{type: TOPICS_SCENE, payload: {
                                                 topicId: topic._id
                                             }}}>
                                             {topic.title}
@@ -44,7 +44,7 @@ class TopicsPage extends Component<*> {
                             <ul>
                                 {_.map(this.props.topics.selectedSections, (section, idx) =>
                                     <li key={idx}>
-                                        <Link to={{type: TOPICS_PAGE, payload: {
+                                        <Link to={{type: TOPICS_SCENE, payload: {
                                                 topicId: this.props.topics.currentTopic._id,
                                                 sectionType: section.type,
                                                 sectionId: section._id
@@ -60,7 +60,7 @@ class TopicsPage extends Component<*> {
                             <ul>
                                 {_.map(this.props.topics.selectedSegments, (segment, idx) =>
                                     <li key={idx}>
-                                        <Link to={{type: TOPICS_PAGE, payload: {
+                                        <Link to={{type: TOPICS_SCENE, payload: {
                                                 topicId: this.props.topics.currentTopic._id,
                                                 sectionType: this.props.topics.sectionIdx.type,
                                                 sectionId: this.props.topics.sectionIdx._id,

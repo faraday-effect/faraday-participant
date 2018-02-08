@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import {Field, reduxForm} from 'redux-form';
-import {Button, InputField} from "./components";
+import {SubmitButton, InputField} from "./components";
 
 import Validator from 'validatorjs';
 
@@ -13,7 +13,7 @@ const SignupForm = (props: any) => {
             <Field name="email" type="text" component={InputField} label="Email Address" placeholder="who@example.com"/>
             <Field name="firstName" type="text" component={InputField} label="First Name" placeholder="Your given name"/>
             <Field name="lastName" type="text" component={InputField} label="Last Name" placeholder="Your surname"/>
-            <Button disabled={props.invalid} onClick={props.handleSubmit}/>
+            <SubmitButton disabled={props.invalid} onClick={props.handleSubmit}/>
         </form>
     );
 };

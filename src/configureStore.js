@@ -4,6 +4,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { reducer as formReducer } from 'redux-form';
+import sceneReducer from './scenes/reducer';
 import * as reducers from './reducers';
 
 import { connectRoutes } from 'redux-first-router';
@@ -15,6 +16,7 @@ export default history => {
 
     const rootReducer = combineReducers({
         ...reducers,
+        scene: sceneReducer,
         form: formReducer,
         location: routeReducer
     });

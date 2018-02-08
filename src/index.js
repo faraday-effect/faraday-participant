@@ -7,14 +7,15 @@ import {Provider} from 'react-redux';
 
 import './css/zenburn.css';
 import 'bulma/css/bulma.css';
-// import faradaySignature from './assets/faraday-sig-small.png';
 
 import createHistory from 'history/createBrowserHistory';
 import configureStore from './configureStore';
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
-import Login from "./scenes/Login";
+
+import Scene from './scenes/Scene';
+//import Login from "./scenes/Login";
 
 fontawesome.library.add(solid);
 
@@ -28,7 +29,7 @@ if (!rootElement) {
 
 ReactDOM.render(
     <Provider store={store}>
-        <Login/>
+        <Scene/>
     </Provider>,
     rootElement
 );

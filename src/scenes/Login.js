@@ -5,6 +5,8 @@ import React from 'react';
 import LoginForm from '../forms/LoginForm';
 import {authenticateUser} from "../reducers/user";
 import FlashMessage from "../components/FlashMessage";
+import {SIGNUP_SCENE} from "./reducer";
+import Link from "redux-first-router-link";
 
 const handleLogin = (values, dispatch, props) => {
     console.log("VALUES", values);
@@ -17,8 +19,7 @@ const handleLogin = (values, dispatch, props) => {
     dispatch(authenticateUser(email, password));
 };
 
-const Login = (props: any) => {
-    console.log(props);
+const Login = () => {
     return (
         <div>
             <section className="hero is-primary">
@@ -36,7 +37,9 @@ const Login = (props: any) => {
                         <h1 className="subtitle is-3">Please Log In</h1>
                         <LoginForm onSubmit={handleLogin}/>
                         <FlashMessage/>
-                        <p>No account? <a>Sign up!</a></p>
+                        <p>No account?
+                            <Link to={{type: SIGNUP_SCENE}}>Sign up</Link>
+                        </p>
                     </div>
                 </div>
             </section>
