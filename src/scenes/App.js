@@ -3,61 +3,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Link from 'redux-first-router-link';
-import faradaySignature from '../assets/faraday-sig-small.png';
-
-
 import FlashMessage from '../components/FlashMessage';
 
 import ProjectorPage from './Projector';
 import QuizzesPage from '../modules/quiz/QuizzesPage';
 import SignupPage from './Signup';
 import TopicsPage from './TopicsPage';
+import {NavBar} from "./components/NavBar";
+import {Footer} from "./components/Footer";
 
-import {PROJECTOR_SCENE, TOPICS_SCENE, SIGNUP_SCENE} from './reducer';
 
-const NavBar = () => (
-    <section className="section">
-        <nav className="navbar is-light">
-            <div className="navbar-menu">
-                <div className="navbar-start">
-                    <div className="navbar-item">
-                        <Link to={{type: SIGNUP_SCENE}}>Sign Up</Link>
-                    </div>
-                    <div className="navbar-item">
-                        <Link to={{type: PROJECTOR_SCENE}}>Projector</Link>
-                    </div>
-                    <div className="navbar-item">
-                        <Link to={{type: TOPICS_SCENE}}>Topics</Link>
-                    </div>
-                </div>
-                <div className="navbar-end">
-                    <div className="navbar-item">Logout</div>
-                </div>
-            </div>
-        </nav>
-    </section>
-);
-
-const Footer = () => (
-    <section className="section">
-        <footer className="footer">
-            <div className="container">
-                <div className="columns">
-                    <div className="column">
-                        <h4 className="title is-4">Faraday</h4>
-                    </div>
-                    <div className="column">
-                        Actionable Educational Intelligence
-                    </div>
-                    <div className="column">
-                        <img className="is-pulled-right" src={faradaySignature} alt="Faraday's signature"/>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </section>
-);
 
 type PageStyle = "normal" | "empty";
 type PageInfo = {[string]: {container: any, style: PageStyle}};

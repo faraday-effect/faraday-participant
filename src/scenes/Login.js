@@ -5,7 +5,7 @@ import React from 'react';
 import LoginForm from '../forms/LoginForm';
 import {authenticateUser} from "../reducers/user";
 import FlashMessage from "../components/FlashMessage";
-import {SIGNUP_SCENE} from "./reducer";
+import {SIGNUP_SCENE} from "../reducers/scenes";
 import Link from "redux-first-router-link";
 
 const handleLogin = (values, dispatch, props) => {

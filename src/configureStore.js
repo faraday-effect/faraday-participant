@@ -4,7 +4,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { reducer as formReducer } from 'redux-form';
-import sceneReducer from './scenes/reducer';
+import sceneReducer from './reducers/scenes';
 import * as reducers from './reducers';
 
 import { connectRoutes } from 'redux-first-router';

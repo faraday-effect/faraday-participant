@@ -7,7 +7,7 @@ import _ from 'lodash';
 import Link from 'redux-first-router-link';
 
 import {segmentFactory} from "../modules/lecture/Segment";
-import {TOPICS_SCENE} from './reducer';
+import {TOPICS_SCENE} from '../reducers/scenes';
 
 /*
                | Offering        |                     |

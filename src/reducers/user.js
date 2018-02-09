@@ -1,9 +1,9 @@
 // @flow
 
-import {httpPost} from './api';
+import {httpPost} from '../lib/api';
 import type {Action} from "../types/redux";
 import {flashInfo, flashError} from "./flash";
-import {GRAND_CENTRAL} from "../scenes/reducer";
+import {GRAND_CENTRAL} from "./scenes";
 import {redirect} from 'redux-first-router';
 
 const USER_AUTH_INIT = 'USER/AUTH-INIT';

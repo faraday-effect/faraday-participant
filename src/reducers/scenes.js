@@ -3,13 +3,14 @@
 import _ from 'lodash';
 
 import type {Action} from '../types/redux';
-import Signup from "./Signup";
-import Login from "./Login";
-import Projector from "./Projector";
+import Signup from "../scenes/Signup";
+import Login from "../scenes/Login";
+import Projector from "../scenes/Projector";
 import {NOT_FOUND} from "redux-first-router";
-import NotFound from "./NotFound";
-import Home from "./Home";
-import GrandCentral from "./GrandCentral";
+import NotFound from "../scenes/NotFound";
+import Home from "../scenes/Home";
+import GrandCentral from "../scenes/GrandCentral";
+import Courses from "../scenes/Courses";
 
 // Action types
 export const HOME_SCENE = 'SCENE/HOME';
@@ -18,8 +19,13 @@ export const SIGNUP_SCENE = 'SCENE/SIGNUP';
 export const LOGIN_SCENE = 'SCENE/LOGIN';
 export const PROJECTOR_SCENE = 'SCENE/PROJECTOR';
 export const TOPICS_SCENE = 'SCENE/TOPICS';     // TODO: Get rid of this.
+export const COURSES_SCENE = 'SCENE/COURSES';
 
 const actionMap = {
+    [COURSES_SCENE]: {
+        name: 'Courses',
+        component: Courses,
+    },
     [GRAND_CENTRAL]: {
         name: 'GrandCentral',
         component: GrandCentral
@@ -53,7 +59,7 @@ type State = {
     name: string
 };
 const initialState = {
-    name: actionMap[LOGIN_SCENE].name
+    name: actionMap[HOME_SCENE].name
 };
 
 export default (state: State = initialState, action: Action) => {

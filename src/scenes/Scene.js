@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import {componentMap} from './reducer';
+import {componentMap} from '../reducers/scenes';
 import {connect} from "react-redux";
 
 const Scene = (scene) => {

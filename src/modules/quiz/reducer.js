@@ -1,7 +1,7 @@
 // @flow
 
 import type {QuizType} from './components/Quiz';
-import {httpGet} from "../../reducers/api";
+import {httpGet} from "../../lib/api";
 
 // Actions
 const ANSWER_QUESTION = 'QUIZZES/ANSWER_QUESTION';

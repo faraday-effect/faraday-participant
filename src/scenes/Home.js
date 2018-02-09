@@ -2,12 +2,17 @@
 
 import React from 'react';
 import Link from "redux-first-router-link";
-import {LOGIN_SCENE} from "./reducer";
+import {LOGIN_SCENE} from "../reducers/scenes";
+import {Header} from "./components/Header";
+import {Footer} from "./components/Footer";
 
 const Home = () => (
     <div>
-        <h1>Welcome, Starfighter</h1>
-        <Link to={{type: LOGIN_SCENE}}>Log In</Link>
+        <Header/>
+        <section className="section">
+            <Link className="button is-primary is-rounded" to={{type: LOGIN_SCENE}}>Log In</Link>
+        </section>
+        <Footer/>
     </div>
 );
 

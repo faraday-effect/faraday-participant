@@ -1,17 +1,13 @@
 // @flow
 
-import {
-    HOME_SCENE,
-    SIGNUP_SCENE,
-    LOGIN_SCENE,
-    PROJECTOR_SCENE
-} from "./scenes/reducer";
+import {HOME_SCENE, SIGNUP_SCENE, LOGIN_SCENE, PROJECTOR_SCENE, COURSES_SCENE} from "./reducers/scenes";
 
 const routesMap = {
     [HOME_SCENE]: '/',
     [SIGNUP_SCENE]: '/signup',
     [LOGIN_SCENE]: '/login',
-    [PROJECTOR_SCENE]: '/projector/:topicId'
+    [PROJECTOR_SCENE]: '/projector/:topicId',
+    [COURSES_SCENE]: '/courses',
     // [QUIZZES_SCENE]: '/quizzes',
     // [TOPICS_SCENE]: '/topics/:topicId?/:sectionType?/:sectionId?/:segmentType?/:segmentId?'
 };
