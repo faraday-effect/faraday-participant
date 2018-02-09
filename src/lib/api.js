@@ -1,6 +1,7 @@
 // @flow
 
 import request from "request";
+import {authenticateUser} from "../reducers/user";
 
 const BASE_URL = 'http://localhost:8000/api';
 
@@ -16,43 +17,51 @@ function makeUrl(urlTail: StringOrArray): string {
     return urlSegments.join('/');
 }
 
-function httpRequest(requestConfig: Object): Promise<Object> {
+type RequestConfig = {
+    method: 'POST' | 'GET',
+    url: string,
+    authRequired: boolean,
+    body?: Object
+}
+
+function httpRequest(requestConfig: RequestConfig): Promise<Object> {
+    const finalConfig = {
+        ...requestConfig,
+        json: true
+    };
+
+    if (finalConfig.authRequired) {
+        authenticateUser();
+    }
+
     return new Promise((resolve, reject) =>
-        request(requestConfig, (error, response, body) => {
+        request(finalConfig, (error, response, body) => {
             if (error) {
                 return reject(error);
             } else {
-                if (response.statusCode >= 200 && response.statusCode <= 299) {
-                    return resolve({
-                        ok: true,
-                        statusCode: response.statusCode,
-                        payload: body
-                    });
-                } else {
-                    return resolve({
-                        ok: false,
-                        statusCode: response.statusCode,
-                        payload: body
-                    });
-                }
+                return resolve({
+                    ok: response.statusCode >= 200 && response.statusCode <= 299,
+                    statusCode: response.statusCode,
+                    payload: body
+                });
             }
         })
     );
 }
 
-export function httpPost(urlTail: StringOrArray, payload: Object): Promise<Object> {
+export function httpGet(urlTail: StringOrArray, authRequired: boolean = true): Promise<Object> {
+    return httpRequest({
+        method: 'GET',
+        authRequired,
+        url: makeUrl(urlTail)
+    })
+}
+
+export function httpPost(urlTail: StringOrArray, payload: Object, authRequired: boolean = true): Promise<Object> {
     return httpRequest({
         method: 'POST',
         url: makeUrl(urlTail),
-        body: payload,
-        json: true
+        authRequired,
+        body: payload
     });
-}
-
-export function httpGet(urlTail: StringOrArray): Promise<Object> {
-    return httpRequest({
-        method: 'GET',
-        url: makeUrl(urlTail),
-        json: true
-    })
 }

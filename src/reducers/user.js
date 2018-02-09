@@ -3,13 +3,14 @@
 import {httpPost} from '../lib/api';
 import type {Action} from "../types/redux";
 import {flashInfo, flashError} from "./flash";
-import {GRAND_CENTRAL} from "./scenes";
+import {GRAND_CENTRAL, LOGIN_SCENE} from "./scenes";
 import {redirect} from 'redux-first-router';
+import JWT from 'jsonwebtoken';
 
 const USER_AUTH_INIT = 'USER/AUTH-INIT';
 const USER_AUTH_OKAY = 'USER/AUTH-OKAY';
 const USER_AUTH_FAIL = 'USER/AUTH-FAIL';
-const USER_LOG_OUT = 'USER/LOG_OUT';
+const USER_LOG_OUT = 'USER/LOG-OUT';
 
 const JWT_LOCAL_STORAGE_KEY = 'faraday-jwt';
 
@@ -32,7 +33,8 @@ type User = {
 
 type State = {
     user?: User,
-    isLoggedIn: boolean
+    jwt?: string,
+    isLoggedIn: boolean,
 };
 
 const initialState = {
@@ -40,15 +42,21 @@ const initialState = {
 };
 
 // Action creators
-export function authenticateUser(email: string, password: string) {
+export function loginUser(email: string, password: string) {
     return async (dispatch: Function) => {
         dispatch({type: USER_AUTH_INIT});
         try {
-            const response = await httpPost('authenticate', {email, password});
+            const response = await httpPost('authenticate', {email, password}, false);
 
             if (response.ok) {
                 localStorage.setItem(JWT_LOCAL_STORAGE_KEY, response.payload.jwt);
-                dispatch({type: USER_AUTH_OKAY, payload: response.payload.user});
+                dispatch({
+                    type: USER_AUTH_OKAY,
+                    payload: {
+                        user: response.payload.user,
+                        jwt: response.payload.jwt
+                    }
+                });
                 dispatch(flashInfo(`Welcome ${response.payload.user.firstName}`));
                 dispatch(redirect({ type: GRAND_CENTRAL }));
             } else {
@@ -57,16 +65,36 @@ export function authenticateUser(email: string, password: string) {
                 dispatch(flashError(response.payload.message));
             }
         } catch (err) {
-            dispatch(flashError(`Unable to get topics from server (${err})`));
+            dispatch(flashError(`Login failed (${err})`));
         }
     }
-};
+}
+
+export function authenticateUser() {
+    const localToken = localStorage.getItem(JWT_LOCAL_STORAGE_KEY);
+    if (localToken) {
+        const decoded = JWT.decode(localToken, {complete: true});
+        return {
+            type: USER_AUTH_OKAY,
+            payload: {
+                user: decoded.payload,
+                jwt: localToken
+            }
+        };
+    } else {
+        console.log('No local JWT');
+        return redirect({
+            type: LOGIN_SCENE
+        });
+    }
+}
 
 const userReducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
         case USER_AUTH_OKAY:
             return {
-                ...action.payload,
+                ...action.payload.user,
+                jwt: action.payload.jwt,
                 isLoggedIn: true
             };
         case USER_AUTH_FAIL:

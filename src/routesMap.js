@@ -1,11 +1,12 @@
 // @flow
 
-import {HOME_SCENE, SIGNUP_SCENE, LOGIN_SCENE, PROJECTOR_SCENE, COURSES_SCENE} from "./reducers/scenes";
+import {HOME_SCENE, SIGNUP_SCENE, LOGIN_SCENE, PROJECTOR_SCENE, COURSES_SCENE, LOGOUT_SCENE} from "./reducers/scenes";
 
 const routesMap = {
     [HOME_SCENE]: '/',
     [SIGNUP_SCENE]: '/signup',
     [LOGIN_SCENE]: '/login',
+    [LOGOUT_SCENE]: '/logout',
     [PROJECTOR_SCENE]: '/projector/:topicId',
     [COURSES_SCENE]: '/courses',
     // [QUIZZES_SCENE]: '/quizzes',

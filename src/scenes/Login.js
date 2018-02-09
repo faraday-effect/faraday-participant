@@ -3,7 +3,7 @@
 import React from 'react';
 
 import LoginForm from '../forms/LoginForm';
-import {authenticateUser} from "../reducers/user";
+import {loginUser} from "../reducers/user";
 import FlashMessage from "../components/FlashMessage";
 import {SIGNUP_SCENE} from "../reducers/scenes";
 import Link from "redux-first-router-link";
@@ -16,7 +16,7 @@ const handleLogin = (values, dispatch, props) => {
     const {email, password} = values;
     console.log("EMAIL", email, "PASSWORD", password);
 
-    dispatch(authenticateUser(email, password));
+    dispatch(loginUser(email, password));
 };
 
 const Login = () => {

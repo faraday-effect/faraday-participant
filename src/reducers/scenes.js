@@ -11,6 +11,7 @@ import NotFound from "../scenes/NotFound";
 import Home from "../scenes/Home";
 import GrandCentral from "../scenes/GrandCentral";
 import Courses from "../scenes/Courses";
+import {Logout} from "../scenes/Logout";
 
 // Action types
 export const HOME_SCENE = 'SCENE/HOME';
@@ -20,11 +21,16 @@ export const LOGIN_SCENE = 'SCENE/LOGIN';
 export const PROJECTOR_SCENE = 'SCENE/PROJECTOR';
 export const TOPICS_SCENE = 'SCENE/TOPICS';     // TODO: Get rid of this.
 export const COURSES_SCENE = 'SCENE/COURSES';
+export const LOGOUT_SCENE = 'SCENE/LOGOUT';
 
 const actionMap = {
     [COURSES_SCENE]: {
         name: 'Courses',
         component: Courses,
+    },
+    [LOGOUT_SCENE]: {
+        name: 'Logout',
+        component: Logout,
     },
     [GRAND_CENTRAL]: {
         name: 'GrandCentral',

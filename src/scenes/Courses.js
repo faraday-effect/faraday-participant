@@ -5,10 +5,10 @@ import {Header} from "./components/Header";
 import {Footer} from "./components/Footer";
 import {getCourses} from "../reducers/courses";
 import {connect} from "react-redux";
-import type {State as coursesState} from '../reducers/courses';
+import type {State as CoursesState} from '../reducers/courses';
 
 type Props = {
-    state: coursesState,
+    courses: CoursesState,
     getCourses: Function
 };
 
@@ -24,7 +24,7 @@ class Courses extends Component<Props> {
                 <Header/>
                 <h1 className="title is-1">Courses</h1>
                 <ul>
-                    {this.props.state.map(course => <li>{course._id}{course.title}</li>)}
+                    {this.props.courses.map(course => <li>{course._id}{course.title}</li>)}
                 </ul>
                 <Footer/>
             </div>
@@ -32,5 +32,5 @@ class Courses extends Component<Props> {
     }
 }
 
-const mapStateToProps = state => state.courses;
+const mapStateToProps = state => ({courses: state.courses});
 export default connect(mapStateToProps, {getCourses})(Courses);
