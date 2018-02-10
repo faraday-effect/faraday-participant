@@ -70,23 +70,8 @@ export function loginUser(email: string, password: string) {
     }
 }
 
-export function authenticateUser() {
-    const localToken = localStorage.getItem(JWT_LOCAL_STORAGE_KEY);
-    if (localToken) {
-        const decoded = JWT.decode(localToken, {complete: true});
-        return {
-            type: USER_AUTH_OKAY,
-            payload: {
-                user: decoded.payload,
-                jwt: localToken
-            }
-        };
-    } else {
-        console.log('No local JWT');
-        return redirect({
-            type: LOGIN_SCENE
-        });
-    }
+export function getUserJWT(): string {
+    return window.localStorage.getItem(JWT_LOCAL_STORAGE_KEY);
 }
 
 const userReducer = (state: State = initialState, action: Action): State => {
