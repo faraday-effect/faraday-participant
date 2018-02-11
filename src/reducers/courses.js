@@ -1,7 +1,7 @@
 // @flow
 
 import type {Action} from "../types/redux";
-import {flashError} from "./flash";
+import {flashError, flashInfo} from "./flash";
 import {httpGetAuth} from "../middleware/api";
 
 // Action types
@@ -18,6 +18,7 @@ export const getCourses = () => {
             const response = await dispatch(httpGetAuth('courses'));
             if (response.ok) {
                 dispatch({type: GET_COURSES_OKAY, payload: response.payload});
+                dispatch(flashInfo('Got some courses'));
             } else {
                 dispatch(flashError(`Unable to get courses (${response.payload.message})`));
                 dispatch({type: GET_COURSES_FAIL});
@@ -31,6 +32,7 @@ export const getCourses = () => {
 
 type Course = {
     _id: string,
+    designation: string,
     title: string
 };
 

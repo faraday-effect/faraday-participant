@@ -3,59 +3,31 @@
 import _ from 'lodash';
 
 import type {Action} from '../types/redux';
-import Signup from "../scenes/Signup";
-import Login from "../scenes/Login";
-import Projector from "../scenes/Projector";
-import {NOT_FOUND} from "redux-first-router";
-import NotFound from "../scenes/NotFound";
-import Home from "../scenes/Home";
-import GrandCentral from "../scenes/GrandCentral";
 import Courses from "../scenes/Courses";
-import {Logout} from "../scenes/Logout";
+import GrandCentral from "../scenes/GrandCentral";
+import Login from "../scenes/Login";
+import NotFound from "../scenes/NotFound";
+import Projector from "../scenes/Projector";
+import Signup from "../scenes/Signup";
+import Logout from "../scenes/Logout";
+import {NOT_FOUND} from "redux-first-router";
 
 // Action types
-export const HOME_SCENE = 'SCENE/HOME';
-export const GRAND_CENTRAL = 'SCENE/GRAND-CENTRAL'
-export const SIGNUP_SCENE = 'SCENE/SIGNUP';
-export const LOGIN_SCENE = 'SCENE/LOGIN';
-export const PROJECTOR_SCENE = 'SCENE/PROJECTOR';
-export const TOPICS_SCENE = 'SCENE/TOPICS';     // TODO: Get rid of this.
 export const COURSES_SCENE = 'SCENE/COURSES';
+export const GRAND_CENTRAL = 'SCENE/GRAND-CENTRAL'
+export const LOGIN_SCENE = 'SCENE/LOGIN';
 export const LOGOUT_SCENE = 'SCENE/LOGOUT';
+export const PROJECTOR_SCENE = 'SCENE/PROJECTOR';
+export const SIGNUP_SCENE = 'SCENE/SIGNUP';
 
 const actionMap = {
-    [COURSES_SCENE]: {
-        name: 'Courses',
-        component: Courses,
-    },
-    [LOGOUT_SCENE]: {
-        name: 'Logout',
-        component: Logout,
-    },
-    [GRAND_CENTRAL]: {
-        name: 'GrandCentral',
-        component: GrandCentral
-    },
-    [HOME_SCENE]: {
-        name: 'Home',
-        component: Home
-    },
-    [SIGNUP_SCENE]: {
-        name: 'Signup',
-        component: Signup
-    },
-    [LOGIN_SCENE]: {
-        name: 'Login',
-        component: Login
-    },
-    [PROJECTOR_SCENE]: {
-        name: 'Projector',
-        component: Projector
-    },
-    [NOT_FOUND]: {
-        name: 'NotFound',
-        component: NotFound
-    }
+    [COURSES_SCENE]: {name: 'Courses', component: Courses},
+    [GRAND_CENTRAL]: {name: 'GrandCentral', component: GrandCentral},
+    [LOGIN_SCENE]: {name: 'Login', component: Login},
+    [LOGOUT_SCENE]: {name: 'Logout', component: Logout},
+    [NOT_FOUND]: {name: 'NotFound', component: NotFound},
+    [PROJECTOR_SCENE]: {name: 'Projector', component: Projector},
+    [SIGNUP_SCENE]: {name: 'Signup', component: Signup}
 };
 
 export const componentMap = _.fromPairs(_.map(actionMap, value => [ value.name, value.component ]));
@@ -65,7 +37,7 @@ type State = {
     name: string
 };
 const initialState = {
-    name: actionMap[HOME_SCENE].name
+    name: actionMap[LOGIN_SCENE].name
 };
 
 export default (state: State = initialState, action: Action) => {

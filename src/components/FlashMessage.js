@@ -4,6 +4,7 @@ import React from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import {connect} from "react-redux";
 import type {State, FlashSeverity} from '../reducers/flash';
+import {flashClear} from "../reducers/flash";
 
 function flashConfig(severity: FlashSeverity) {
     switch(severity) {
@@ -18,18 +19,27 @@ function flashConfig(severity: FlashSeverity) {
     }
 }
 
-function FlashMessage(props: State) {
+type Props = State & {
+    flashClear: Function
+};
+
+function FlashMessage(props: Props) {
     if (!props.visible) {
         return null;
     }
 
     const [flashIcon, flashStyle] = flashConfig(props.severity);
     return (
-        <div className={`notification ${flashStyle}`}>
-            <FontAwesomeIcon icon={flashIcon} size="lg"/>&nbsp;{props.message}
-        </div>
+        <section className="section">
+            <div className="container">
+                <div className={`notification ${flashStyle}`}>
+                    <button class="delete" onClick={props.flashClear()}></button>
+                    <FontAwesomeIcon icon={flashIcon} size="lg"/>&nbsp;{props.message}
+                </div>
+            </div>
+        </section>
     );
 }
 
 const mapStateToProps = state => state.flash;
-export default connect(mapStateToProps, {})(FlashMessage);
+export default connect(mapStateToProps, {flashClear})(FlashMessage);

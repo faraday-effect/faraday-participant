@@ -1,13 +1,19 @@
 // @flow
 
 import React from 'react';
-import {Header} from "./components/Header";
 import {Footer} from "./components/Footer";
+import {NavBar} from "./components/NavBar";
 
-export const Logout = () => (
+const Logout = () => (
     <div>
-        <Header/>
-        <h1 className="title is-1">Logged Out</h1>
+        <NavBar/>
+        <section className="section">
+            <div className="container">
+                <h1 className="title is-1">Logged Out</h1>
+            </div>
+        </section>
         <Footer/>
     </div>
 );
+
+export default Logout;

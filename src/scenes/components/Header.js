@@ -1,8 +1,6 @@
 // @flow
 
 import React from 'react';
-import Link from "redux-first-router-link";
-import {HOME_SCENE} from "../../reducers/scenes";
 import FlashMessage from "../../components/FlashMessage";
 
 export const Header = () => (
@@ -11,7 +9,7 @@ export const Header = () => (
             <div className="hero-body">
                 <div className="container">
                     <h1 className="title is-1">
-                        <Link to={{type: HOME_SCENE}}>Faraday</Link>
+                        Faraday
                     </h1>
                 </div>
             </div>
