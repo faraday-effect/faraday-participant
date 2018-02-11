@@ -21,7 +21,15 @@ function makeUrl(urlTail: StringOrArray): string {
     return urlSegments.join('/');
 }
 
-function httpRequest(method: 'POST'|'GET', url: string, jwt: string = '', body: string = ''): Promise<Object> {
+type HttpAction = {
+    type: string,
+    payload: {
+        url: string,
+        body?: Object
+    }
+};
+
+function httpRequest(method: 'POST'|'GET', url: string, jwt: ?string = null, body: ?Object = null): Promise<Object> {
     const options: Object = {
         method,
         url,
@@ -52,14 +60,14 @@ function httpRequest(method: 'POST'|'GET', url: string, jwt: string = '', body: 
 }
 
 // Action creators
-const httpGetAuth = (urlTail: StringOrArray) => ({
+export const httpGetAuth = (urlTail: StringOrArray): HttpAction => ({
     type: API_GET_AUTH,
     payload: {
         url: makeUrl(urlTail)
     }
 });
 
-const httpPostAuth = (urlTail: StringOrArray, body: Object) => ({
+export const httpPostAuth = (urlTail: StringOrArray, body: Object): HttpAction => ({
     type: API_POST_AUTH,
     payload: {
         url: makeUrl(urlTail),
@@ -67,7 +75,7 @@ const httpPostAuth = (urlTail: StringOrArray, body: Object) => ({
     }
 });
 
-const httpPost = (urlTail: StringOrArray, body: Object) => ({
+export const httpPost = (urlTail: StringOrArray, body: Object): HttpAction => ({
     type: API_POST,
     payload: {
         url: makeUrl(urlTail),
@@ -75,19 +83,13 @@ const httpPost = (urlTail: StringOrArray, body: Object) => ({
     }
 });
 
-const fetch = (url, params) => ({
-    type: 'FETCH',
-    url,
-    params,
-});
-
-const apiMiddleware = store => next => action => {
+export const apiMiddleware = (store: Store) => (next: Dispatch<HttpAction>) => (action: HttpAction) => {
     if (action.type === API_GET_AUTH) {
         return httpRequest('GET', action.payload.url, getUserJWT());
     } else if (action.type === API_POST_AUTH) {
         return httpRequest('POST', action.payload.url, getUserJWT(), action.payload.body);
     } else if (action.type === API_POST) {
-        return httpRequest('POST', action.payload.url, undefined, action.payload.body);
+        return httpRequest('POST', action.payload.url, null, action.payload.body);
     } else {
         return next(action);
     }

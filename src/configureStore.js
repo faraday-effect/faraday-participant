@@ -1,3 +1,4 @@
+// @flow
 
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
@@ -10,9 +11,10 @@ import * as reducers from './reducers';
 import { connectRoutes } from 'redux-first-router';
 
 import routesMap from './routesMap'
+import {apiMiddleware} from "./middleware/api";
 
-export default history => {
-    const {reducer: routeReducer, middleware, enhancer} = connectRoutes(history, routesMap);
+function configureStore(history: History) {
+    const {reducer: routeReducer, middleware: routeMiddleware, enhancer} = connectRoutes(history, routesMap);
 
     const rootReducer = combineReducers({
         ...reducers,
@@ -21,7 +23,7 @@ export default history => {
         location: routeReducer
     });
 
-    const middlewares = applyMiddleware(middleware, thunk);
+    const middlewares = applyMiddleware(routeMiddleware, apiMiddleware, thunk);
 
     const store = createStore(
         rootReducer,
@@ -30,3 +32,6 @@ export default history => {
 
     return store;
 }
+
+export default configureStore;
+

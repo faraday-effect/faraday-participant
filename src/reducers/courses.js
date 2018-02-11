@@ -1,8 +1,8 @@
 // @flow
 
 import type {Action} from "../types/redux";
-import {httpGet} from "../lib/api";
 import {flashError} from "./flash";
+import {httpGetAuth} from "../middleware/api";
 
 // Action types
 export const GET_COURSES_INIT = 'COURSES/INIT';
@@ -15,7 +15,7 @@ export const getCourses = () => {
         dispatch({type: GET_COURSES_INIT});
 
         try {
-            const response = await httpGet('courses');
+            const response = await dispatch(httpGetAuth('courses'));
             if (response.ok) {
                 dispatch({type: GET_COURSES_OKAY, payload: response.payload});
             } else {

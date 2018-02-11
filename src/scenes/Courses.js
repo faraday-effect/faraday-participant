@@ -13,7 +13,6 @@ type Props = {
 };
 
 class Courses extends Component<Props> {
-
     componentDidMount() {
         this.props.getCourses();
     }
@@ -24,7 +23,7 @@ class Courses extends Component<Props> {
                 <Header/>
                 <h1 className="title is-1">Courses</h1>
                 <ul>
-                    {this.props.courses.map(course => <li>{course._id}{course.title}</li>)}
+                    {this.props.courses.map(course => <li key={course._id}>{course._id}{course.title}</li>)}
                 </ul>
                 <Footer/>
             </div>

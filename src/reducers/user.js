@@ -1,11 +1,10 @@
 // @flow
 
-import {httpPost} from '../lib/api';
 import type {Action} from "../types/redux";
 import {flashInfo, flashError} from "./flash";
-import {GRAND_CENTRAL, LOGIN_SCENE} from "./scenes";
+import {GRAND_CENTRAL} from "./scenes";
 import {redirect} from 'redux-first-router';
-import JWT from 'jsonwebtoken';
+import {httpPost} from "../middleware/api";
 
 const USER_AUTH_INIT = 'USER/AUTH-INIT';
 const USER_AUTH_OKAY = 'USER/AUTH-OKAY';
@@ -46,7 +45,7 @@ export function loginUser(email: string, password: string) {
     return async (dispatch: Function) => {
         dispatch({type: USER_AUTH_INIT});
         try {
-            const response = await httpPost('authenticate', {email, password}, false);
+            const response = await dispatch(httpPost('authenticate', {email, password}));
 
             if (response.ok) {
                 localStorage.setItem(JWT_LOCAL_STORAGE_KEY, response.payload.jwt);

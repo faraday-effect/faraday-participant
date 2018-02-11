@@ -1,7 +1,7 @@
 // @flow
 
 import type {QuizType} from './components/Quiz';
-import {httpGet} from "../../lib/api";
+import {httpGetAuth} from "../../middleware/api";
 
 // Actions
 const ANSWER_QUESTION = 'QUIZZES/ANSWER_QUESTION';
@@ -44,7 +44,7 @@ function fetchAllOkay(quizzes: Array<QuizType>) {
 // Side effects
 export function fetchOne(_id: string) {
     return async (dispatch: $FlowTODO) => {
-        const response = await httpGet('quizzes');
+        const response = await dispatch(httpGetAuth('quizzes'));
         dispatch(fetchOneOkay(response.payload));
     };
 }
@@ -52,7 +52,7 @@ export function fetchOne(_id: string) {
 export function fetchAll() {
     return async (dispatch: $FlowTODO) => {
         try {
-            const response = await httpGet('quizzes');
+            const response = await dispatch(httpGetAuth('quizzes'));
             dispatch(fetchAllOkay(response.payload));
         } catch(err) {
             console.error(err);
