@@ -15,17 +15,14 @@ export const getCourses = () => {
         dispatch({type: GET_COURSES_INIT});
 
         try {
-            const response = await dispatch(httpGetAuth('courses'));
+            const response = await dispatch(httpGetAuth('courses', [GET_COURSES_INIT, GET_COURSES_OKAY, GET_COURSES_FAIL]));
             if (response.ok) {
-                dispatch({type: GET_COURSES_OKAY, payload: response.payload});
                 dispatch(flashInfo('Got some courses'));
             } else {
                 dispatch(flashError(`Unable to get courses (${response.payload.message})`));
-                dispatch({type: GET_COURSES_FAIL});
             }
         } catch (err) {
             dispatch(flashError(`Unable to get courses from server (${err})`));
-            dispatch({type: GET_COURSES_FAIL});
         }
     }
 };

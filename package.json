@@ -10,6 +10,7 @@
     "highlight.js": "^9.12.0",
     "history": "^4.7.2",
     "invariant": "^2.2.2",
+    "jsonwebtoken": "^8.1.1",
     "lodash": "^4.17.4",
     "markdown-it": "^8.4.0",
     "markdown-it-highlightjs": "^3.0.0",

@@ -7,9 +7,7 @@ const BASE_URL = 'http://localhost:8000/api';
 
 type StringOrArray = string | Array<string>;
 
-const API_GET_AUTH = "API/GET-AUTH";
-const API_POST = "API/POST";
-const API_POST_AUTH = "API/POST-AUTH";
+const CALL_API = "API/CALL";
 
 function makeUrl(urlTail: StringOrArray): string {
     let urlSegments = [BASE_URL];
@@ -21,18 +19,26 @@ function makeUrl(urlTail: StringOrArray): string {
     return urlSegments.join('/');
 }
 
+type ActionTypes = Array<string>;
+
 type HttpAction = {
     type: string,
     payload: {
-        url: string,
-        body?: Object
+        method: 'GET' | 'POST',
+        endpoint: string,
+        authenticated: boolean,
+        body?: Object,
+        actionTypes: ActionTypes
     }
 };
 
-function httpRequest(method: 'POST'|'GET', url: string, jwt: ?string = null, body: ?Object = null): Promise<Object> {
+function httpRequest(method: 'POST'|'GET',
+                     endpoint: string,
+                     jwt: ?string = null,
+                     body: ?Object = null): Promise<Object> {
     const options: Object = {
         method,
-        url,
+        url: endpoint,
         json: true
     };
 
@@ -60,37 +66,64 @@ function httpRequest(method: 'POST'|'GET', url: string, jwt: ?string = null, bod
 }
 
 // Action creators
-export const httpGetAuth = (urlTail: StringOrArray): HttpAction => ({
-    type: API_GET_AUTH,
+export const httpGetAuth = (urlTail: StringOrArray,
+                            actionTypes: ActionTypes): HttpAction => ({
+    type: CALL_API,
     payload: {
-        url: makeUrl(urlTail)
+        method: 'GET',
+        endpoint: makeUrl(urlTail),
+        authenticated: true,
+        actionTypes
     }
 });
 
-export const httpPostAuth = (urlTail: StringOrArray, body: Object): HttpAction => ({
-    type: API_POST_AUTH,
+export const httpPostAuth = (urlTail: StringOrArray,
+                             body: Object,
+                             actionTypes: ActionTypes): HttpAction => ({
+    type: CALL_API,
     payload: {
-        url: makeUrl(urlTail),
-        body
+        method: 'POST',
+        endpoint: makeUrl(urlTail),
+        authenticated: true,
+        body,
+        actionTypes
     }
 });
 
-export const httpPost = (urlTail: StringOrArray, body: Object): HttpAction => ({
-    type: API_POST,
+export const httpPost = (urlTail: StringOrArray,
+                         body: Object,
+                         actionTypes: ActionTypes): HttpAction => ({
+    type: CALL_API,
     payload: {
-        url: makeUrl(urlTail),
-        body
+        method: 'POST',
+        endpoint: makeUrl(urlTail),
+        authenticated: false,
+        body,
+        actionTypes
     }
 });
 
 export const apiMiddleware = (store: Store) => (next: Dispatch<HttpAction>) => (action: HttpAction) => {
-    if (action.type === API_GET_AUTH) {
-        return httpRequest('GET', action.payload.url, getUserJWT());
-    } else if (action.type === API_POST_AUTH) {
-        return httpRequest('POST', action.payload.url, getUserJWT(), action.payload.body);
-    } else if (action.type === API_POST) {
-        return httpRequest('POST', action.payload.url, null, action.payload.body);
-    } else {
-        return next(action);
+    if (action.type !== CALL_API) {
+        return next(action);        // Not for us.
     }
+
+    const [initActionType, okayActionType, failActionType] = action.payload.actionTypes;
+
+    next({type: initActionType});
+
+    httpRequest(action.payload.method,
+        action.payload.endpoint,
+        action.payload.authenticated ? getUserJWT() : null,
+        action.payload.body)
+        .then(response => {
+            if (response.ok) {
+                next({type: okayActionType, payload: response.payload});
+            } else {
+                next({type: failActionType, payload: response.payload});
+            }
+        })
+        .catch(error => {
+            next({type: failActionType, payload: error});
+        });
 };
