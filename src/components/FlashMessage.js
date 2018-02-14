@@ -33,7 +33,7 @@ function FlashMessage(props: Props) {
         <section className="section">
             <div className="container">
                 <div className={`notification ${flashStyle}`}>
-                    <button class="delete" onClick={props.flashClear()}></button>
+                    <button className="delete" onClick={() => props.flashClear()}></button>
                     <FontAwesomeIcon icon={flashIcon} size="lg"/>&nbsp;{props.message}
                 </div>
             </div>

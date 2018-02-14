@@ -2,12 +2,13 @@
 
 import request from "request";
 import {getUserJWT} from "../reducers/user";
+import {flashError, flashInfo} from "../reducers/flash";
 
 const BASE_URL = 'http://localhost:8000/api';
 
 type StringOrArray = string | Array<string>;
 
-const CALL_API = "API/CALL";
+export const CALL_API = "API/CALL";
 
 function makeUrl(urlTail: StringOrArray): string {
     let urlSegments = [BASE_URL];
@@ -108,9 +109,7 @@ export const apiMiddleware = (store: Store) => (next: Dispatch<HttpAction>) => (
         return next(action);        // Not for us.
     }
 
-    const [initActionType, okayActionType, failActionType] = action.payload.actionTypes;
-
-    next({type: initActionType});
+    const [okayActionType, failActionType] = action.payload.actionTypes;
 
     httpRequest(action.payload.method,
         action.payload.endpoint,
@@ -118,12 +117,15 @@ export const apiMiddleware = (store: Store) => (next: Dispatch<HttpAction>) => (
         action.payload.body)
         .then(response => {
             if (response.ok) {
+                next(flashInfo('Worked'));
                 next({type: okayActionType, payload: response.payload});
             } else {
+                next(flashError('Failed'));
                 next({type: failActionType, payload: response.payload});
             }
         })
         .catch(error => {
+            next(flashError('Dude'));
             next({type: failActionType, payload: error});
         });
 };
