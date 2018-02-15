@@ -12,6 +12,7 @@ import { connectRoutes } from 'redux-first-router';
 
 import routesMap from './routesMap'
 import {apiMiddleware} from "./middleware/api";
+import logger from 'redux-logger';
 
 function configureStore(history: History) {
     const {reducer: routeReducer, middleware: routeMiddleware, enhancer} = connectRoutes(history, routesMap);
@@ -23,7 +24,7 @@ function configureStore(history: History) {
         location: routeReducer
     });
 
-    const middlewares = applyMiddleware(routeMiddleware, apiMiddleware, thunk);
+    const middlewares = applyMiddleware(routeMiddleware, apiMiddleware, thunk, logger);
 
     const store = createStore(
         rootReducer,

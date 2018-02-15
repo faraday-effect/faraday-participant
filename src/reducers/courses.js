@@ -2,6 +2,7 @@
 
 import type {Action} from "../types/redux";
 import {httpGetAuth} from "../middleware/api";
+import {fromPairs} from 'lodash/array';
 
 // Action types
 export const GET_COURSES_OKAY = 'COURSES/OKAY';
@@ -16,14 +17,14 @@ type Course = {
     title: string
 };
 
-export type State = Array<Course>;
-const initialState: State = [];
+export type State = { [string]: Course };
+const initialState: State = {};
 
 // Reducer
 export default (state: State = initialState, action: Action) => {
     switch(action.type) {
         case GET_COURSES_OKAY:
-            return action.payload;
+            return fromPairs(action.payload.map(course => [course._id, course]));
         case GET_COURSES_FAIL:
             return initialState;
         default:

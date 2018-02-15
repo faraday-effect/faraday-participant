@@ -2,6 +2,7 @@
 
 import type {Action} from "../types/redux";
 import {httpGetAuth} from "../middleware/api";
+import {fromPairs} from "lodash/array";
 
 // Action types
 export const GET_SEMESTERS_OKAY = 'SEMESTERS/OKAY';
@@ -19,7 +20,7 @@ type DateRangeMap = {
 
 type Semester = {
     _id: string,
-    semester: string,
+    name: string,
     year: number,
     courseDates: DateRangeMap,
     holidays: DateRangeMap
@@ -32,7 +33,7 @@ const initialState: State = [];
 export default (state: State = initialState, action: Action) => {
     switch(action.type) {
         case GET_SEMESTERS_OKAY:
-            return action.payload;
+            return fromPairs(action.payload.map(semester => [semester._id, semester]));
         case GET_SEMESTERS_FAIL:
             return initialState;
         default:
