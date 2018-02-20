@@ -1,6 +1,7 @@
 import {takeLatest, call, put} from "redux-saga/effects";
 import {httpPost} from "../lib/api";
 import {USER_LOGIN_FAILURE, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS} from "../reducers/user";
+import {flashError, flashInfo} from "../reducers/flash";
 
 // JavaScript Web Token support
 const JWT_LOCAL_STORAGE_KEY = 'faraday-jwt';
@@ -17,24 +18,6 @@ function clearUserJWT() {
     window.localStorage.removeItem(JWT_LOCAL_STORAGE_KEY);
 }
 
-
-
-/*
-1. HAVE THE SAGA LISTEN FOR A LOGIN REQUEST (PLAIN ACTION THAT INCLUDES EMAIL and PASSWORD)
-2. REWRITE (AGAIN) API TO BE SIMPLE CALLS;
-   DOESN'T MAKE SENSE TO DISPATCH LOGIN AND yield httpPost WITHIN SAGA;
-   WANT MORE CONTROL IN SAGA
-LOGIN_REQUEST -- From Login.js scene
-LOGIN_SUCCESS -- Handled in Saga
-LOGIN_FAILURE -- Handled in Saga
-3. DO ALL SIDE EFFECTS IN SAGA: API, Local Storage, fl;
-   message
-4. KEEP API MIDDLEWARE AROUND? USE FOR NON-SAGA STUFF? OR JUST USE SAGAS EVERYWHERE?
-*/
-
-
-
-
 // Sagas
 function* handleLogin(action) {
     clearUserJWT();
@@ -43,17 +26,25 @@ function* handleLogin(action) {
             email: action.payload.email,
             password: action.payload.password
         });
-        setUserJWT(response.payload.jwt);
-        yield put({
-            type: USER_LOGIN_SUCCESS,
-            ...response
-        });
+        if (response.error) {
+            console.log(response);
+            yield put(flashError(`Can't log in: ${response.payload.message}`));
+        } else {
+            setUserJWT(response.payload.jwt);
+            yield put({
+                type: USER_LOGIN_SUCCESS,
+                ...response
+            });
+            const {firstName, lastName} = response.payload.user;
+            yield put(flashInfo(`${firstName} ${lastName} logged in successfully`));
+        }
     } catch (error) {
         yield put({
             type: USER_LOGIN_FAILURE,
             error: true,
             payload: error
-        })
+        });
+        yield put(flashError(`Failed to log in (${error})`));
     }
 }
 
