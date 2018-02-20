@@ -14,6 +14,9 @@ import routesMap from './routesMap'
 import {apiMiddleware} from "./middleware/api";
 import logger from 'redux-logger';
 
+import createSagaMiddleware from 'redux-saga';
+import {helloSaga} from './sagas';
+
 function configureStore(history: History) {
     const {reducer: routeReducer, middleware: routeMiddleware, enhancer} = connectRoutes(history, routesMap);
 
@@ -24,12 +27,16 @@ function configureStore(history: History) {
         location: routeReducer
     });
 
-    const middlewares = applyMiddleware(routeMiddleware, apiMiddleware, thunk, logger);
+    const sagaMiddleware = createSagaMiddleware();
+
+    const middlewares = applyMiddleware(routeMiddleware, sagaMiddleware, apiMiddleware, thunk, logger);
 
     const store = createStore(
         rootReducer,
         composeWithDevTools(enhancer, middlewares)
     );
+
+    sagaMiddleware.run(helloSaga);
 
     return store;
 }
