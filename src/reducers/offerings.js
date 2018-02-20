@@ -1,7 +1,7 @@
 // @flow
 
 import type {Action} from "../types/redux";
-import {httpGetAuth} from "../middleware/api";
+import {httpGetAuth} from "../lib/api";
 import {fromPairs} from "lodash/array";
 
 // Action types

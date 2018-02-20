@@ -1,7 +1,7 @@
 // @flow
 
 import type {QuizType} from './components/Quiz';
-import {httpGetAuth} from "../../middleware/api";
+import {httpGetAuth} from "../../lib/api";
 
 // Actions
 const ANSWER_QUESTION = 'QUIZZES/ANSWER_QUESTION';

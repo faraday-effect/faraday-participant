@@ -4,15 +4,12 @@ import type {Action} from "../types/redux";
 
 import {FETCH_TOPIC_OKAY} from "./topics";
 import {GET_COURSES_FAIL, GET_COURSES_OKAY} from "./courses";
-import {CALL_API} from "../middleware/api";
 
 type State = boolean;
 const initialState = false;
 
 export default (state: State = initialState, action: Action) => {
     switch(action.type) {
-        case CALL_API:
-            return true;
         case FETCH_TOPIC_OKAY:
         case GET_COURSES_OKAY:
         case GET_COURSES_FAIL:

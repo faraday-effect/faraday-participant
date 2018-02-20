@@ -11,11 +11,10 @@ import * as reducers from './reducers';
 import { connectRoutes } from 'redux-first-router';
 
 import routesMap from './routesMap'
-import {apiMiddleware} from "./middleware/api";
 import logger from 'redux-logger';
 
 import createSagaMiddleware from 'redux-saga';
-import {helloSaga} from './sagas';
+import rootSaga from './sagas';
 
 function configureStore(history: History) {
     const {reducer: routeReducer, middleware: routeMiddleware, enhancer} = connectRoutes(history, routesMap);
@@ -29,14 +28,14 @@ function configureStore(history: History) {
 
     const sagaMiddleware = createSagaMiddleware();
 
-    const middlewares = applyMiddleware(routeMiddleware, sagaMiddleware, apiMiddleware, thunk, logger);
+    const middlewares = applyMiddleware(routeMiddleware, sagaMiddleware, thunk, logger);
 
     const store = createStore(
         rootReducer,
         composeWithDevTools(enhancer, middlewares)
     );
 
-    sagaMiddleware.run(helloSaga);
+    sagaMiddleware.run(rootSaga);
 
     return store;
 }

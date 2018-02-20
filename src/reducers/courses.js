@@ -1,12 +1,12 @@
 // @flow
 
 import type {Action} from "../types/redux";
-import {httpGetAuth} from "../middleware/api";
+import {httpGetAuth} from "../lib/api";
 import {fromPairs} from 'lodash/array';
 
 // Action types
-export const GET_COURSES_OKAY = 'COURSES/OKAY';
-export const GET_COURSES_FAIL = 'COURSES/FAIL';
+export const GET_COURSES_OKAY = 'COURSES/GET-OKAY';
+export const GET_COURSES_FAIL = 'COURSES/GET-FAIL';
 
 // Action creators
 export const getCourses = () => httpGetAuth('courses', [GET_COURSES_OKAY, GET_COURSES_FAIL]);
