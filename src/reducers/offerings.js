@@ -1,15 +1,12 @@
 // @flow
 
 import type {Action} from "../types/redux";
-import {httpGetAuth} from "../lib/api";
 import {fromPairs} from "lodash/array";
 
 // Action types
-export const GET_OFFERINGS_OKAY = 'OFFERINGS/OKAY';
-export const GET_OFFERINGS_FAIL = 'OFFERINGS/FAIL';
-
-// Action creators
-export const getOfferings = () => httpGetAuth('offerings', [GET_OFFERINGS_OKAY, GET_OFFERINGS_FAIL]);
+export const GET_OFFERINGS_REQUEST = 'OFFERINGS/GET-INIT';
+export const GET_OFFERINGS_SUCCESS = 'OFFERINGS/GET-OKAY';
+export const GET_OFFERINGS_FAILURE = 'OFFERINGS/GET-FAIL';
 
 type Meeting = {
     day: string,
@@ -38,9 +35,9 @@ const initialState: State = [];
 // Reducer
 export default (state: State = initialState, action: Action) => {
     switch(action.type) {
-        case GET_OFFERINGS_OKAY:
+        case GET_OFFERINGS_SUCCESS:
             return fromPairs(action.payload.map(offering => [offering._id, offering]));
-        case GET_OFFERINGS_FAIL:
+        case GET_OFFERINGS_FAILURE:
             return initialState;
         default:
             return state;

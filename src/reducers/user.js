@@ -5,9 +5,8 @@ import type {Action} from "../types/redux";
 export const USER_LOGIN_REQUEST = 'USER/LOGIN-REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER/LOGIN-SUCCESS';
 export const USER_LOGIN_FAILURE = 'USER/LOGIN-FAILURE';
+
 export const USER_LOGOUT = 'USER/LOGOUT';
-
-
 
 type Permission = {
     _id: string,

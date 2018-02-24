@@ -1,15 +1,12 @@
 // @flow
 
 import type {Action} from "../types/redux";
-import {httpGetAuth} from "../lib/api";
 import {fromPairs} from "lodash/array";
 
 // Action types
-export const GET_SEMESTERS_OKAY = 'SEMESTERS/OKAY';
-export const GET_SEMESTERS_FAIL = 'SEMESTERS/FAIL';
-
-// Action creators
-export const getSemesters = () => httpGetAuth('semesters', [GET_SEMESTERS_OKAY, GET_SEMESTERS_FAIL]);
+export const GET_SEMESTERS_REQUEST = 'SEMESTERS/GET-INIT';
+export const GET_SEMESTERS_SUCCESS = 'SEMESTERS/GET-OKAY';
+export const GET_SEMESTERS_FAILURE = 'SEMESTERS/GET-FAIL';
 
 type DateRangeMap = {
     [string]: {
@@ -32,9 +29,9 @@ const initialState: State = [];
 // Reducer
 export default (state: State = initialState, action: Action) => {
     switch(action.type) {
-        case GET_SEMESTERS_OKAY:
+        case GET_SEMESTERS_SUCCESS:
             return fromPairs(action.payload.map(semester => [semester._id, semester]));
-        case GET_SEMESTERS_FAIL:
+        case GET_SEMESTERS_FAILURE:
             return initialState;
         default:
             return state;

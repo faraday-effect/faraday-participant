@@ -2,17 +2,20 @@
 
 import type {Action} from "../types/redux";
 
-import {FETCH_TOPIC_OKAY} from "./topics";
-import {GET_COURSES_FAIL, GET_COURSES_OKAY} from "./courses";
+export const LOADING_STARTING = 'LOADING/STARTING';
+export const LOADING_COMPLETE = 'LOADING/COMPLETE';
 
 type State = boolean;
 const initialState = false;
 
+export const loadingStarting = () => ({type: LOADING_STARTING});
+export const loadingComplete = () => ({type: LOADING_COMPLETE});
+
 export default (state: State = initialState, action: Action) => {
     switch(action.type) {
-        case FETCH_TOPIC_OKAY:
-        case GET_COURSES_OKAY:
-        case GET_COURSES_FAIL:
+        case LOADING_STARTING:
+            return true;
+        case LOADING_COMPLETE:
             return false;
         default:
             return state;

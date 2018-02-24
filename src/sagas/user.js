@@ -1,3 +1,5 @@
+// TODO: Re-enable flow
+
 import {takeLatest, call, put} from "redux-saga/effects";
 import {httpPost} from "../lib/api";
 import {USER_LOGIN_FAILURE, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS} from "../reducers/user";
@@ -48,6 +50,6 @@ function* handleLogin(action) {
     }
 }
 
-export function* watchForLogin() {
+export function* watchForLogin(): Saga<void> {
     yield takeLatest(USER_LOGIN_REQUEST, handleLogin);
 }
