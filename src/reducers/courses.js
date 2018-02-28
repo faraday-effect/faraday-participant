@@ -9,7 +9,15 @@ export const GET_COURSES_SUCCESS = 'COURSES/GET-SUCCESS';
 export const GET_COURSES_FAILURE = 'COURSES/GET-FAILURE';
 
 // Action creators
-export const getCourses = () => ({type: GET_COURSES_REQUEST});
+export const getAllCourses = () => ({
+    type: GET_COURSES_REQUEST,
+    payload: 'all'
+});
+
+export const getCurrentCourses = () => ({
+    type: GET_COURSES_REQUEST,
+    payload: 'current'
+});
 
 type Course = {
     _id: string,

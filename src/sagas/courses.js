@@ -12,15 +12,31 @@ function* handleCourseRequest(action) {
     yield put(loadingStarting());
 
     try {
-        let response = yield call(httpGetAuth, 'courses');
-        yield put({type: GET_COURSES_SUCCESS, ...response});
+        switch (action.payload) {
+            case 'current':
+                const currentSemester = yield call(httpGetAuth, 'semesters/current');
+                console.log("CUR SEMESTER", currentSemester);
+                yield put({type: GET_SEMESTERS_SUCCESS, ...currentSemester});
 
-        response = yield call(httpGetAuth, 'offerings');
-        yield put({type: GET_OFFERINGS_SUCCESS, ...response});
+                const result = yield call(httpGetAuth, ['offerings', currentSemester.payload._id]);
+                console.log("COMBO RESULT", result);
+                yield put({type: GET_OFFERINGS_SUCCESS, ...result.payload.offerings});
+                yield put({type: GET_COURSES_SUCCESS, ...result.payload.courses});
 
-        response = yield call(httpGetAuth, 'semesters');
-        yield put({type: GET_SEMESTERS_SUCCESS, ...response});
+                break;
+            case 'all':
+                let response = yield call(httpGetAuth, 'courses');
+                yield put({type: GET_COURSES_SUCCESS, ...response});
 
+                response = yield call(httpGetAuth, 'offerings');
+                yield put({type: GET_OFFERINGS_SUCCESS, ...response});
+
+                response = yield call(httpGetAuth, 'semesters');
+                yield put({type: GET_SEMESTERS_SUCCESS, ...response});
+                break;
+            default:
+                yield put(flashError(`Invalid action payload (${action.payload})`));
+        }
     } catch (error) {
         yield put({
             type: GET_COURSES_FAILURE,
