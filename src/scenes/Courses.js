@@ -11,13 +11,13 @@ import {getCurrentCourses} from "../reducers/courses";
 import {flashInfo} from "../reducers/flash";
 
 import type {State as CoursesState} from '../reducers/courses';
-import type {State as SemestersState} from '../reducers/semesters';
+import type {State as SemestersState} from '../reducers/semester';
 import type {State as OfferingsState} from '../reducers/offerings';
 
 type Props = {
     getCurrentCourses: Function,
     courses: CoursesState,
-    semesters: SemestersState,
+    semester: SemestersState,
     offerings: OfferingsState,
     flashInfo: Function
 };
@@ -48,11 +48,8 @@ class Courses extends Component<Props> {
 
                 <section className="section">
                     <div className="container">
-                        <h1 className="title is-1">Semesters</h1>
-                        <ul>
-                            {map(this.props.semesters, semester =>
-                                <li key={semester._id}>{semester.name} {semester.year}</li>)}
-                        </ul>
+                        <h1 className="title is-1">Current Semester</h1>
+                        <p>{this.props.semester._id} {this.props.semester.name} {this.props.semester.year}</p>
                     </div>
                 </section>
 
@@ -75,7 +72,7 @@ class Courses extends Component<Props> {
 
 const mapStateToProps = state => ({
     courses: state.courses,
-    semesters: state.semesters,
+    semester: state.semester,
     offerings: state.offerings,
     loading: state.loading
 });

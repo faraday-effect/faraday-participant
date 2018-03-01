@@ -4,7 +4,7 @@ import {takeLatest, call, put} from "redux-saga/effects";
 import {httpGetAuth} from "../lib/api";
 import {GET_COURSES_FAILURE, GET_COURSES_REQUEST, GET_COURSES_SUCCESS} from "../reducers/courses";
 import {GET_OFFERINGS_SUCCESS} from "../reducers/offerings";
-import {GET_SEMESTERS_SUCCESS} from "../reducers/semesters";
+import {GET_SEMESTER_SUCCESS} from "../reducers/semester";
 import {flashError} from "../reducers/flash";
 import {loadingComplete, loadingStarting} from "../reducers/loading";
 
@@ -17,6 +17,10 @@ function* handleCourseRequest(action) {
                 const currentSemester = yield call(httpGetAuth, 'semesters/current');
                 const currentOfferings = yield call(httpGetAuth, ['offerings', currentSemester.body._id]);
 
+                yield put({
+                    type: GET_SEMESTER_SUCCESS,
+                    payload: currentSemester.body
+                });
                 yield put({
                     type: GET_OFFERINGS_SUCCESS,
                     payload: currentOfferings.body.offerings
@@ -34,7 +38,7 @@ function* handleCourseRequest(action) {
                 yield put({type: GET_OFFERINGS_SUCCESS, ...response});
 
                 response = yield call(httpGetAuth, 'semesters');
-                yield put({type: GET_SEMESTERS_SUCCESS, ...response});
+                yield put({type: GET_SEMESTER_SUCCESS, ...response});
                 break;
             default:
                 yield put(flashError(`Invalid action payload (${action.payload})`));

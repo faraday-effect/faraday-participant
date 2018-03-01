@@ -1,12 +1,11 @@
 // @flow
 
 import type {Action} from "../types/redux";
-import {fromPairs} from "lodash/array";
 
 // Action types
-export const GET_SEMESTERS_REQUEST = 'SEMESTERS/GET-INIT';
-export const GET_SEMESTERS_SUCCESS = 'SEMESTERS/GET-OKAY';
-export const GET_SEMESTERS_FAILURE = 'SEMESTERS/GET-FAIL';
+export const GET_SEMESTER_REQUEST = 'SEMESTER/GET-INIT';
+export const GET_SEMESTER_SUCCESS = 'SEMESTER/GET-OKAY';
+export const GET_SEMESTER_FAILURE = 'SEMESTER/GET-FAIL';
 
 type DateRangeMap = {
     [string]: {
@@ -23,15 +22,15 @@ type Semester = {
     holidays: DateRangeMap
 };
 
-export type State = Array<Semester>;
-const initialState: State = [];
+export type State = Semester;
+const initialState: State | Object = {};
 
 // Reducer
 export default (state: State = initialState, action: Action) => {
     switch(action.type) {
-        case GET_SEMESTERS_SUCCESS:
-            return fromPairs(action.payload.map(semester => [semester._id, semester]));
-        case GET_SEMESTERS_FAILURE:
+        case GET_SEMESTER_SUCCESS:
+            return action.payload;
+        case GET_SEMESTER_FAILURE:
             return initialState;
         default:
             return state;
