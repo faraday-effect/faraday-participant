@@ -15,14 +15,16 @@ function* handleCourseRequest(action) {
         switch (action.payload) {
             case 'current':
                 const currentSemester = yield call(httpGetAuth, 'semesters/current');
-                console.log("CUR SEMESTER", currentSemester);
-                yield put({type: GET_SEMESTERS_SUCCESS, ...currentSemester});
+                const currentOfferings = yield call(httpGetAuth, ['offerings', currentSemester.body._id]);
 
-                const result = yield call(httpGetAuth, ['offerings', currentSemester.payload._id]);
-                console.log("COMBO RESULT", result);
-                yield put({type: GET_OFFERINGS_SUCCESS, ...result.payload.offerings});
-                yield put({type: GET_COURSES_SUCCESS, ...result.payload.courses});
-
+                yield put({
+                    type: GET_OFFERINGS_SUCCESS,
+                    payload: currentOfferings.body.offerings
+                });
+                yield put({
+                    type: GET_COURSES_SUCCESS,
+                    payload: currentOfferings.body.courses
+                });
                 break;
             case 'all':
                 let response = yield call(httpGetAuth, 'courses');

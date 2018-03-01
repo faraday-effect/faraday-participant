@@ -35,20 +35,17 @@ function httpRequest(method: 'POST'|'GET',
         options.body = body;
     }
 
+    // console.log(`httpRequest(${JSON.stringify(options, null, 4)})`);
+
     return new Promise((resolve, reject) =>
         request(options, (error, response, body) => {
             if (error) {
-                return reject({
-                    error: true,
-                    payload: error
-                });
+                return reject(error);
             } else {
                 return resolve({
-                    error: response.statusCode < 200 || response.statusCode > 299,
-                    payload: body,
-                    meta: {
-                        statusCode: response.statusCode
-                    }
+                    statusCode: response.statusCode,
+                    isSuccess: response.statusCode < 200 || response.statusCode > 299,
+                    body
                 });
             }
         })
